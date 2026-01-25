@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    <title>HoRly’s Tech | Premium Gadgets & Expert Repairs</title>
+    <title>HoRly’s Tech | The Gadget Empire</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
             --primary: #0ea5e9;
             --secondary: #6366f1;
             --dark: #020617;
+            --glass-border: rgba(255, 255, 255, 0.08);
         }
         body {
             font-family: 'Inter', sans-serif;
@@ -21,163 +24,106 @@
         .orbitron { font-family: 'Orbitron', sans-serif; }
         
         .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+        }
+        
+        .glass-heavy {
+            background: #0f172a;
+            border: 1px solid var(--glass-border);
         }
 
         .gradient-text {
-            background: linear-gradient(to right, #38bdf8, #818cf8);
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .hero-3d {
-            transform: perspective(1000px) rotateY(-10deg) rotateX(5deg);
-            transition: transform 0.5s ease;
-        }
-        .hero-3d:hover {
-            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
-        }
-
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 100;
-            transition: transform 0.3s ease;
-        }
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-        }
-        .pulse-wa {
-            animation: pulse-wa 2s infinite;
-        }
-        @keyframes pulse-wa {
-            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-      
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
         .card-hover {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
         }
         .card-hover:hover {
-            transform: translateY(-12px);
+            transform: translateY(-5px);
             border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.15);
         }
 
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0%;
-            height: 2px;
+        .filter-btn.active {
             background: var(--primary);
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
+            color: white;
+            border-color: var(--primary);
         }
 
-        /* Custom scrollbar */
+        /* Checkbox Custom Styling */
+        .option-radio:checked + div {
+            border-color: #0ea5e9;
+            background: rgba(14, 165, 233, 0.1);
+        }
+        .option-radio:checked + div .check-icon {
+            opacity: 1;
+        }
+
+        /* Modal Animation */
+        .modal { opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .modal.active { opacity: 1; visibility: visible; }
+        .modal-content { transform: scale(0.95); transition: all 0.3s ease; }
+        .modal.active .modal-content { transform: scale(1); }
+
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
     </style>
 </head>
 <body class="selection:bg-sky-500/30">
 
-       <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/2349121213936?text=Hello%20HoRly's%20Tech,%20I'd%20like%20to%20inquire%20about%20your%20gadgets/repairs." 
-       target="_blank" 
-       class="whatsapp-float pulse-wa flex items-center justify-center w-16 h-16 bg-[#25d366] rounded-full shadow-2xl"
-       title="Chat on WhatsApp">
-        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-4.752 8.995c-3.076 0-6.145-1.046-8.623-3.033l-1.096-.883-4.001 1.048 1.067-3.901-.968-1.214C.951 12.67 0 10.354 0 7.944 0 3.564 3.564 0 7.944 0c4.38 0 7.944 3.564 7.944 7.944 0 2.41-.951 4.726-2.678 6.452-1.726 1.727-4.042 2.678-6.452 2.678z"/>
-        </svg>
+    <a href="https://wa.me/2349121213936" target="_blank" class="fixed bottom-8 right-8 z-50 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(34,197,94,0.5)] hover:scale-110 transition-transform">
+        <i class="fab fa-whatsapp text-3xl text-white"></i>
     </a>
 
-    <!-- Navbar -->
-    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <nav class="fixed top-0 w-full z-40 glass border-b border-white/5 bg-slate-900/80">
+        <div class="max-w-8xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <a href="https://horlystech.vercel.app"><h1 class="orbitron text-2xl font-bold tracking-tighter">
-                    HoRly’s_<span class="gradient-text">Tech</span>
-                </h1></a>
+                <div class="w-8 h-8 bg-sky-500 rounded flex items-center justify-center font-bold">H</div>
+                <h1 class="orbitron text-xl font-bold tracking-tighter">HoRly’s_<span class="gradient-text">Tech</span></h1>
             </div>
             
-            <div class="hidden md:flex items-center gap-8 font-medium text-sm uppercase tracking-widest text-slate-300">
-                <a href="#home" class="nav-link hover:text-white">Home</a>
-                <a href="#services" class="nav-link hover:text-white">Services</a>
-                <a href="#store" class="nav-link hover:text-white">Store</a>
-                <a href="#repair" class="nav-link hover:text-white">Repair Lab</a>
-                <a href="#contact" class="px-5 py-2.5 bg-sky-500 rounded-full text-white hover:bg-sky-400 transition-colors">Inquire Now</a>
+            <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-400">
+                <a href="#home" class="hover:text-white transition-colors">Home</a>
+                <a href="#catalog" class="hover:text-white transition-colors">Store</a>
+                <a href="#repair" class="hover:text-white transition-colors">Repair</a>
+                <a href="#about" class="hover:text-white transition-colors">About Us</a>
             </div>
 
-            <button class="md:hidden text-white" id="menuBtn">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+            <button onclick="document.getElementById('catalog').scrollIntoView()" class="hidden md:block px-6 py-2 bg-white/10 rounded-full text-xs font-bold uppercase hover:bg-white/20 transition-all">
+                Search Devices <i class="fas fa-search ml-2"></i>
             </button>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="fixed inset-0 z-[60] glass hidden flex flex-col items-center justify-center space-y-8 text-2xl orbitron">
-        <button class="absolute top-6 right-6" id="closeMenu">
-            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-        </button>
-        <a href="#home" class="mobile-link">Home</a>
-        <a href="#services" class="mobile-link">Services</a>
-        <a href="#store" class="mobile-link">Store</a>
-        <a href="#contact" class="mobile-link">Contact</a>
-    </div>
+    <section id="home" class="pt-32 pb-16 px-6 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto text-center relative z-10">
+            <div class="inline-block px-4 py-1 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 text-xs font-bold uppercase tracking-widest mb-6">
+                The Future of Gadgets
+            </div>
+            <h1 class="orbitron text-5xl md:text-7xl font-black mb-6 leading-tight">
+                All Gadgets.<br><span class="gradient-text">One Destination.</span>
+            </h1>
+            <p class="text-slate-400 max-w-2xl mx-auto text-lg mb-10">
+                Your one-stop hub for premium gadget sales, precision repairs, and software engineering. From the latest iPhones to complex motherboard microsurgery.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#catalog" class="px-8 py-4 bg-sky-500 rounded-xl font-bold orbitron uppercase tracking-widest hover:bg-sky-400 transition-all shadow-[0_0_30px_rgba(14,165,233,0.3)]">
+                    Browse Inventory
+                </a>
+                <a href="#repair" class="px-8 py-4 glass rounded-xl font-bold orbitron uppercase tracking-widest hover:bg-white/5 transition-all">
+                    Book Repair
+                </a>
+            </div>
+        </div>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative pt-32 pb-20 px-6 overflow-hidden">
-        <div class="absolute -top-24 -left-24 w-96 h-96 bg-sky-500/10 rounded-full blur-[120px]"></div>
-        <div class="absolute top-1/2 -right-24 w-96 h-96 bg-indigo-500/10 rounded-full blur-[120px]"></div>
-
-        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-            <div class="flex-1 space-y-8 text-center lg:text-left">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-sky-500/30 text-sky-400 text-xs font-bold uppercase tracking-[0.2em]">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
-                    </span>
-                    Professional Tech Solutions
-                </div>
-                <h2 class="orbitron text-5xl lg:text-7xl font-bold leading-tight">
-                    Upgrade Your <span class="gradient-text">Digital Life</span>
-                </h2>
-                <p class="text-slate-400 text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                    Premium gadget sales, professional repairs, and expert software solutions. We don't just fix devices; we restore your connection to the world.
-                </p>
-                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-                    <a href="#store" class="w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-sky-500 to-indigo-600 rounded-2xl font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_30px_rgba(14,165,233,0.4)] transition-all">
-                        Browse Store
-                    </a>
-                    <a href="#contact" class="w-full sm:w-auto px-10 py-5 glass rounded-2xl font-bold uppercase tracking-widest text-sm hover:bg-white/10 transition-all">
-                        Get a Quote
-                    </a>
-                </div>
-                
-                <div class="flex items-center justify-center lg:justify-start gap-8 pt-8 opacity-60">
+      <div class="flex items-center justify-center lg:justify-start gap-8 pt-8 opacity-60">
                     <div class="text-center">
                         <div class="orbitron text-2xl font-bold">5k+</div>
                         <div class="text-[10px] uppercase tracking-tighter">Repairs Done</div>
@@ -193,11 +139,10 @@
                         <div class="text-[10px] uppercase tracking-tighter">Rapid Return</div>
                     </div>
                 </div>
-            </div>
 
             <div class="flex-1 relative">
                 <div class="hero-3d relative z-10">
-                    <img src="https://image2url.com/r2/default/images/1769348935568-bd7d6235-436f-467b-b8dd-25417f5413a0.jpeg" alt="Tech Setup" class="rounded-[2.5rem] shadow-2xl border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=800&q=80" alt="Tech Setup" class="rounded-[2.5rem] shadow-2xl border border-white/10">
                     <div class="absolute -bottom-10 -left-10 glass p-6 rounded-3xl floating border-sky-500/50">
                         <div class="flex items-center gap-4">
                             <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-2xl">
@@ -210,277 +155,313 @@
                         </div>
                     </div>
                 </div>
-                <!-- Background glow -->
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-sky-500/20 rounded-full blur-[120px] -z-10"></div>
             </div>
+      
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-6xl pointer-events-none">
+            <div class="absolute top-1/4 left-0 w-64 h-64 bg-purple-600/20 rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-sky-600/10 rounded-full blur-[100px]"></div>
         </div>
     </section>
 
-    <!-- Services Grid -->
-    <section id="services" class="py-24 px-6 bg-slate-900/30">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h3 class="orbitron text-3xl font-bold mb-4">What We Do</h3>
-                <div class="w-24 h-1 bg-sky-500 mx-auto rounded-full"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Sales -->
-                <div class="glass p-8 rounded-[2rem] card-hover border-t-4 border-t-sky-500">
-                    <div class="w-14 h-14 bg-sky-500/20 text-sky-400 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                    </div>
-                    <h4 class="orbitron text-xl font-bold mb-3">Gadget Sales</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                        Brand New and high-quality Uk-used iPhones, Laptops, Androids, and POS Terminals. Every device is tested.
-                    </p>
-                    <ul class="space-y-2 text-xs text-slate-300">
-                        <li class="flex items-center gap-2">✔ Brand New iPhones & Pixels</li>
-                        <li class="flex items-center gap-2">✔ Merchant POS Terminals</li>
-                        <li class="flex items-center gap-2">✔ Laptop Sales & Upgrades</li>
-                    </ul>
-                </div>
-
-                <!-- Repairs -->
-                <div class="glass p-8 rounded-[2rem] card-hover border-t-4 border-t-emerald-500">
-                    <div class="w-14 h-14 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                    </div>
-                    <h4 class="orbitron text-xl font-bold mb-3">Repair Lab</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                        Precision micro-soldering and software engineering. We fix what others call "impossible".
-                    </p>
-                    <ul class="space-y-2 text-xs text-slate-300">
-                        <li class="flex items-center gap-2">✔ Screen & Battery Swaps</li>
-                        <li class="flex items-center gap-2">✔ Motherboard Logic Repair</li>
-                        <li class="flex items-center gap-2">✔ Water Damage Restoration</li>
-                    </ul>
-                </div>
-
-                <!-- Gaming -->
-                <div class="glass p-8 rounded-[2rem] card-hover border-t-4 border-t-indigo-500">
-                    <div class="w-14 h-14 bg-indigo-500/20 text-indigo-400 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/></svg>
-                    </div>
-                    <h4 class="orbitron text-xl font-bold mb-3">Gaming Hub</h4>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                        Unlock the next level of gaming with our console sales and specialized PSP/PS5 repair services.
-                    </p>
-                    <ul class="space-y-2 text-xs text-slate-300">
-                        <li class="flex items-center gap-2">✔ PS4/PS5 Console Sales</li>
-                        <li class="flex items-center gap-2">✔ Controller Refurbishing</li>
-                        <li class="flex items-center gap-2">✔ Custom Gaming PC Builds</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Product Showcase -->
-    <section id="store" class="py-24 px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
+    <section id="catalog" class="py-20 px-4 md:px-8 bg-slate-900/50 min-h-screen">
+        <div class="max-w-8xl mx-auto">
+            
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
                 <div>
-                    <h3 class="orbitron text-3xl font-bold mb-2">Featured Inventory</h3>
-                    <p class="text-slate-400">Premium tech, hand-picked for performance.</p>
-                </div>
-                <a href=""><button class="text-sky-400 font-bold border-b border-sky-400 pb-1">View Full Catalog →</button></a>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Item 1 -->
-                <div class="glass rounded-3xl overflow-hidden group">
-                    <div class="h-64 overflow-hidden relative">
-                        <img src="https://image2url.com/r2/default/images/1769350172208-9d4ff202-192a-436d-bee2-83dfd2345d3e.jpeg" alt="Smartphone" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        <div class="absolute top-4 left-4 bg-sky-500 px-3 py-1 rounded-full text-[10px] font-bold uppercase">New Arrival</div>
-                    </div>
-                    <div class="p-6">
-                        <h5 class="orbitron font-bold text-lg mb-1">Flagship Phones</h5>
-                        <p class="text-xs text-slate-400 mb-4">iPhone 17 Pro, Samsung S24, Google Pixel 8.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sky-400 font-bold">Best Price</span>
-                            <button class="p-2 bg-white/5 rounded-xl hover:bg-sky-500 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item 2 -->
-                <div class="glass rounded-3xl overflow-hidden group">
-                    <div class="h-64 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=500&q=80" alt="Laptop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="p-6">
-                        <h5 class="orbitron font-bold text-lg mb-1">Pro Laptops</h5>
-                        <p class="text-xs text-slate-400 mb-4">MacBook Air/Pro, Dell XPS, HP Spectre.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sky-400 font-bold">Best Price</span>
-                            <button class="p-2 bg-white/5 rounded-xl hover:bg-sky-500 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item 3 -->
-                <div class="glass rounded-3xl overflow-hidden group">
-                    <div class="h-64 overflow-hidden relative">
-                        <img src="https://image2url.com/r2/default/images/1769349571103-910dc88e-5390-4060-9908-1f5f5fa2a893.webp" alt="POS" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="p-6">
-                        <h5 class="orbitron font-bold text-lg mb-1">Merchant POS</h5>
-                        <p class="text-xs text-slate-400 mb-4">Reliable POS terminals for business scaling.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sky-400 font-bold">Fast Setup</span>
-                            <button class="p-2 bg-white/5 rounded-xl hover:bg-sky-500 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item 4 -->
-                <div class="glass rounded-3xl overflow-hidden group">
-                    <div class="h-64 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=500&q=80" alt="Gaming" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="p-6">
-                        <h5 class="orbitron font-bold text-lg mb-1">Gaming Gear</h5>
-                        <p class="text-xs text-slate-400 mb-4">PS5 Consoles, PSPs, & Mobile Coolers.</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sky-400 font-bold">Best Price</span>
-                            <button class="p-2 bg-white/5 rounded-xl hover:bg-sky-500 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Repair Section -->
-    <section id="repair" class="py-24 px-6 bg-gradient-to-b from-transparent to-sky-950/20">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
-            <div class="flex-1">
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1597733336794-12d05021d510?auto=format&fit=crop&w=800&q=80" alt="Repair Lab" class="rounded-[3rem] shadow-2xl">
-                    <div class="absolute inset-0 bg-sky-500/20 mix-blend-overlay rounded-[3rem]"></div>
-                </div>
-            </div>
-            <div class="flex-1 space-y-8">
-                <h3 class="orbitron text-4xl font-bold">Expert Repair <span class="gradient-text">Laboratory</span></h3>
-                <p class="text-slate-400 leading-relaxed text-lg">
-                    Our laboratory is equipped with state-of-the-art infrared soldering stations and high-precision diagnostic tools. We specialize in microsurgery on modern device motherboards.
-                </p>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="glass p-4 rounded-2xl">
-                        <div class="text-emerald-400 font-bold mb-1">Screen Tech</div>
-                        <div class="text-xs text-slate-500">OLED/LCD replacements</div>
-                    </div>
-                    <div class="glass p-4 rounded-2xl">
-                        <div class="text-sky-400 font-bold mb-1">Power Fix</div>
-                        <div class="text-xs text-slate-500">Charging ports & ICs</div>
-                    </div>
-                    <div class="glass p-4 rounded-2xl">
-                        <div class="text-indigo-400 font-bold mb-1">Software</div>
-                        <div class="text-xs text-slate-500">Unlocking & OS restores</div>
-                    </div>
-                    <div class="glass p-4 rounded-2xl">
-                        <div class="text-rose-400 font-bold mb-1">Data Rec</div>
-                        <div class="text-xs text-slate-500">Hard drive & SSD recovery</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Inquiry Form Section -->
-    <section id="contact" class="py-24 px-6 relative">
-        <div class="max-w-4xl mx-auto glass p-8 md:p-16 rounded-[3rem] border border-white/10 relative z-10">
-            <div class="text-center mb-12">
-                <h3 class="orbitron text-3xl font-bold mb-4">Audience <span class="gradient-text">Inquiries</span></h3>
-                <p class="text-slate-400">Tell us what you need, and we'll get back to you within 2 hours.</p>
-            </div>
-
-            <!-- FORM: Replace 'your@email.com' with your actual Gmail address -->
-            <form action="https://formspree.io/f/horlys.tech@gmail.com" method="POST" class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-2">Full Name</label>
-                        <input type="text" name="name" required placeholder="John Doe" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-sky-500 transition-all">
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-2">Phone Number</label>
-                        <input type="tel" name="phone" required placeholder="0912..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-sky-500 transition-all">
-                    </div>
+                    <h2 class="orbitron text-3xl font-bold">The <span class="gradient-text">Inventory</span></h2>
+                    <p class="text-slate-400 text-sm mt-2">Select a category to filter products.</p>
                 </div>
                 
-                <div class="space-y-2">
-                    <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-2">Interested In</label>
-                    <select name="category" class="w-auto bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-sky-500 transition-all appearance-none cursor-pointer">
-                        <option value="Gadget Sales">Gadget Sales</option>
-                        <option value="Phone Repair">Phone Repair</option>
-                        <option value="Laptop Repair">Laptop Repair</option>
-                        <option value="POS Terminal">POS Terminal</option>
-                        <option value="Gaming Console">Gaming/PS5 Inquiry</option>
-                    </select>
+                <div class="flex overflow-x-auto pb-2 gap-2 w-full md:w-auto no-scrollbar">
+                    <button onclick="filterItems('all')" class="filter-btn active px-6 py-2 rounded-lg border border-white/10 bg-white/5 text-sm font-bold whitespace-nowrap hover:bg-white/10 transition-all">All</button>
+                    <button onclick="filterItems('iphone')" class="filter-btn px-6 py-2 rounded-lg border border-white/10 bg-white/5 text-sm font-bold whitespace-nowrap hover:bg-white/10 transition-all">iPhones</button>
+                    <button onclick="filterItems('android')" class="filter-btn px-6 py-2 rounded-lg border border-white/10 bg-white/5 text-sm font-bold whitespace-nowrap hover:bg-white/10 transition-all">Android</button>
+                    <button onclick="filterItems('laptop')" class="filter-btn px-6 py-2 rounded-lg border border-white/10 bg-white/5 text-sm font-bold whitespace-nowrap hover:bg-white/10 transition-all">Laptops</button>
+                    <button onclick="filterItems('gaming')" class="filter-btn px-6 py-2 rounded-lg border border-white/10 bg-white/5 text-sm font-bold whitespace-nowrap hover:bg-white/10 transition-all">Gaming</button>
+                    <button onclick="filterItems('accessories')" class="filter-btn px-6 py-2 rounded-lg border border-white/10 bg-white/5 text-sm font-bold whitespace-nowrap hover:bg-white/10 transition-all">Accessories</button>
+                </div>
+            </div>
+
+            <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
                 </div>
 
-                <div class="space-y-2">
-                    <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-2">Message / Device Details</label>
-                    <textarea name="message" rows="4" required placeholder="Describe your issue or the device you're looking for..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-sky-500 transition-all"></textarea>
-                </div>
-
-                <button type="submit" class="w-full bg-gradient-to-r from-sky-500 to-indigo-600 py-5 rounded-2xl font-bold orbitron uppercase tracking-[0.2em] shadow-xl shadow-sky-500/20 hover:scale-[1.02] transition-all">
-                    Send Inquiry
-                </button>
-            </form>
+            <div class="mt-16 text-center">
+                <p class="text-slate-500 mb-4">Don't see exactly what you need?</p>
+                <button onclick="openCustomOrder()" class="text-sky-400 font-bold border-b border-sky-400 pb-1 hover:text-white hover:border-white transition-colors">Request Specific Device via WhatsApp</button>
+            </div>
         </div>
-        <!-- Decoration -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-indigo-500/5 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-12 px-6 border-t border-white/5 glass">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="text-center md:text-left">
-                <h1 class="orbitron text-xl font-bold mb-2">HoRly’s_<span class="gradient-text">Tech</span></h1>
-                <p class="text-slate-500 text-sm">© 2026 HoRly Tech Gadgets Sales N Repair. All rights reserved.</p>
-            </div>
-            
-            <div class="flex flex-col items-center md:items-end gap-2">
-                <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Direct Contact</p>
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-4.752 8.995c-3.076 0-6.145-1.046-8.623-3.033l-1.096-.883-4.001 1.048 1.067-3.901-.968-1.214C.951 12.67 0 10.354 0 7.944 0 3.564 3.564 0 7.944 0c4.38 0 7.944 3.564 7.944 7.944 0 2.41-.951 4.726-2.678 6.452-1.726 1.727-4.042 2.678-6.452 2.678z"/></svg>
+  
+
+    <section id="repair" class="py-24 px-6 bg-gradient-to-b from-transparent to-sky-900/10">
+        <div class="max-w-6xl mx-auto glass rounded-[3rem] p-8 md:p-16 relative overflow-hidden text-center md:text-left flex flex-col md:flex-row items-center gap-12">
+            <div class="relative z-10 flex-1">
+                <div class="inline-block px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4">Repair Lab</div>
+                <h2 class="orbitron text-3xl md:text-5xl font-bold mb-6">Broken Device? <br> We Fix It.</h2>
+                <p class="text-slate-300 mb-8 leading-relaxed">
+                    We specialize in complex repairs for all the devices we sell. Screen swaps, battery replacement, motherboard microsoldering, and console cleaning.
+                </p>
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <i class="fas fa-mobile-alt text-sky-400 mb-2"></i>
+                        <div class="text-xs font-bold text-slate-300">Screen & Battery</div>
                     </div>
-                    <span class="text-2xl font-bold orbitron">09121213936</span>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <i class="fas fa-microchip text-indigo-400 mb-2"></i>
+                        <div class="text-xs font-bold text-slate-300">Motherboard</div>
+                    </div>
                 </div>
+                <a href="https://wa.me/2349121213936?text=Hi%20HoRly's%20Tech,%20I%20have%20a%20device%20that%20needs%20repair." class="inline-block px-8 py-3 bg-white text-black font-bold rounded-lg hover:bg-slate-200 transition-colors">Get Repair Quote</a>
+            </div>
+            <div class="flex-1 w-full max-w-sm">
+                <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a783?q=80&w=2070&auto=format&fit=crop" class="rounded-3xl shadow-2xl rotate-3 border border-white/10" alt="Repair">
             </div>
         </div>
+    </section>
+
+   <section id="about" class="py-24 px-6 bg-slate-900/50">
+        <div class="max-w-4xl mx-auto text-center space-y-6">
+            <h2 class="orbitron text-3xl font-bold">About <span class="gradient-text">HoRly’s Tech</span></h2>
+            <p class="text-slate-300 leading-relaxed text-lg">
+                We are not just a store; we are a technology sanctuary. Founded on the belief that devices should last longer and perform better, HoRly’s Tech brings world-class repair standards to Nigeria. Whether you are buying a UK-used iPhone, upgrading your gaming rig, or reviving a dead laptop, we guarantee transparency, speed, and premium quality.
+            </p>
+            <div class="flex justify-center gap-4 text-3xl text-slate-600 mt-8">
+                <i class="fab fa-apple hover:text-white transition-colors"></i>
+                <i class="fab fa-android hover:text-green-500 transition-colors"></i>
+                <i class="fab fa-windows hover:text-blue-500 transition-colors"></i>
+                <i class="fab fa-playstation hover:text-indigo-500 transition-colors"></i>
+            </div>
+        </div>
+    </section>
+  
+    <footer class="py-12 text-center text-slate-500 text-sm border-t border-white/5">
+        <p class="orbitron font-bold text-white text-lg mb-2">HoRly’s_Tech</p>
+        <p>Lagos, Nigeria • 09121213936</p>
+        <p class="mt-4">&copy; 2026. All rights reserved.</p>
     </footer>
 
+    <div id="orderModal" class="modal fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm">
+        <div class="modal-content w-full max-w-2xl glass-heavy rounded-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            
+            <div class="p-6 border-b border-white/5 flex justify-between items-center bg-slate-900">
+                <div>
+                    <h3 id="modalTitle" class="orbitron text-xl font-bold text-white">iPhone 15 Pro Max</h3>
+                    <p class="text-xs text-slate-400 uppercase tracking-wider">Configure your order</p>
+                </div>
+                <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="p-6 overflow-y-auto custom-scrollbar space-y-8">
+                
+                <div>
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 block">1. Select Condition</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="cursor-pointer group relative">
+                            <input type="radio" name="condition" value="UK Used" class="option-radio hidden" checked>
+                            <div class="border border-white/10 bg-white/5 p-4 rounded-xl hover:border-sky-500/50 transition-all text-center">
+                                <div class="text-sm font-bold text-white mb-1">🇬🇧 UK Used</div>
+                                <div class="text-[10px] text-slate-400">Clean, Tested, Affordable</div>
+                                <i class="fas fa-check-circle check-icon absolute top-2 right-2 text-sky-500 opacity-0 transition-opacity"></i>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group relative">
+                            <input type="radio" name="condition" value="Brand New" class="option-radio hidden">
+                            <div class="border border-white/10 bg-white/5 p-4 rounded-xl hover:border-sky-500/50 transition-all text-center">
+                                <div class="text-sm font-bold text-white mb-1">✨ Brand New</div>
+                                <div class="text-[10px] text-slate-400">Sealed in Box</div>
+                                <i class="fas fa-check-circle check-icon absolute top-2 right-2 text-sky-500 opacity-0 transition-opacity"></i>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2 block">Storage / Spec</label>
+                        <select id="modalSpec" class="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-sky-500 outline-none">
+                            <option>Lowest Spec (Standard)</option>
+                            <option>Middle Spec</option>
+                            <option>Highest Spec (Max Storage)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2 block">Preferred Color</label>
+                        <input type="text" id="modalColor" placeholder="e.g. Gold, Midnight..." class="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-sky-500 outline-none">
+                    </div>
+                </div>
+
+                <div class="border-t border-white/5 pt-6">
+                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 block">3. Delivery Details</label>
+                    <div class="space-y-4">
+                        <input type="text" id="customerName" placeholder="Your Name" class="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-sky-500 outline-none">
+                        <select id="customerLocation" class="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-sky-500 outline-none">
+                            <option value="">Select Location...</option>
+                            <option value="Lagos - Mainland">Lagos - Mainland</option>
+                            <option value="Lagos - Island">Lagos - Island</option>
+                            <option value="ogun state">ogun state</option>
+                            <option value="Other State (Waybill)">Other State (Waybill)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 border-t border-white/5 bg-slate-900">
+                <button onclick="sendOrder()" class="w-full bg-gradient-to-r from-green-600 to-green-500 text-white font-bold py-4 rounded-xl orbitron hover:shadow-[0_0_20px_rgba(34,197,94,0.4)] transition-all flex items-center justify-center gap-3">
+                    <i class="fab fa-whatsapp text-xl"></i> Send Order Request
+                </button>
+                <p class="text-[10px] text-center text-slate-500 mt-3">This will open WhatsApp with your pre-filled order details.</p>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Mobile Menu Logic
-        const menuBtn = document.getElementById('menuBtn');
-        const closeMenu = document.getElementById('closeMenu');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
+        // --- DATABASE ---
+        // This array simulates a database. Add as many items as you want here.
+        const products = [
+            // IPHONES
+            { id: 1, name: "iPhone 17 / Pro / Max", category: "iphone", image: "https://image2url.com/r2/default/images/1769369124620-819c437f-3a7d-4665-9da4-42e172e1a5a2.jpeg", desc: "The Future. Titanium finish." },
+            { id: 2, name: "iPhone 16 / Pro /", category: "iphone", image: "https://image2url.com/r2/default/images/1769369381921-148a551b-fe9d-4f82-a543-3581ab862562.webp", desc: "Titanium." },
+            { id: 3, name: "iPhone 15 / Pro / Max", category: "iphone", image: "https://image2url.com/r2/default/images/1769369931850-ea932182-ad61-4ee1-8568-b274e75a8ecd.jpeg", desc: ". A17 Pro Chip." },
+            { id: 4, name: "iPhone 14 / Pro / Max", category: "iphone", image: "https://images.unsplash.com/photo-1663499482523-1c0c167b2d72?auto=format&fit=crop&q=80&w=500", desc: "Dynamic Island. 48MP Cam." },
+            { id: 5, name: "iPhone 13 / Pro / Max", category: "iphone", image: "https://images.unsplash.com/photo-1632661674596-df8be070a5c5?auto=format&fit=crop&q=80&w=500", desc: "120Hz ProMotion Display." },
+            { id: 6, name: "iPhone 12 / Pro / Max", category: "iphone", image: "https://images.unsplash.com/photo-1605236453806-6ff36851218e?auto=format&fit=crop&q=80&w=500", desc: "5G Speed. Ceramic Shield." },
+            { id: 7, name: "iPhone 11 / Pro / Max", category: "iphone", image: "https://images.unsplash.com/photo-1574755393849-1a39e273574c?auto=format&fit=crop&q=80&w=500", desc: "Triple Camera System." },
+            { id: 8, name: "iPhone XR / XS Max", category: "iphone", image: "https://images.unsplash.com/photo-1551817958-c5b51e7373f1?auto=format&fit=crop&q=80&w=500", desc: "Reliable classics." },
+            { id: 9, name: "iPhone 8 Plus / 7 / 6s", category: "iphone", image: "https://images.unsplash.com/photo-1523206485973-6740a7ee92fb?auto=format&fit=crop&q=80&w=500", desc: "Budget friendly starters." },
 
-        menuBtn.onclick = () => mobileMenu.classList.remove('hidden');
-        closeMenu.onclick = () => mobileMenu.classList.add('hidden');
-        mobileLinks.forEach(link => {
-            link.onclick = () => mobileMenu.classList.add('hidden');
-        });
+            // ANDROID
+            { id: 10, name: "Samsung S24 Ultra", category: "android", image: "https://images.unsplash.com/photo-1706606995654-72a394462746?auto=format&fit=crop&q=80&w=500", desc: "AI Integrated. S-Pen." },
+            { id: 11, name: "Samsung S23 Ultra", category: "android", image: "https://images.unsplash.com/photo-1678911820864-e2c567c655d7?auto=format&fit=crop&q=80&w=500", desc: "200MP Camera Zoom." },
+            { id: 12, name: "Google Pixel 8 Pro", category: "android", image: "https://images.unsplash.com/photo-1698669527376-7977a4143d4f?auto=format&fit=crop&q=80&w=500", desc: "Pure Android Experience." },
+            { id: 13, name: "Redmi Note Series", category: "android", image: "https://images.unsplash.com/photo-1598327105666-5b89351aff23?auto=format&fit=crop&q=80&w=500", desc: "Best value for money." },
+            { id: 14, name: "Samsung A-Series", category: "android", image: "https://images.unsplash.com/photo-1610945699354-95ba75f8ddf2?auto=format&fit=crop&q=80&w=500", desc: "Solid mid-range power." },
 
-        // Intersection Observer for animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100');
-                    entry.target.classList.remove('translate-y-10');
-                }
+            // LAPTOPS
+            { id: 15, name: "MacBook Pro M3", category: "laptop", image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=500", desc: "Space Black. Extreme Power." },
+            { id: 16, name: "MacBook Air M1/M2", category: "laptop", image: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&q=80&w=500", desc: "Slim. Silent. Powerful." },
+            { id: 17, name: "Dell XPS 13/15", category: "laptop", image: "https://images.unsplash.com/photo-1593642632823-8f785667771d?auto=format&fit=crop&q=80&w=500", desc: "InfinityEdge Display." },
+            { id: 18, name: "HP Spectre x360", category: "laptop", image: "https://images.unsplash.com/photo-1544731612-de7f96afe55f?auto=format&fit=crop&q=80&w=500", desc: "Convertible Touchscreen." },
+            { id: 19, name: "Gaming Laptops", category: "laptop", image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&q=80&w=500", desc: "Alienware, ROG, Predator." },
+
+            // GAMING
+            { id: 20, name: "Sony PS5 Pro", category: "gaming", image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&q=80&w=500", desc: "8K Gaming. High FPS." },
+            { id: 21, name: "Sony PS5 Slim", category: "gaming", image: "https://images.unsplash.com/photo-1622297845775-5ff3fef71d13?auto=format&fit=crop&q=80&w=500", desc: "Compact Powerhouse." },
+            { id: 22, name: "PS4 Pro / Slim", category: "gaming", image: "https://images.unsplash.com/photo-1507457379470-08b800bebc67?auto=format&fit=crop&q=80&w=500", desc: "The Legend. Jailbreak available." },
+            { id: 23, name: "Mobile Phone Cooler", category: "gaming", image: "https://plus.unsplash.com/premium_photo-1677103216839-8667dc9c735d?auto=format&fit=crop&q=80&w=500", desc: "Keep your phone cold while gaming." },
+
+            // ACCESSORIES
+            { id: 24, name: "AirPods Pro 2", category: "accessories", image: "https://images.unsplash.com/photo-1603351154351-5cf99703f6a8?auto=format&fit=crop&q=80&w=500", desc: "Active Noise Cancellation." },
+            { id: 25, name: "Smart Watches", category: "accessories", image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&q=80&w=500", desc: "Apple Watch & Android wear." },
+            { id: 26, name: "JBL/Sony Headphones", category: "accessories", image: "https://images.unsplash.com/photo-1613040809024-b4ef7ba99bc3?auto=format&fit=crop&q=80&w=500", desc: "Deep Bass. Wireless." },
+            { id: 27, name: "Power Banks", category: "accessories", image: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&q=80&w=500", desc: "20,000mAh - 50,000mAh." },
+        ];
+
+        // --- FUNCTIONS ---
+
+        const grid = document.getElementById('productGrid');
+        const btns = document.querySelectorAll('.filter-btn');
+
+        // 1. Render Products
+        function renderProducts(filter = 'all') {
+            grid.innerHTML = ''; // Clear grid
+            
+            const filteredData = filter === 'all' 
+                ? products 
+                : products.filter(p => p.category === filter);
+
+            filteredData.forEach(item => {
+                const card = `
+                    <div class="glass rounded-2xl overflow-hidden card-hover group relative">
+                        <div class="h-48 overflow-hidden bg-slate-800">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] uppercase font-bold text-white border border-white/10">
+                                In Stock
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <div class="text-[10px] text-sky-400 font-bold uppercase tracking-wider mb-1">${item.category}</div>
+                            <h3 class="font-bold text-sm md:text-base text-white mb-1 leading-tight">${item.name}</h3>
+                            <p class="text-xs text-slate-400 mb-4 line-clamp-1">${item.desc}</p>
+                            
+                            <button onclick="openOrderModal('${item.name}')" class="w-full py-2 bg-white/10 hover:bg-sky-500 text-white rounded-lg text-xs font-bold uppercase transition-all flex items-center justify-center gap-2">
+                                <i class="fas fa-shopping-cart"></i> Buy
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
             });
-        }, { threshold: 0.1 });
+        }
 
-        document.querySelectorAll('section').forEach(section => {
-            section.classList.add('transition-all', 'duration-1000', 'translate-y-10', 'opacity-0');
-            observer.observe(section);
+        // 2. Filter Logic
+        function filterItems(category) {
+            // Update buttons
+            btns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Render
+            renderProducts(category);
+        }
+
+        // 3. Modal Logic
+        const modal = document.getElementById('orderModal');
+        const modalTitle = document.getElementById('modalTitle');
+        let currentProduct = '';
+
+        function openOrderModal(productName) {
+            currentProduct = productName;
+            modalTitle.innerText = productName;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        // Close on click outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
         });
+
+        // 4. Send Order (WhatsApp)
+        function sendOrder() {
+            const condition = document.querySelector('input[name="condition"]:checked').value;
+            const spec = document.getElementById('modalSpec').value;
+            const color = document.getElementById('modalColor').value || "Any Color";
+            const name = document.getElementById('customerName').value;
+            const location = document.getElementById('customerLocation').value;
+
+            if(!name || !location) {
+                alert("Please fill in your Name and Location.");
+                return;
+            }
+
+            // Create Message
+            const msg = `*NEW ORDER ALERT - HoRly's Tech* 🚀%0A%0A` +
+                        `*Device:* ${currentProduct}%0A` +
+                        `*Condition:* ${condition}%0A` +
+                        `*Spec/Storage:* ${spec}%0A` +
+                        `*Color:* ${color}%0A` +
+                        `------------------%0A` +
+                        `*Customer Name:* ${name}%0A` +
+                        `*Location:* ${location}%0A` +
+                        `------------------%0A` +
+                        `_Please confirm availability and price._`;
+
+            window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
+            closeModal();
+        }
+
+        function openCustomOrder() {
+             window.open(`https://wa.me/2349121213936?text=Hello HoRly's Tech, I am looking for a specific device not listed on your site...`, '_blank');
+        }
+
+        // Initial Load
+        renderProducts('all');
+
     </script>
 </body>
 </html>
