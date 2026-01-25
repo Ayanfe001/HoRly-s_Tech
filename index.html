@@ -3,17 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.5">
-    <title>HoRly’s Tech | Premium Gadgets, Sales & Repair</title>
+    <title>HoRly’s Tech | Premium Gadgets & Expert Repairs</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0ea5e9;
             --secondary: #6366f1;
             --dark: #020617;
-            --glass-border: rgba(255, 255, 255, 0.08);
         }
         body {
             font-family: 'Inter', sans-serif;
@@ -24,37 +21,48 @@
         .orbitron { font-family: 'Orbitron', sans-serif; }
         
         .glass {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-        
-        .glass-strong {
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+            background: linear-gradient(to right, #38bdf8, #818cf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .hero-3d {
-            transform: perspective(1000px) rotateY(-5deg) rotateX(2deg);
+            transform: perspective(1000px) rotateY(-10deg) rotateX(5deg);
             transition: transform 0.5s ease;
         }
         .hero-3d:hover {
             transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
         }
 
-        .floating { animation: floating 6s ease-in-out infinite; }
-        .floating-delayed { animation: floating 6s ease-in-out 3s infinite; }
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
 
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        .pulse-wa {
+            animation: pulse-wa 2s infinite;
+        }
+        @keyframes pulse-wa {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+      
         @keyframes floating {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
@@ -64,12 +72,15 @@
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .card-hover:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-12px);
             border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.2);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
         }
 
-        .nav-link { position: relative; transition: color 0.3s ease; }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
         .nav-link::after {
             content: '';
             position: absolute;
@@ -80,474 +91,371 @@
             background: var(--primary);
             transition: width 0.3s ease;
         }
-        .nav-link:hover::after { width: 100%; }
+        .nav-link:hover::after {
+            width: 100%;
+        }
 
         /* Custom scrollbar */
-        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #0ea5e9, #6366f1); border-radius: 10px; }
-        
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 100;
-            transition: all 0.3s ease;
-        }
-        .whatsapp-float:hover { transform: scale(1.1) rotate(10deg); }
-        
-        /* Modal Animation */
-        .modal {
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease-in-out;
-        }
-        .modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-content {
-            transform: scale(0.9);
-            transition: all 0.3s ease-in-out;
-        }
-        .modal.active .modal-content {
-            transform: scale(1);
-        }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
     </style>
 </head>
 <body class="selection:bg-sky-500/30">
 
-    <a href="https://wa.me/2349121213936?text=Hello%20HoRly's%20Tech,%20I'm%20visiting%20your%20website." 
+       <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/2349121213936?text=Hello%20HoRly's%20Tech,%20I'd%20like%20to%20inquire%20about%20your%20gadgets/repairs." 
        target="_blank" 
-       class="whatsapp-float flex items-center justify-center w-16 h-16 bg-[#25d366] rounded-full shadow-[0_0_30px_rgba(37,211,102,0.5)] border-2 border-white/20"
+       class="whatsapp-float pulse-wa flex items-center justify-center w-16 h-16 bg-[#25d366] rounded-full shadow-2xl"
        title="Chat on WhatsApp">
-        <i class="fab fa-whatsapp text-3xl text-white"></i>
+        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-4.752 8.995c-3.076 0-6.145-1.046-8.623-3.033l-1.096-.883-4.001 1.048 1.067-3.901-.968-1.214C.951 12.67 0 10.354 0 7.944 0 3.564 3.564 0 7.944 0c4.38 0 7.944 3.564 7.944 7.944 0 2.41-.951 4.726-2.678 6.452-1.726 1.727-4.042 2.678-6.452 2.678z"/>
+        </svg>
     </a>
 
+    <!-- Navbar -->
     <nav class="fixed top-0 w-full z-50 glass border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-gradient-to-br from-sky-500 to-indigo-600 rounded-lg flex items-center justify-center font-bold text-xl orbitron">H</div>
                 <h1 class="orbitron text-2xl font-bold tracking-tighter">
                     HoRly’s_<span class="gradient-text">Tech</span>
                 </h1>
             </div>
             
-            <div class="hidden lg:flex items-center gap-8 font-medium text-xs uppercase tracking-widest text-slate-300">
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm uppercase tracking-widest text-slate-300">
                 <a href="#home" class="nav-link hover:text-white">Home</a>
-                <a href="#about" class="nav-link hover:text-white">About Us</a>
+                <a href="#services" class="nav-link hover:text-white">Services</a>
                 <a href="#store" class="nav-link hover:text-white">Store</a>
-                <a href="#repair" class="nav-link hover:text-white">Repairs</a>
-                <a href="#blog" class="nav-link hover:text-white">Gadget Tips</a>
-                <a href="#contact" class="px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-white transition-all">Track Order</a>
+                <a href="#repair" class="nav-link hover:text-white">Repair Lab</a>
+                <a href="#contact" class="px-5 py-2.5 bg-sky-500 rounded-full text-white hover:bg-sky-400 transition-colors">Inquire Now</a>
             </div>
 
-            <button class="lg:hidden text-white p-2" id="menuBtn">
-                <i class="fas fa-bars text-2xl"></i>
+            <button class="md:hidden text-white" id="menuBtn">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
             </button>
         </div>
     </nav>
 
-    <div id="mobileMenu" class="fixed inset-0 z-[60] glass-strong hidden flex flex-col items-center justify-center space-y-8 text-2xl orbitron">
-        <button class="absolute top-8 right-8 p-2" id="closeMenu">
-            <i class="fas fa-times text-3xl"></i>
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 z-[60] glass hidden flex flex-col items-center justify-center space-y-8 text-2xl orbitron">
+        <button class="absolute top-6 right-6" id="closeMenu">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
-        <a href="#home" class="mobile-link hover:text-sky-400 transition-colors">Home</a>
-        <a href="#store" class="mobile-link hover:text-sky-400 transition-colors">Store</a>
-        <a href="#repair" class="mobile-link hover:text-sky-400 transition-colors">Repairs</a>
-        <a href="#contact" class="mobile-link hover:text-sky-400 transition-colors">Contact</a>
+        <a href="#home" class="mobile-link">Home</a>
+        <a href="#services" class="mobile-link">Services</a>
+        <a href="#store" class="mobile-link">Store</a>
+        <a href="#contact" class="mobile-link">Contact</a>
     </div>
 
-    <section id="home" class="relative min-h-screen pt-32 pb-20 px-6 overflow-hidden flex items-center">
-        <div class="absolute -top-[20%] -left-[10%] w-[700px] h-[700px] bg-sky-600/10 rounded-full blur-[120px] animate-pulse"></div>
-        <div class="absolute top-[40%] -right-[10%] w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[120px]"></div>
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 px-6 overflow-hidden">
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-sky-500/10 rounded-full blur-[120px]"></div>
+        <div class="absolute top-1/2 -right-24 w-96 h-96 bg-indigo-500/10 rounded-full blur-[120px]"></div>
 
-        <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center">
-            <div class="space-y-8 text-center lg:text-left z-10">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+            <div class="flex-1 space-y-8 text-center lg:text-left">
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-sky-500/30 text-sky-400 text-xs font-bold uppercase tracking-[0.2em]">
                     <span class="relative flex h-2 w-2">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
                     </span>
-                    The Future of Gadgets
+                    Professional Tech Solutions
                 </div>
-                
-                <h1 class="orbitron text-5xl lg:text-7xl font-black leading-[1.1]">
-                    Power Up Your <br>
-                    <span class="gradient-text">Digital World</span>
-                </h1>
-                
-                <p class="text-slate-400 text-lg max-w-xl mx-auto lg:mx-0 leading-relaxed font-light">
-                    Your one-stop hub for premium gadget sales, precision repairs, and software engineering. From the latest iPhones to complex motherboard microsurgery.
+                <h2 class="orbitron text-5xl lg:text-7xl font-bold leading-tight">
+                    Upgrade Your <span class="gradient-text">Digital Life</span>
+                </h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Premium gadget sales, professional repairs, and expert software solutions. We don't just fix devices; we restore your connection to the world.
                 </p>
-                
                 <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-                    <a href="#store" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-sky-500 to-indigo-600 rounded-xl font-bold orbitron text-sm hover:shadow-[0_0_40px_rgba(14,165,233,0.3)] transition-all flex items-center justify-center gap-3">
-                        <i class="fas fa-shopping-bag"></i> Shop Now
+                    <a href="#store" class="w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-sky-500 to-indigo-600 rounded-2xl font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_30px_rgba(14,165,233,0.4)] transition-all">
+                        Browse Store
                     </a>
-                    <a href="#repair" class="w-full sm:w-auto px-8 py-4 glass rounded-xl font-bold orbitron text-sm hover:bg-white/5 transition-all flex items-center justify-center gap-3">
-                        <i class="fas fa-wrench"></i> Book Repair
+                    <a href="#contact" class="w-full sm:w-auto px-10 py-5 glass rounded-2xl font-bold uppercase tracking-widest text-sm hover:bg-white/10 transition-all">
+                        Get a Quote
                     </a>
                 </div>
-
-                <div class="flex items-center justify-center lg:justify-start gap-8 pt-8 border-t border-white/5">
-                    <div>
-                        <p class="text-2xl font-bold orbitron text-white">500+</p>
-                        <p class="text-xs text-slate-500 uppercase tracking-wider">Devices Fixed</p>
+                
+                <div class="flex items-center justify-center lg:justify-start gap-8 pt-8 opacity-60">
+                    <div class="text-center">
+                        <div class="orbitron text-2xl font-bold">5k+</div>
+                        <div class="text-[10px] uppercase tracking-tighter">Repairs Done</div>
                     </div>
-                    <div>
-                        <p class="text-2xl font-bold orbitron text-white">100%</p>
-                        <p class="text-xs text-slate-500 uppercase tracking-wider">Quality Parts</p>
+                    <div class="w-[1px] h-10 bg-white/10"></div>
+                    <div class="text-center">
+                        <div class="orbitron text-2xl font-bold">100%</div>
+                        <div class="text-[10px] uppercase tracking-tighter">Genuine Parts</div>
                     </div>
-                    <div>
-                        <p class="text-2xl font-bold orbitron text-white">24/7</p>
-                        <p class="text-xs text-slate-500 uppercase tracking-wider">Support</p>
+                    <div class="w-[1px] h-10 bg-white/10"></div>
+                    <div class="text-center">
+                        <div class="orbitron text-2xl font-bold">24hr</div>
+                        <div class="text-[10px] uppercase tracking-tighter">Rapid Return</div>
                     </div>
                 </div>
             </div>
 
-            <div class="relative hidden lg:block">
+            <div class="flex-1 relative">
                 <div class="hero-3d relative z-10">
-                    <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?q=80&w=2929&auto=format&fit=crop" alt="Latest Tech" class="rounded-[2.5rem] shadow-2xl border border-white/10 w-full object-cover h-[600px]">
-                    
-                    <div class="absolute -left-10 top-20 glass p-5 rounded-2xl floating flex items-center gap-4 border-sky-500/30">
-                        <div class="w-12 h-12 rounded-full bg-sky-500/20 flex items-center justify-center text-sky-400">
-                            <i class="fab fa-apple text-xl"></i>
-                        </div>
-                        <div>
-                            <p class="font-bold text-sm">iPhone 15 Pro</p>
-                            <p class="text-xs text-green-400">Available Now</p>
+                    <img src="https://image2url.com/r2/default/images/1769348935568-bd7d6235-436f-467b-b8dd-25417f5413a0.jpeg" alt="Tech Setup" class="rounded-[2.5rem] shadow-2xl border border-white/10">
+                    <div class="absolute -bottom-10 -left-10 glass p-6 rounded-3xl floating border-sky-500/50">
+                        <div class="flex items-center gap-4">
+                            <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-2xl">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-bold">Certified Techs</div>
+                                <div class="text-xs text-slate-400">Expertise guaranteed</div>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <!-- Background glow -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-sky-500/20 rounded-full blur-[120px] -z-10"></div>
+            </div>
+        </div>
+    </section>
 
-                    <div class="absolute -right-5 bottom-32 glass p-5 rounded-2xl floating-delayed flex items-center gap-4 border-indigo-500/30">
-                        <div class="w-12 h-12 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400">
-                            <i class="fas fa-microchip text-xl"></i>
-                        </div>
-                        <div>
-                            <p class="font-bold text-sm">Logic Board Repair</p>
-                            <p class="text-xs text-slate-400">Expert Level</p>
-                        </div>
+    <!-- Services Grid -->
+    <section id="services" class="py-24 px-6 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h3 class="orbitron text-3xl font-bold mb-4">What We Do</h3>
+                <div class="w-24 h-1 bg-sky-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Sales -->
+                <div class="glass p-8 rounded-[2rem] card-hover border-t-4 border-t-sky-500">
+                    <div class="w-14 h-14 bg-sky-500/20 text-sky-400 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
                     </div>
+                    <h4 class="orbitron text-xl font-bold mb-3">Gadget Sales</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Brand New and high-quality Uk-used iPhones, Laptops, Androids, and POS Terminals. Every device is tested.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-center gap-2">✔ Brand New iPhones & Pixels</li>
+                        <li class="flex items-center gap-2">✔ Merchant POS Terminals</li>
+                        <li class="flex items-center gap-2">✔ Laptop Sales & Upgrades</li>
+                    </ul>
+                </div>
+
+                <!-- Repairs -->
+                <div class="glass p-8 rounded-[2rem] card-hover border-t-4 border-t-emerald-500">
+                    <div class="w-14 h-14 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    </div>
+                    <h4 class="orbitron text-xl font-bold mb-3">Repair Lab</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Precision micro-soldering and software engineering. We fix what others call "impossible".
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-center gap-2">✔ Screen & Battery Swaps</li>
+                        <li class="flex items-center gap-2">✔ Motherboard Logic Repair</li>
+                        <li class="flex items-center gap-2">✔ Water Damage Restoration</li>
+                    </ul>
+                </div>
+
+                <!-- Gaming -->
+                <div class="glass p-8 rounded-[2rem] card-hover border-t-4 border-t-indigo-500">
+                    <div class="w-14 h-14 bg-indigo-500/20 text-indigo-400 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/></svg>
+                    </div>
+                    <h4 class="orbitron text-xl font-bold mb-3">Gaming Hub</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Unlock the next level of gaming with our console sales and specialized PSP/PS5 repair services.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-center gap-2">✔ PS4/PS5 Console Sales</li>
+                        <li class="flex items-center gap-2">✔ Controller Refurbishing</li>
+                        <li class="flex items-center gap-2">✔ Custom Gaming PC Builds</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="about" class="py-24 px-6 bg-slate-900/50">
-        <div class="max-w-4xl mx-auto text-center space-y-6">
-            <h2 class="orbitron text-3xl font-bold">About <span class="gradient-text">HoRly’s Tech</span></h2>
-            <p class="text-slate-300 leading-relaxed text-lg">
-                We are not just a store; we are a technology sanctuary. Founded on the belief that devices should last longer and perform better, HoRly’s Tech brings world-class repair standards to Nigeria. Whether you are buying a UK-used iPhone, upgrading your gaming rig, or reviving a dead laptop, we guarantee transparency, speed, and premium quality.
-            </p>
-            <div class="flex justify-center gap-4 text-3xl text-slate-600 mt-8">
-                <i class="fab fa-apple hover:text-white transition-colors"></i>
-                <i class="fab fa-android hover:text-green-500 transition-colors"></i>
-                <i class="fab fa-windows hover:text-blue-500 transition-colors"></i>
-                <i class="fab fa-playstation hover:text-indigo-500 transition-colors"></i>
-            </div>
-        </div>
-    </section>
-
+    <!-- Product Showcase -->
     <section id="store" class="py-24 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
                 <div>
-                    <h2 class="orbitron text-4xl font-bold mb-2">The <span class="gradient-text">Vault</span></h2>
-                    <p class="text-slate-400">Select premium gadgets available for instant delivery.</p>
+                    <h3 class="orbitron text-3xl font-bold mb-2">Featured Inventory</h3>
+                    <p class="text-slate-400">Premium tech, hand-picked for performance.</p>
                 </div>
-                
-                <div class="flex gap-2 overflow-x-auto pb-2 w-full md:w-auto">
-                    <button class="px-6 py-2 rounded-full bg-sky-500 text-white text-sm font-bold whitespace-nowrap">All</button>
-                    <button class="px-6 py-2 rounded-full glass hover:bg-white/10 text-slate-300 text-sm font-bold whitespace-nowrap">Phones</button>
-                    <button class="px-6 py-2 rounded-full glass hover:bg-white/10 text-slate-300 text-sm font-bold whitespace-nowrap">Laptops</button>
-                    <button class="px-6 py-2 rounded-full glass hover:bg-white/10 text-slate-300 text-sm font-bold whitespace-nowrap">Consoles</button>
-                </div>
+                <a href=""><button class="text-sky-400 font-bold border-b border-sky-400 pb-1">View Full Catalog →</button></a>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="glass rounded-3xl overflow-hidden group card-hover relative">
-                    <div class="absolute top-4 left-4 z-10 bg-rose-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Hot Seller</div>
-                    <div class="h-64 overflow-hidden bg-slate-800">
-                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1780&auto=format&fit=crop" alt="iPhone" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Item 1 -->
+                <div class="glass rounded-3xl overflow-hidden group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://image2url.com/r2/default/images/1769350172208-9d4ff202-192a-436d-bee2-83dfd2345d3e.jpeg" alt="Smartphone" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-4 left-4 bg-sky-500 px-3 py-1 rounded-full text-[10px] font-bold uppercase">New Arrival</div>
                     </div>
                     <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h3 class="orbitron font-bold text-lg">iPhone 14 Pro Max</h3>
-                                <p class="text-xs text-slate-400">256GB • UK Used • Gold</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between mt-4">
-                            <span class="text-sky-400 font-bold text-lg">₦1,xxx,xxx</span>
-                            <button onclick="openCheckout('iPhone 14 Pro Max')" class="p-3 bg-white/5 rounded-xl hover:bg-sky-500 hover:text-white transition-all">
-                                <i class="fas fa-shopping-cart"></i>
-                            </button>
+                        <h5 class="orbitron font-bold text-lg mb-1">Flagship Phones</h5>
+                        <p class="text-xs text-slate-400 mb-4">iPhone 17 Pro, Samsung S24, Google Pixel 8.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sky-400 font-bold">Best Price</span>
+                            <button class="p-2 bg-white/5 rounded-xl hover:bg-sky-500 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button>
                         </div>
                     </div>
                 </div>
 
-                <div class="glass rounded-3xl overflow-hidden group card-hover relative">
-                    <div class="h-64 overflow-hidden bg-slate-800">
-                        <img src="https://images.unsplash.com/photo-1660945532598-a89c2cc7864f?q=80&w=2070&auto=format&fit=crop" alt="MacBook" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <!-- Item 2 -->
+                <div class="glass rounded-3xl overflow-hidden group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=500&q=80" alt="Laptop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h3 class="orbitron font-bold text-lg">MacBook Air M2</h3>
-                                <p class="text-xs text-slate-400">512GB SSD • Midnight</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between mt-4">
-                            <span class="text-sky-400 font-bold text-lg">₦1,xxx,xxx</span>
-                            <button onclick="openCheckout('MacBook Air M2')" class="p-3 bg-white/5 rounded-xl hover:bg-sky-500 hover:text-white transition-all">
-                                <i class="fas fa-shopping-cart"></i>
-                            </button>
+                        <h5 class="orbitron font-bold text-lg mb-1">Pro Laptops</h5>
+                        <p class="text-xs text-slate-400 mb-4">MacBook Air/Pro, Dell XPS, HP Spectre.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sky-400 font-bold">Best Price</span>
+                            <button class="p-2 bg-white/5 rounded-xl hover:bg-sky-500 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button>
                         </div>
                     </div>
                 </div>
 
-                <div class="glass rounded-3xl overflow-hidden group card-hover relative">
-                    <div class="h-64 overflow-hidden bg-slate-800">
-                        <img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=2070&auto=format&fit=crop" alt="PS5" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <!-- Item 3 -->
+                <div class="glass rounded-3xl overflow-hidden group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://image2url.com/r2/default/images/1769349571103-910dc88e-5390-4060-9908-1f5f5fa2a893.webp" alt="POS" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h3 class="orbitron font-bold text-lg">Sony PS5 Slim</h3>
-                                <p class="text-xs text-slate-400">1TB • Disc Edition</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between mt-4">
-                            <span class="text-sky-400 font-bold text-lg">₦xxx,xxx</span>
-                            <button onclick="openCheckout('Sony PS5 Slim')" class="p-3 bg-white/5 rounded-xl hover:bg-sky-500 hover:text-white transition-all">
-                                <i class="fas fa-shopping-cart"></i>
-                            </button>
+                        <h5 class="orbitron font-bold text-lg mb-1">Merchant POS</h5>
+                        <p class="text-xs text-slate-400 mb-4">Reliable POS terminals for business scaling.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sky-400 font-bold">Fast Setup</span>
+                            <button class="p-2 bg-white/5 rounded-xl hover:bg-sky-500 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button>
                         </div>
                     </div>
                 </div>
 
-                <div class="glass rounded-3xl overflow-hidden group card-hover relative">
-                    <div class="absolute top-4 left-4 z-10 bg-indigo-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">Business</div>
-                    <div class="h-64 overflow-hidden bg-slate-800">
-                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=2070&auto=format&fit=crop" alt="POS" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <!-- Item 4 -->
+                <div class="glass rounded-3xl overflow-hidden group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=500&q=80" alt="Gaming" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <div class="p-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h3 class="orbitron font-bold text-lg">Smart POS Terminal</h3>
-                                <p class="text-xs text-slate-400">4G Android • Fast Printer</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between mt-4">
-                            <span class="text-sky-400 font-bold text-lg">Ask Price</span>
-                            <button onclick="openCheckout('Smart POS Terminal')" class="p-3 bg-white/5 rounded-xl hover:bg-sky-500 hover:text-white transition-all">
-                                <i class="fas fa-shopping-cart"></i>
-                            </button>
+                        <h5 class="orbitron font-bold text-lg mb-1">Gaming Gear</h5>
+                        <p class="text-xs text-slate-400 mb-4">PS5 Consoles, PSPs, & Mobile Coolers.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sky-400 font-bold">Best Price</span>
+                            <button class="p-2 bg-white/5 rounded-xl hover:bg-sky-500 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="mt-12 text-center">
-                 <button class="px-8 py-3 border border-white/20 rounded-full hover:bg-white/10 transition-all text-sm uppercase tracking-widest">Load More Gadgets</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="repair" class="py-24 px-6 bg-gradient-to-b from-transparent to-sky-950/20 relative">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                <div class="order-2 md:order-1 space-y-8">
-                    <h2 class="orbitron text-4xl font-bold">Expert <span class="gradient-text">Repair Lab</span></h2>
-                    <p class="text-slate-400 text-lg leading-relaxed">
-                        Don't throw it away. We bring dead devices back to life. Our laboratory uses infrared soldering and schematic diagnostics to fix issues other shops reject.
-                    </p>
-                    
-                    <div class="space-y-4">
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400 shrink-0">
-                                <i class="fas fa-mobile-alt"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg">Screen & Battery Replacement</h4>
-                                <p class="text-sm text-slate-500">Original OLED screens and high-capacity cells installed in 30 mins.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-indigo-500/10 flex items-center justify-center text-indigo-400 shrink-0">
-                                <i class="fas fa-microchip"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg">Motherboard Microsoldering</h4>
-                                <p class="text-sm text-slate-500">Fixing FaceID, Audio IC, Charging IC, and Water Damage.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-rose-500/10 flex items-center justify-center text-rose-400 shrink-0">
-                                <i class="fas fa-laptop-code"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-lg">Software & Unlocking</h4>
-                                <p class="text-sm text-slate-500">Network unlock, OS Reinstall, Data Recovery services.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <a href="#contact" class="inline-block mt-4 px-8 py-3 bg-white text-black font-bold rounded-lg hover:bg-slate-200 transition-colors">Start a Repair Ticket</a>
-                </div>
-
-                <div class="order-1 md:order-2 relative group">
-                    <div class="absolute inset-0 bg-sky-500/20 blur-[60px] rounded-full group-hover:bg-sky-500/30 transition-all"></div>
-                    <img src="https://images.unsplash.com/photo-1588508065123-28d467538d80?q=80&w=2070&auto=format&fit=crop" alt="Repair Lab" class="relative z-10 rounded-[3rem] shadow-2xl border border-white/10 rotate-2 hover:rotate-0 transition-all duration-500">
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="blog" class="py-24 px-6">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="orbitron text-4xl font-bold mb-12 text-center">Tech <span class="gradient-text">Insights</span></h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <article class="glass rounded-2xl overflow-hidden hover:bg-white/5 transition-all cursor-pointer">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1621330396167-e41485e87fd5?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover">
+    <!-- Repair Section -->
+    <section id="repair" class="py-24 px-6 bg-gradient-to-b from-transparent to-sky-950/20">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
+            <div class="flex-1">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1597733336794-12d05021d510?auto=format&fit=crop&w=800&q=80" alt="Repair Lab" class="rounded-[3rem] shadow-2xl">
+                    <div class="absolute inset-0 bg-sky-500/20 mix-blend-overlay rounded-[3rem]"></div>
+                </div>
+            </div>
+            <div class="flex-1 space-y-8">
+                <h3 class="orbitron text-4xl font-bold">Expert Repair <span class="gradient-text">Laboratory</span></h3>
+                <p class="text-slate-400 leading-relaxed text-lg">
+                    Our laboratory is equipped with state-of-the-art infrared soldering stations and high-precision diagnostic tools. We specialize in microsurgery on modern device motherboards.
+                </p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="glass p-4 rounded-2xl">
+                        <div class="text-emerald-400 font-bold mb-1">Screen Tech</div>
+                        <div class="text-xs text-slate-500">OLED/LCD replacements</div>
                     </div>
-                    <div class="p-6">
-                        <span class="text-xs font-bold text-sky-400 uppercase">Maintenance</span>
-                        <h3 class="font-bold text-xl mt-2 mb-3">How to Maintain Your Battery Health</h3>
-                        <p class="text-sm text-slate-400 mb-4">Learn the charging habits that can double your phone's battery lifespan.</p>
-                        <a href="#" class="text-sm font-bold border-b border-sky-400 pb-1">Read Article</a>
+                    <div class="glass p-4 rounded-2xl">
+                        <div class="text-sky-400 font-bold mb-1">Power Fix</div>
+                        <div class="text-xs text-slate-500">Charging ports & ICs</div>
                     </div>
-                </article>
-
-                <article class="glass rounded-2xl overflow-hidden hover:bg-white/5 transition-all cursor-pointer">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover">
+                    <div class="glass p-4 rounded-2xl">
+                        <div class="text-indigo-400 font-bold mb-1">Software</div>
+                        <div class="text-xs text-slate-500">Unlocking & OS restores</div>
                     </div>
-                    <div class="p-6">
-                        <span class="text-xs font-bold text-indigo-400 uppercase">Buying Guide</span>
-                        <h3 class="font-bold text-xl mt-2 mb-3">UK Used vs. Brand New?</h3>
-                        <p class="text-sm text-slate-400 mb-4">The truth about buying used iPhones in Lagos. What to check before you pay.</p>
-                        <a href="#" class="text-sm font-bold border-b border-indigo-400 pb-1">Read Article</a>
+                    <div class="glass p-4 rounded-2xl">
+                        <div class="text-rose-400 font-bold mb-1">Data Rec</div>
+                        <div class="text-xs text-slate-500">Hard drive & SSD recovery</div>
                     </div>
-                </article>
-
-                <article class="glass rounded-2xl overflow-hidden hover:bg-white/5 transition-all cursor-pointer">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1531297461136-82lwDe43sqTO?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover">
-                    </div>
-                    <div class="p-6">
-                        <span class="text-xs font-bold text-rose-400 uppercase">Protection</span>
-                        <h3 class="font-bold text-xl mt-2 mb-3">Why You Need a Screen Guard</h3>
-                        <p class="text-sm text-slate-400 mb-4">A 2k screen guard can save you 150k in repairs. Here is why.</p>
-                        <a href="#" class="text-sm font-bold border-b border-rose-400 pb-1">Read Article</a>
-                    </div>
-                </article>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="glass border-t border-white/10 pt-20 pb-10 px-6 mt-20">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                <div class="col-span-1 md:col-span-2">
-                    <h2 class="orbitron text-2xl font-bold mb-6">HoRly’s_<span class="gradient-text">Tech</span></h2>
-                    <p class="text-slate-400 max-w-sm mb-6">
-                        Your trusted partner for all things technology in Lagos. We sell, we fix, we deliver.
-                    </p>
-                    <div class="flex gap-4">
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-all"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-all"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-all"><i class="fab fa-whatsapp"></i></a>
+    <!-- Inquiry Form Section -->
+    <section id="contact" class="py-24 px-6 relative">
+        <div class="max-w-4xl mx-auto glass p-8 md:p-16 rounded-[3rem] border border-white/10 relative z-10">
+            <div class="text-center mb-12">
+                <h3 class="orbitron text-3xl font-bold mb-4">Audience <span class="gradient-text">Inquiries</span></h3>
+                <p class="text-slate-400">Tell us what you need, and we'll get back to you within 2 hours.</p>
+            </div>
+
+            <!-- FORM: Replace 'your@email.com' with your actual Gmail address -->
+            <form action="https://formspree.io/f/horlys.tech@gmail.com" method="POST" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-2">Full Name</label>
+                        <input type="text" name="name" required placeholder="John Doe" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-sky-500 transition-all">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-2">Phone Number</label>
+                        <input type="tel" name="phone" required placeholder="0912..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-sky-500 transition-all">
                     </div>
                 </div>
                 
-                <div>
-                    <h4 class="font-bold orbitron mb-6">Quick Links</h4>
-                    <ul class="space-y-4 text-sm text-slate-400">
-                        <li><a href="#store" class="hover:text-white">Shop iPhones</a></li>
-                        <li><a href="#repair" class="hover:text-white">Book Repair</a></li>
-                        <li><a href="#about" class="hover:text-white">About Us</a></li>
-                        <li><a href="#contact" class="hover:text-white">Contact Support</a></li>
-                    </ul>
+                <div class="space-y-2">
+                    <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-2">Interested In</label>
+                    <select name="category" class="w-auto bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-sky-500 transition-all appearance-none cursor-pointer">
+                        <option value="Gadget Sales">Gadget Sales</option>
+                        <option value="Phone Repair">Phone Repair</option>
+                        <option value="Laptop Repair">Laptop Repair</option>
+                        <option value="POS Terminal">POS Terminal</option>
+                        <option value="Gaming Console">Gaming/PS5 Inquiry</option>
+                    </select>
                 </div>
 
-                <div>
-                    <h4 class="font-bold orbitron mb-6">Contact</h4>
-                    <ul class="space-y-4 text-sm text-slate-400">
-                        <li class="flex items-center gap-3"><i class="fas fa-phone text-sky-400"></i> 09121213936</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-map-marker-alt text-sky-400"></i> Lagos, Nigeria</li>
-                        <li class="flex items-center gap-3"><i class="fas fa-envelope text-sky-400"></i> support@horlystech.com</li>
-                    </ul>
+                <div class="space-y-2">
+                    <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-2">Message / Device Details</label>
+                    <textarea name="message" rows="4" required placeholder="Describe your issue or the device you're looking for..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-sky-500 transition-all"></textarea>
                 </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-sky-500 to-indigo-600 py-5 rounded-2xl font-bold orbitron uppercase tracking-[0.2em] shadow-xl shadow-sky-500/20 hover:scale-[1.02] transition-all">
+                    Send Inquiry
+                </button>
+            </form>
+        </div>
+        <!-- Decoration -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-indigo-500/5 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-white/5 glass">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <h1 class="orbitron text-xl font-bold mb-2">HoRly’s_<span class="gradient-text">Tech</span></h1>
+                <p class="text-slate-500 text-sm">© 2026 HoRly Tech Gadgets Sales N Repair. All rights reserved.</p>
             </div>
             
-            <div class="border-t border-white/5 pt-8 text-center text-xs text-slate-600">
-                &copy; 2026 HoRly’s Tech Gadgets Sales N Repair. All rights reserved.
+            <div class="flex flex-col items-center md:items-end gap-2">
+                <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Direct Contact</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-4.752 8.995c-3.076 0-6.145-1.046-8.623-3.033l-1.096-.883-4.001 1.048 1.067-3.901-.968-1.214C.951 12.67 0 10.354 0 7.944 0 3.564 3.564 0 7.944 0c4.38 0 7.944 3.564 7.944 7.944 0 2.41-.951 4.726-2.678 6.452-1.726 1.727-4.042 2.678-6.452 2.678z"/></svg>
+                    </div>
+                    <span class="text-2xl font-bold orbitron">09121213936</span>
+                </div>
             </div>
         </div>
     </footer>
 
-    <div id="checkoutModal" class="modal fixed inset-0 z-[70] flex items-center justify-center bg-black/80 px-4">
-        <div class="modal-content w-full max-w-lg glass-strong rounded-3xl p-8 relative border border-sky-500/30">
-            <button onclick="closeCheckout()" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-white">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-            
-            <h3 class="orbitron text-2xl font-bold mb-1">Secure Checkout</h3>
-            <p class="text-xs text-slate-400 mb-6">Complete your order details below</p>
-            
-            <form id="checkoutForm" onsubmit="processPayment(event)" class="space-y-4">
-                <div>
-                    <label class="text-xs font-bold uppercase text-slate-500 ml-1">Selected Item</label>
-                    <input type="text" id="productName" readonly class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sky-400 font-bold outline-none">
-                </div>
-                
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="text-xs font-bold uppercase text-slate-500 ml-1">Delivery Location</label>
-                        <select id="location" required class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-sky-500">
-                            <option value="">Select Area...</option>
-                            <option value="Lagos - Mainland">Lagos - Mainland</option>
-                            <option value="Lagos - Island">Lagos - Island</option>
-                            <option value="Ogun State">Ogun State</option>
-                            <option value="Abuja">Abuja</option>
-                            <option value="Other State">Other State (Waybill)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="text-xs font-bold uppercase text-slate-500 ml-1">Payment Method</label>
-                        <select id="paymentMethod" required class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-sky-500">
-                            <option value="Bank Transfer">Bank Transfer</option>
-                            <option value="Card Payment">Card Payment (POS)</option>
-                            <option value="Pay on Delivery">Pay on Delivery (Lagos Only)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="text-xs font-bold uppercase text-slate-500 ml-1">Your Full Name</label>
-                    <input type="text" id="customerName" required placeholder="Enter your name" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-sky-500">
-                </div>
-
-                <div class="pt-2">
-                    <button type="submit" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:scale-[1.02] transition-transform py-4 rounded-xl font-bold orbitron flex items-center justify-center gap-2">
-                        <i class="fab fa-whatsapp text-xl"></i> Proceed to Order
-                    </button>
-                    <p class="text-[10px] text-center text-slate-500 mt-2">
-                        <i class="fas fa-lock"></i> Transaction secured via WhatsApp Business
-                    </p>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <script>
-        // Mobile Menu
+        // Mobile Menu Logic
         const menuBtn = document.getElementById('menuBtn');
         const closeMenu = document.getElementById('closeMenu');
         const mobileMenu = document.getElementById('mobileMenu');
@@ -555,48 +463,16 @@
 
         menuBtn.onclick = () => mobileMenu.classList.remove('hidden');
         closeMenu.onclick = () => mobileMenu.classList.add('hidden');
-        mobileLinks.forEach(link => link.onclick = () => mobileMenu.classList.add('hidden'));
-
-        // Checkout Logic
-        const modal = document.getElementById('checkoutModal');
-        const productInput = document.getElementById('productName');
-
-        function openCheckout(productName) {
-            productInput.value = productName;
-            modal.classList.add('active');
-        }
-
-        function closeCheckout() {
-            modal.classList.remove('active');
-        }
-
-        function processPayment(e) {
-            e.preventDefault();
-            
-            const product = document.getElementById('productName').value;
-            const location = document.getElementById('location').value;
-            const method = document.getElementById('paymentMethod').value;
-            const name = document.getElementById('customerName').value;
-            
-            // Format WhatsApp Message
-            const message = `Hello HoRly's Tech,%0A%0AI want to place an order:%0A📦 *Item:* ${product}%0A👤 *Name:* ${name}%0A📍 *Location:* ${location}%0A💳 *Payment:* ${method}%0A%0APlease confirm availability so I can make payment.`;
-            
-            // Redirect to WhatsApp
-            window.open(`https://wa.me/2349121213936?text=${message}`, '_blank');
-            closeCheckout();
-        }
-
-        // Close modal if clicking outside
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeCheckout();
+        mobileLinks.forEach(link => {
+            link.onclick = () => mobileMenu.classList.add('hidden');
         });
 
-        // Scroll Animations
+        // Intersection Observer for animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('translate-y-10');
                 }
             });
         }, { threshold: 0.1 });
