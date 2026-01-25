@@ -93,6 +93,7 @@
                 <a href="#home" class="hover:text-white transition-colors">Home</a>
                 <a href="#catalog" class="hover:text-white transition-colors">Store</a>
                 <a href="#repair" class="hover:text-white transition-colors">Repair</a>
+                <a href="#inquiry" class="hover:text-white transition-colors">Inquiry</a>
                 <a href="#about" class="hover:text-white transition-colors">About Us</a>
             </div>
 
@@ -198,8 +199,6 @@
         </div>
     </section>
 
-  
-
     <section id="repair" class="py-24 px-6 bg-gradient-to-b from-transparent to-sky-900/10">
         <div class="max-w-6xl mx-auto glass rounded-[3rem] p-8 md:p-16 relative overflow-hidden text-center md:text-left flex flex-col md:flex-row items-center gap-12">
             <div class="relative z-10 flex-1">
@@ -226,6 +225,57 @@
         </div>
     </section>
 
+              <section id="inquiry" class="py-20 px-6">
+        <div class="max-w-5xl mx-auto glass rounded-3xl p-8 md:p-12 border-t border-sky-500/30 shadow-[0_0_50px_rgba(14,165,233,0.1)]">
+            <div class="text-center mb-10">
+                <h2 class="orbitron text-3xl font-bold mb-3">General <span class="gradient-text">Inquiry</span></h2>
+                <p class="text-slate-400 text-sm">Have a question? Need a swap deal? Fill this form to chat directly with us.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4 p-4 bg-white/5 rounded-xl border border-white/5">
+                        <div class="w-10 h-10 bg-sky-500/20 rounded-full flex items-center justify-center text-sky-400 text-xl">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white">Customer Support</h4>
+                            <p class="text-xs text-slate-400">Available 24/hrs</p>
+                            <p class="text-sky-400 font-bold mt-1">09121213936</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 bg-white/5 rounded-xl border border-white/5">
+                        <div class="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center text-indigo-400 text-xl">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white">Visit Store</h4>
+                            <p class="text-xs text-slate-400">Lagos, Nigeria</p>
+                            <p class="text-indigo-400 font-bold mt-1 text-xs">Nationwide Delivery Available</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input type="text" id="inqName" placeholder="Your Name" class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 focus:border-sky-500 outline-none text-sm">
+                        <select id="inqType" class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 focus:border-sky-500 outline-none text-sm text-slate-300">
+                            <option value="General Question">General Question</option>
+                            <option value="Phone Swap Deal">Phone Swap Deal</option>
+                            <option value="Delivery Inquiry">Delivery Inquiry</option>
+                        </select>
+                    </div>
+                    <textarea id="inqMessage" rows="4" placeholder="Type your message here..." class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 focus:border-sky-500 outline-none text-sm"></textarea>
+                    
+                    <button onclick="sendInquiry()" class="w-full bg-white text-black font-bold py-3 rounded-lg hover:bg-sky-400 hover:text-white transition-all flex items-center justify-center gap-2">
+                        <i class="fab fa-whatsapp"></i> Send Message
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+              
    <section id="about" class="py-24 px-6 bg-slate-900/50">
         <div class="max-w-4xl mx-auto text-center space-y-6">
             <h2 class="orbitron text-3xl font-bold">About <span class="gradient-text">HoRly’s Tech</span></h2>
@@ -465,6 +515,25 @@
              window.open(`https://wa.me/2349121213936?text=Hello HoRly's Tech, I am looking for a specific device not listed on your site...`, '_blank');
         }
 
+      // 5. Inquiry Function
+        function sendInquiry() {
+            const name = document.getElementById('inqName').value;
+            const type = document.getElementById('inqType').value;
+            const message = document.getElementById('inqMessage').value;
+
+            if(!name || !message) {
+                alert("Please enter your name and message.");
+                return;
+            }
+
+            const waMsg = `*GENERAL INQUIRY - HoRly's Tech* ❓%0A%0A` +
+                          `*Name:* ${name}%0A` +
+                          `*Topic:* ${type}%0A` +
+                          `*Message:* ${message}`;
+            
+            window.open(`https://wa.me/2349121213936?text=${waMsg}`, '_blank');
+        }
+      
         // Initial Load
         renderProducts('all');
 
