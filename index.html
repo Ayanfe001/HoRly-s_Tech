@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoRly’s Tech | Premium Gadgets & Expert Repairs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --secondary: #6366f1;
+            --dark: #020617;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: white;
+            overflow-x: hidden;
+        }
+        .orbitron { font-family: 'Orbitron', sans-serif; }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-3d {
+            transform: perspective(1000px) rotateY(-10deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+        }
+        .hero-3d:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        .pulse-wa {
+            animation: pulse-wa 2s infinite;
+        }
+        @keyframes pulse-wa {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+      
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .card-hover:hover {
+            transform: translateY(-12px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
+    </style>
+</head>
+<body class="selection:bg-sky-500/30">
+
+       <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/2349121213936?text=Hello%20HoRly's%20Tech,%20I'd%20like%20to%20inquire%20about%20your%20gadgets/repairs." 
+       target="_blank" 
+       class="whatsapp-float pulse-wa flex items-center justify-center w-16 h-16 bg-[#25d366] rounded-full shadow-2xl"
+       title="Chat on WhatsApp">
+        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-4.752 8.995c-3.076 0-6.145-1.046-8.623-3.033l-1.096-.883-4.001 1.048 1.067-3.901-.968-1.214C.951 12.67 0 10.354 0 7.944 0 3.564 3.564 0 7.944 0c4.38 0 7.944 3.564 7.944 7.944 0 2.41-.951 4.726-2.678 6.452-1.726 1.727-4.042 2.678-6.452 2.678z"/>
+        </svg>
+    </a>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <h1 class="orbitron text-2xl font-bold tracking-tighter">
+                    HoRly’s_<span class="gradient-text">Tech</span>
+                </h1>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm uppercase tracking-widest text-slate-300">
+                <a href="#home" class="nav-link hover:text-white">Home</a>
+                <a href="#services" class="nav-link hover:text-white">Services</a>
+                <a href="#store" class="nav-link hover:text-white">Store</a>
+                <a href="#repair" class="nav-link hover:text-white">Repair Lab</a>
+                <a href="#contact" class="px-5 py-2.5 bg-sky-500 rounded-full text-white hover:bg-sky-400 transition-colors">Inquire Now</a>
+            </div>
+
+            <button class="md:hidden text-white" id="menuBtn">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed inset-0 z-[60] glass hidden flex flex-col items-center justify-center space-y-8 text-2xl orbitron">
+        <button class="absolute top-6 right-6" id="closeMenu">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <a href="#home" class="mobile-link">Home</a>
+        <a href="#services" class="mobile-link">Services</a>
+        <a href="#store" class="mobile-link">Store</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 px-6 overflow-hidden">
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-sky-500/10 rounded-full blur-[120px]"></div>
+        <div class="absolute top-1/2 -right-24 w-96 h-96 bg-indigo-500/10 rounded-full blur-[120px]"></div>
+
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+            <div class="flex-1 space-y-8 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-sky-500/30 text-sky-400 text-xs font-bold uppercase tracking-[0.2em]">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+                    </span>
+                    Professional Tech Solutions
+                </div>
+                <h2 class="orbitron text-5xl lg:text-7xl font-bold leading-tight">
+                    Upgrade Your <span class="gradient-text">Digital Life</span>
+                </h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                    Premium gadget sales, professional repairs, and expert software solutions. We don't just fix devices; we restore your connection to the world.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                    <a href="#store" class="w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-sky-500 to-indigo-600 rounded-2xl font-bold uppercase tracking-widest text-sm hover:shadow-[0_0_30px_rgba(14,165,233,0.4)] transition-all">
+                        Browse Store
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto px-10 py-5 glass rounded-2xl font-bold uppercase tracking-widest text-sm hover:bg-white/10 transition-all">
+                        Get a Quote
+                    </a>
+                </div>
+                
+                <div class="flex items-center justify-center lg:justify-start gap-8 pt-8 opacity-60">
+                    <div class="text-center">
+                        <div class="orbitron text-2xl font-bold">5k+</div>
+                        <div class="text-[10px] uppercase tracking-tighter">Repairs Done</div>
+                    </div>
+                    <div class="w-[1px] h-10 bg-white/10"></div>
+                    <div class="text-center">
+                        <div class="orbitron text-2xl font-bold">100%</div>
+                        <div class="text-[10px] uppercase tracking-tighter">Genuine Parts</div>
+                    </div>
+                    <div class="w-[1px] h-10 bg-white/10"></div>
+                    <div class="text-center">
+                        <div class="orbitron text-2xl font-bold">24hr</div>
+                        <div class="text-[10px] uppercase tracking-tighter">Rapid Return</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-1 relative">
+                <div class="hero-3d relative z-10">
+                    <img src="https://image2url.com/r2/default/images/1769348935568-bd7d6235-436f-467b-b8dd-25417f5413a0.jpeg" alt="Tech Setup" class="rounded-[2.5rem] shadow-2xl border border-white/10">
+                    <div class="absolute -bottom-10 -left-10 glass p-6 rounded-3xl floating border-sky-500/50">
+                        <div class="flex items-center gap-4">
+                            <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-2xl">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-bold">Certified Techs</div>
+                                <div class="text-xs text-slate-400">Expertise guaranteed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Background glow -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-sky-500/20 rounded-full blur-[120px] -z-10"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section id="services" class="py-24 px-6 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h3 class="orbitron text-3xl font-bold mb-4">What We Do</h3>
+                <div class="w-24 h-1 bg-sky-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Sales -->
+                <div class="glass p-8 rounded-[2rem] card-hover">
+                    <div class="w-14 h-14 bg-sky-500/20 text-sky-400 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                    </div>
+                    <h4 class="orbitron text-xl font-bold mb-3">Gadget Sales</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        New and high-quality pre-owned iPhones, Laptops, Androids, and POS Terminals. Every device is tested.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-center gap-2">✔ Brand New iPhones & Pixels</li>
+                        <li class="flex items-center gap-2">✔ Merchant POS Terminals</li>
+                        <li class="flex items-center gap-2">✔ Laptop Sales & Upgrades</li>
+                    </ul>
+                </div>
+
+                <!-- Repairs -->
+                <div class="glass p-8 rounded-[2rem] card-hover border-t-4 border-t-emerald-500">
+                    <div class="w-14 h-14 bg-emerald-500/20 text-emerald-400 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    </div>
+                    <h4 class="orbitron text-xl font-bold mb-3">Repair Lab</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Precision micro-soldering and software engineering. We fix what others call "impossible".
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-center gap-2">✔ Screen & Battery Swaps</li>
+                        <li class="flex items-center gap-2">✔ Motherboard Logic Repair</li>
+                        <li class="flex items-center gap-2">✔ Water Damage Restoration</li>
+                    </ul>
+                </div>
+
+                <!-- Gaming -->
+                <div class="glass p-8 rounded-[2rem] card-hover border-t-4 border-t-indigo-500">
+                    <div class="w-14 h-14 bg-indigo-500/20 text-indigo-400 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/></svg>
+                    </div>
+                    <h4 class="orbitron text-xl font-bold mb-3">Gaming Hub</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Unlock the next level of gaming with our console sales and specialized PSP/PS5 repair services.
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-300">
+                        <li class="flex items-center gap-2">✔ PS4/PS5 Console Sales</li>
+                        <li class="flex items-center gap-2">✔ Controller Refurbishing</li>
+                        <li class="flex items-center gap-2">✔ Custom Gaming PC Builds</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Showcase -->
+    <section id="store" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
+                <div>
+                    <h3 class="orbitron text-3xl font-bold mb-2">Featured Inventory</h3>
+                    <p class="text-slate-400">Premium tech, hand-picked for performance.</p>
+                </div>
+                <button class="text-sky-400 font-bold border-b border-sky-400 pb-1">View Full Catalog →</button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Item 1 -->
+                <div class="glass rounded-3xl overflow-hidden group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://image2url.com/r2/default/images/1769350172208-9d4ff202-192a-436d-bee2-83dfd2345d3e.jpeg" alt="Smartphone" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute top-4 left-4 bg-sky-500 px-3 py-1 rounded-full text-[10px] font-bold uppercase">New Arrival</div>
+                    </div>
+                    <div class="p-6">
+                        <h5 class="orbitron font-bold text-lg mb-1">Flagship Phones</h5>
+                        <p class="text-xs text-slate-400 mb-4">iPhone 17 Pro, Samsung S24, Google Pixel 8.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sky-400 font-bold">Best Price</span>
+                            <button class="p-2 bg-white/5 rounded-xl hover:bg-sky-500 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="glass rounded-3xl overflow-hidden group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=500&q=80" alt="Laptop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h5 class="orbitron font-bold text-lg mb-1">Pro Laptops</h5>
+                        <p class="text-xs text-slate-400 mb-4">MacBook Air/Pro, Dell XPS, HP Spectre.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sky-400 font-bold">Best Price</span>
+                            <button class="p-2 bg-white/5 rounded-xl hover:bg-sky-500 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="glass rounded-3xl overflow-hidden group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://image2url.com/r2/default/images/1769349571103-910dc88e-5390-4060-9908-1f5f5fa2a893.webp" alt="POS" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h5 class="orbitron font-bold text-lg mb-1">Merchant POS</h5>
+                        <p class="text-xs text-slate-400 mb-4">Reliable POS terminals for business scaling.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sky-400 font-bold">Fast Setup</span>
+                            <button class="p-2 bg-white/5 rounded-xl hover:bg-sky-500 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="glass rounded-3xl overflow-hidden group">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=500&q=80" alt="Gaming" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h5 class="orbitron font-bold text-lg mb-1">Gaming Gear</h5>
+                        <p class="text-xs text-slate-400 mb-4">PS5 Consoles, PSPs, & Mobile Coolers.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sky-400 font-bold">Best Price</span>
+                            <button class="p-2 bg-white/5 rounded-xl hover:bg-sky-500 transition-colors"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Repair Section -->
+    <section id="repair" class="py-24 px-6 bg-gradient-to-b from-transparent to-sky-950/20">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-16 items-center">
+            <div class="flex-1">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1597733336794-12d05021d510?auto=format&fit=crop&w=800&q=80" alt="Repair Lab" class="rounded-[3rem] shadow-2xl">
+                    <div class="absolute inset-0 bg-sky-500/20 mix-blend-overlay rounded-[3rem]"></div>
+                </div>
+            </div>
+            <div class="flex-1 space-y-8">
+                <h3 class="orbitron text-4xl font-bold">Expert Repair <span class="gradient-text">Laboratory</span></h3>
+                <p class="text-slate-400 leading-relaxed text-lg">
+                    Our laboratory is equipped with state-of-the-art infrared soldering stations and high-precision diagnostic tools. We specialize in microsurgery on modern device motherboards.
+                </p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="glass p-4 rounded-2xl">
+                        <div class="text-emerald-400 font-bold mb-1">Screen Tech</div>
+                        <div class="text-xs text-slate-500">OLED/LCD replacements</div>
+                    </div>
+                    <div class="glass p-4 rounded-2xl">
+                        <div class="text-sky-400 font-bold mb-1">Power Fix</div>
+                        <div class="text-xs text-slate-500">Charging ports & ICs</div>
+                    </div>
+                    <div class="glass p-4 rounded-2xl">
+                        <div class="text-indigo-400 font-bold mb-1">Software</div>
+                        <div class="text-xs text-slate-500">Unlocking & OS restores</div>
+                    </div>
+                    <div class="glass p-4 rounded-2xl">
+                        <div class="text-rose-400 font-bold mb-1">Data Rec</div>
+                        <div class="text-xs text-slate-500">Hard drive & SSD recovery</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inquiry Form Section -->
+    <section id="contact" class="py-24 px-6 relative">
+        <div class="max-w-4xl mx-auto glass p-8 md:p-16 rounded-[3rem] border border-white/10 relative z-10">
+            <div class="text-center mb-12">
+                <h3 class="orbitron text-3xl font-bold mb-4">Audience <span class="gradient-text">Inquiries</span></h3>
+                <p class="text-slate-400">Tell us what you need, and we'll get back to you within 2 hours.</p>
+            </div>
+
+            <!-- FORM: Replace 'your@email.com' with your actual Gmail address -->
+            <form action="https://formspree.io/f/horlys.tech@gmail.com" method="POST" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-2">Full Name</label>
+                        <input type="text" name="name" required placeholder="John Doe" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-sky-500 transition-all">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-2">Phone Number</label>
+                        <input type="tel" name="phone" required placeholder="0912..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-sky-500 transition-all">
+                    </div>
+                </div>
+                
+                <div class="space-y-2">
+                    <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-2">Interested In</label>
+                    <select name="category" class="w-auto bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-sky-500 transition-all appearance-none cursor-pointer">
+                        <option value="Gadget Sales">Gadget Sales</option>
+                        <option value="Phone Repair">Phone Repair</option>
+                        <option value="Laptop Repair">Laptop Repair</option>
+                        <option value="POS Terminal">POS Terminal</option>
+                        <option value="Gaming Console">Gaming/PS5 Inquiry</option>
+                    </select>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-xs font-bold uppercase tracking-widest text-slate-500 ml-2">Message / Device Details</label>
+                    <textarea name="message" rows="4" required placeholder="Describe your issue or the device you're looking for..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:border-sky-500 transition-all"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-sky-500 to-indigo-600 py-5 rounded-2xl font-bold orbitron uppercase tracking-[0.2em] shadow-xl shadow-sky-500/20 hover:scale-[1.02] transition-all">
+                    Send Inquiry
+                </button>
+            </form>
+        </div>
+        <!-- Decoration -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-indigo-500/5 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-white/5 glass">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <h1 class="orbitron text-xl font-bold mb-2">HoRly’s_<span class="gradient-text">Tech</span></h1>
+                <p class="text-slate-500 text-sm">© 2026 HoRly Tech Gadgets Sales N Repair. All rights reserved.</p>
+            </div>
+            
+            <div class="flex flex-col items-center md:items-end gap-2">
+                <p class="text-xs font-bold text-slate-500 uppercase tracking-widest">Direct Contact</p>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-4.752 8.995c-3.076 0-6.145-1.046-8.623-3.033l-1.096-.883-4.001 1.048 1.067-3.901-.968-1.214C.951 12.67 0 10.354 0 7.944 0 3.564 3.564 0 7.944 0c4.38 0 7.944 3.564 7.944 7.944 0 2.41-.951 4.726-2.678 6.452-1.726 1.727-4.042 2.678-6.452 2.678z"/></svg>
+                    </div>
+                    <span class="text-2xl font-bold orbitron">09121213936</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Logic
+        const menuBtn = document.getElementById('menuBtn');
+        const closeMenu = document.getElementById('closeMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.onclick = () => mobileMenu.classList.remove('hidden');
+        closeMenu.onclick = () => mobileMenu.classList.add('hidden');
+        mobileLinks.forEach(link => {
+            link.onclick = () => mobileMenu.classList.add('hidden');
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.classList.remove('translate-y-10');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-1000', 'translate-y-10', 'opacity-0');
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
+
