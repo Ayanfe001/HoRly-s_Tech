@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Sitemap: https://horlystech.com/sitemap.xml
+
+# Block access to system files
+Disallow: /manifest.json
+Disallow: /404.html
