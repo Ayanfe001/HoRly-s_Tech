@@ -8,6 +8,9 @@
     <meta name="description" content="The #1 Gadget Hub in Lagos. Buy UK Used iPhones, PS5 Consoles, and Laptops. Expert screen repair and motherboard microsoldering. Nationwide Delivery.">
     <meta name="keywords" content="HoRlys Tech, iPhone Lagos, UK Used iPhone, PS5 Nigeria, Phone Repair Ikeja, Swap iPhone, Gadget Store">
     <meta name="author" content="HoRly's Tech">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#020617">
+
     
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://horlystech.com/"> <meta property="og:title" content="HoRly’s Tech | Upgrade Your Digital Life">
@@ -35,6 +38,8 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=YOUR-PIXEL-ID-HERE&ev=PageView&noscript=1"
     /></noscript>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
  
   <style>
     :root {
@@ -103,6 +108,48 @@
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
     </style>
+
+      <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ElectronicsStore",
+      "name": "HoRly's Tech Gadgets Sales N Repair",
+      "image": "https://your-website-link.com/logo.png",
+      "description": "Premium UK Used iPhones, Gaming Consoles, and Expert Motherboard Repairs in Lagos.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "No 5, Medical Road, Computer Village",
+        "addressLocality": "Ikeja",
+        "addressRegion": "Lagos",
+        "postalCode": "100001",
+        "addressCountry": "NG"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 6.5965,
+        "longitude": 3.3421
+      },
+      "url": "https://horlystech.com",
+      "telephone": "+2349121213936",
+      "priceRange": "₦₦",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ]
+    }
+    </script>
+
 </head>
 
 <body class="selection:bg-sky-500/30">
@@ -313,6 +360,8 @@
         }, 1000);
 
         function claimDeal() {
+          triggerConfetti();
+          
             const msg = `*FLASH DEAL CLAIM* 🔥%0A%0AI want to claim the *PS5 Slim Promo* for ₦980,000.%0A%0APlease reserve this for me immediately!`;
             window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
         }
@@ -923,6 +972,9 @@
         function joinVip(e) {
             e.preventDefault();
             const phone = document.getElementById('vipPhone').value;
+
+          triggerConfetti();
+          
             // Send to WhatsApp
             const msg = `*VIP LIST SIGNUP* 👑%0A%0AI want to join the HoRly Tech VIP list to get stock updates.%0A*My Number:* ${phone}`;
             window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
@@ -1159,6 +1211,8 @@
                 alert("Please fill in your Name and Location.");
                 return;
             }
+          
+          triggerConfetti();
 
             // Create Message
             const msg = `*NEW ORDER ALERT - HoRly's Tech* 🚀%0A%0A` +
@@ -1222,6 +1276,25 @@
             // (You would need a hidden div with id="noResults" in your HTML)
         }
 
+              // ANTI-THEFT PROTECTION
+        document.addEventListener('contextmenu', event => event.preventDefault()); // Disable Right Click
+        
+        document.onkeydown = function(e) {
+            // Disable F12, Ctrl+U, Ctrl+Shift+I (Dev Tools)
+            if(event.keyCode == 123) {
+               return false;
+            }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+               return false;
+            }
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+               return false;
+            }
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+               return false;
+            }
+        }
+
               // UI SOUND EFFECTS
         // Create audio context
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -1253,6 +1326,58 @@
                 if(audioCtx.state === 'suspended') audioCtx.resume();
                 playClickSound();
             });
+        });
+
+              // VICTORY CONFETTI
+        function triggerConfetti() {
+            var duration = 3 * 1000;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 999 };
+
+            function randomInOut(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                var particleCount = 50 * (timeLeft / duration);
+                
+                // Shoot confetti from left and right
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInOut(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInOut(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+        }
+
+        // Attach to all "Buy" and "Join" buttons
+        // Update your existing sendOrder() and joinVip() functions to call triggerConfetti() first!
+
+              // DATA SAVER (LAZY LOAD)
+        document.addEventListener("DOMContentLoaded", function() {
+            var lazyImages = [].slice.call(document.querySelectorAll("img"));
+
+            if ("IntersectionObserver" in window) {
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            // Simulate high-res load
+                            lazyImage.classList.add("opacity-100");
+                            lazyImage.classList.remove("opacity-0");
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImage.classList.add("transition-opacity", "duration-700");
+                    lazyImageObserver.observe(lazyImage);
+                });
+            }
         });
 
         // Initial Load
