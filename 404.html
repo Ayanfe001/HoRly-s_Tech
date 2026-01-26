@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | System Error</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #020617; color: white; font-family: 'Orbitron', sans-serif; }
+        .glitch { animation: glitch 1s linear infinite; }
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px,0) skew(0deg); }
+            4%, 60% { transform: translate(-2px,0) skew(0deg); }
+            62% { transform: translate(0,0) skew(5deg); }
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col items-center justify-center text-center px-6">
+    <h1 class="text-9xl font-bold text-sky-500 glitch">404</h1>
+    <h2 class="text-2xl mt-4 mb-8">SYSTEM FAILURE: Page Not Found</h2>
+    <p class="text-slate-400 max-w-md mb-8 font-sans">
+        The gadget you are looking for has been disconnected from the matrix.
+    </p>
+    <a href="index.html" class="px-8 py-4 bg-sky-500 hover:bg-sky-400 text-black font-bold rounded-xl transition-all">
+        RETURN TO BASE
+    </a>
+</body>
+</html>
