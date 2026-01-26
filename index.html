@@ -86,16 +86,18 @@
         <div class="max-w-8xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-2">
                 <div class="w-8 h-8 bg-sky-500 rounded flex items-center justify-center font-bold">H</div>
-                <h1 class="orbitron text-xl font-bold tracking-tighter">HoRly’s_<span class="gradient-text">Tech</span></h1>
+                <a href="#home"><h1 class="orbitron text-xl font-bold tracking-tighter">HoRly’s_<span class="gradient-text">Tech</span></h1></a>
             </div>
             
             <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-400">
-                <a href="#home" class="hover:text-white transition-colors">Home</a>
+                <a href="#home" class="hover:text-white transition-colors"></a>
                 <a href="#catalog" class="hover:text-white transition-colors">Store</a>
                 <a href="#swap" class="hover:text-white transition-colors">Swap</a>
                 <a href="#repair" class="hover:text-white transition-colors">Repair</a>
                 <a href="#inquiry" class="hover:text-white transition-colors">Inquiry</a>
+                <a href="#rating" class="hover:text-white transition-colors"> Our Ratings</a>
                 <a href="#about" class="hover:text-white transition-colors">About Us</a>
+                <a href="#faq" class="hover:text-white transition-colors">Faq</a>
             </div>
 
             <button onclick="document.getElementById('catalog').scrollIntoView()" class="hidden md:block px-6 py-2 bg-white/10 rounded-full text-xs font-bold uppercase hover:bg-white/20 transition-all">
@@ -290,33 +292,7 @@
         </div>
     </section>
 
-    <section id="repair" class="py-24 px-6 bg-gradient-to-b from-transparent to-sky-900/10">
-        <div class="max-w-6xl mx-auto glass rounded-[3rem] p-8 md:p-16 relative overflow-hidden text-center md:text-left flex flex-col md:flex-row items-center gap-12">
-            <div class="relative z-10 flex-1">
-                <div class="inline-block px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4">Repair Lab</div>
-                <h2 class="orbitron text-3xl md:text-5xl font-bold mb-6">Broken Device? <br> We Fix It.</h2>
-                <p class="text-slate-300 mb-8 leading-relaxed">
-                    We specialize in complex repairs for all the devices we sell. Screen swaps, battery replacement, motherboard microsoldering, and console cleaning.
-                </p>
-                <div class="grid grid-cols-2 gap-4 mb-8">
-                    <div class="bg-black/20 p-4 rounded-xl">
-                        <i class="fas fa-mobile-alt text-sky-400 mb-2"></i>
-                        <div class="text-xs font-bold text-slate-300">Screen & Battery</div>
-                    </div>
-                    <div class="bg-black/20 p-4 rounded-xl">
-                        <i class="fas fa-microchip text-indigo-400 mb-2"></i>
-                        <div class="text-xs font-bold text-slate-300">Motherboard</div>
-                    </div>
-                </div>
-                <a href="https://wa.me/2349121213936?text=Hi%20HoRly's%20Tech,%20I%20have%20a%20device%20that%20needs%20repair." class="inline-block px-8 py-3 bg-white text-black font-bold rounded-lg hover:bg-slate-200 transition-colors">Get Repair Quote</a>
-            </div>
-            <div class="flex-1 w-full max-w-sm">
-                <img src="https://image2url.com/r2/default/images/1769372487026-15b9cdd3-cef7-4df7-beb1-e59927d6a51e.png" class="rounded-3xl shadow-2xl rotate-3 border border-white/10" alt="Repair">
-            </div>
-        </div>
-    </section>
-
-                  <section id="swap" class="py-20 px-6 bg-slate-900 relative overflow-hidden">
+              <section id="swap" class="py-20 px-6 bg-slate-900 relative overflow-hidden">
         <div class="absolute top-0 right-0 w-96 h-96 bg-green-500/10 rounded-full blur-[100px] pointer-events-none"></div>
 
         <div class="max-w-4xl mx-auto glass rounded-3xl p-8 md:p-12 border border-green-500/30 relative z-10">
@@ -387,6 +363,32 @@
             window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
         }
     </script>
+              
+    <section id="repair" class="py-24 px-6 bg-gradient-to-b from-transparent to-sky-900/10">
+        <div class="max-w-6xl mx-auto glass rounded-[3rem] p-8 md:p-16 relative overflow-hidden text-center md:text-left flex flex-col md:flex-row items-center gap-12">
+            <div class="relative z-10 flex-1">
+                <div class="inline-block px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4">Repair Lab</div>
+                <h2 class="orbitron text-3xl md:text-5xl font-bold mb-6">Broken Device? <br> We Fix It.</h2>
+                <p class="text-slate-300 mb-8 leading-relaxed">
+                    We specialize in complex repairs for all the devices we sell. Screen swaps, battery replacement, motherboard microsoldering, and console cleaning.
+                </p>
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <i class="fas fa-mobile-alt text-sky-400 mb-2"></i>
+                        <div class="text-xs font-bold text-slate-300">Screen & Battery</div>
+                    </div>
+                    <div class="bg-black/20 p-4 rounded-xl">
+                        <i class="fas fa-microchip text-indigo-400 mb-2"></i>
+                        <div class="text-xs font-bold text-slate-300">Motherboard</div>
+                    </div>
+                </div>
+                <a href="https://wa.me/2349121213936?text=Hi%20HoRly's%20Tech,%20I%20have%20a%20device%20that%20needs%20repair." class="inline-block px-8 py-3 bg-white text-black font-bold rounded-lg hover:bg-slate-200 transition-colors">Get Repair Quote</a>
+            </div>
+            <div class="flex-1 w-full max-w-sm">
+                <img src="https://image2url.com/r2/default/images/1769372487026-15b9cdd3-cef7-4df7-beb1-e59927d6a51e.png" class="rounded-3xl shadow-2xl rotate-3 border border-white/10" alt="Repair">
+            </div>
+        </div>
+    </section>
 
               <section id="inquiry" class="py-20 px-6">
         <div class="max-w-5xl mx-auto glass rounded-3xl p-8 md:p-12 border-t border-sky-500/30 shadow-[0_0_50px_rgba(14,165,233,0.1)]">
@@ -437,8 +439,70 @@
             </div>
         </div>
     </section>
-              
-   <section id="about" class="py-24 px-6 bg-slate-900/50">
+
+              <section id="rating" class="py-20 px-6 bg-slate-900 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="orbitron text-3xl font-bold mb-2">Trusted by <span class="gradient-text">Lagos</span></h2>
+                <div class="flex items-center justify-center gap-2 text-yellow-500 text-sm">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <span class="text-slate-400 ml-2">(500+ Verified Sales)</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass p-6 rounded-2xl relative">
+                    <div class="absolute -top-3 -right-3 bg-green-500 text-white text-[10px] font-bold px-3 py-1 rounded-full border border-slate-900">
+                        VERIFIED PURCHASE
+                    </div>
+                    <div class="flex items-center gap-3 mb-4 border-b border-white/5 pb-3">
+                        <div class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center font-bold text-slate-300">DJ</div>
+                        <div>
+                            <p class="font-bold text-sm">Daniel J.</p>
+                            <p class="text-[10px] text-slate-400">Bought iPhone 13 Pro Max</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-sm italic">
+                        "I was scared to buy online initially, but HoRly delivered to Lekki in 2 hours. The phone is clean as new. Battery is 98%. 100% recommended."
+                    </p>
+                </div>
+
+                <div class="glass p-6 rounded-2xl relative">
+                    <div class="absolute -top-3 -right-3 bg-green-500 text-white text-[10px] font-bold px-3 py-1 rounded-full border border-slate-900">
+                        REPAIR SERVICE
+                    </div>
+                    <div class="flex items-center gap-3 mb-4 border-b border-white/5 pb-3">
+                        <div class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center font-bold text-slate-300">FA</div>
+                        <div>
+                            <p class="font-bold text-sm">Fatima A.</p>
+                            <p class="text-[10px] text-slate-400">Fixed Samsung S22 Ultra</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-sm italic">
+                        "Computer Village guys said my screen couldn't be fixed. HoRly's lab fixed the ribbon without changing the whole screen. Saved me 150k!"
+                    </p>
+                </div>
+
+                <div class="glass p-6 rounded-2xl relative">
+                    <div class="absolute -top-3 -right-3 bg-green-500 text-white text-[10px] font-bold px-3 py-1 rounded-full border border-slate-900">
+                        VERIFIED PURCHASE
+                    </div>
+                    <div class="flex items-center gap-3 mb-4 border-b border-white/5 pb-3">
+                        <div class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center font-bold text-slate-300">EM</div>
+                        <div>
+                            <p class="font-bold text-sm">Emmanuel M.</p>
+                            <p class="text-[10px] text-slate-400">Bought PS5 Console</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-sm italic">
+                        "Best price for PS5 in Nigeria right now. It came sealed with the extra controller I ordered. Legit vendor."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+              <section id="about" class="py-24 px-6 bg-slate-900/50">
         <div class="max-w-4xl mx-auto text-center space-y-6">
             <h2 class="orbitron text-3xl font-bold">About <span class="gradient-text">HoRly’s Tech</span></h2>
             <p class="text-slate-300 leading-relaxed text-lg">
@@ -452,7 +516,117 @@
             </div>
         </div>
     </section>
-  
+              
+                  <section id="" class="py-20 px-6 bg-slate-900 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="orbitron text-3xl font-bold mb-4">Nationwide <span class="gradient-text">Delivery</span></h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    We deliver to all 36 states in Nigeria via GIG Logistics or Driver Waybill. 
+                    Here is how we ensure you get exactly what you ordered.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                <div class="hidden md:block absolute top-12 left-[10%] w-[80%] h-0.5 bg-gradient-to-r from-sky-500/20 to-sky-500/0 z-0"></div>
+
+                <div class="relative z-10 text-center group">
+                    <div class="w-24 h-24 mx-auto glass rounded-full flex items-center justify-center border border-white/10 mb-6 group-hover:border-sky-500 group-hover:shadow-[0_0_30px_rgba(14,165,233,0.3)] transition-all">
+                        <i class="fas fa-shopping-bag text-3xl text-sky-400"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-lg mb-2">1. Place Order</h4>
+                    <p class="text-xs text-slate-400 px-4">Select your gadget and make payment securely.</p>
+                </div>
+
+                <div class="relative z-10 text-center group">
+                    <div class="w-24 h-24 mx-auto glass rounded-full flex items-center justify-center border border-white/10 mb-6 group-hover:border-green-500 group-hover:shadow-[0_0_30px_rgba(34,197,94,0.3)] transition-all">
+                        <i class="fas fa-video text-3xl text-green-400"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-lg mb-2">2. Video Confirm</h4>
+                    <p class="text-xs text-slate-400 px-4">We send a live video of your device (IMEI & Condition) before packing.</p>
+                </div>
+
+                <div class="relative z-10 text-center group">
+                    <div class="w-24 h-24 mx-auto glass rounded-full flex items-center justify-center border border-white/10 mb-6 group-hover:border-indigo-500 group-hover:shadow-[0_0_30px_rgba(99,102,241,0.3)] transition-all">
+                        <i class="fas fa-truck-fast text-3xl text-indigo-400"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-lg mb-2">3. Dispatch</h4>
+                    <p class="text-xs text-slate-400 px-4">Package is sent via GIG/Park. You get a Tracking Number/Driver Number.</p>
+                </div>
+
+                <div class="relative z-10 text-center group">
+                    <div class="w-24 h-24 mx-auto glass rounded-full flex items-center justify-center border border-white/10 mb-6 group-hover:border-orange-500 group-hover:shadow-[0_0_30px_rgba(249,115,22,0.3)] transition-all">
+                        <i class="fas fa-box-open text-3xl text-orange-400"></i>
+                    </div>
+                    <h4 class="font-bold text-white text-lg mb-2">4. Receive</h4>
+                    <p class="text-xs text-slate-400 px-4">Pick up at your park or doorstep delivery (Lagos only).</p>
+                </div>
+            </div>
+
+            <div class="mt-16 flex flex-wrap justify-center gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                <div class="text-xl font-bold text-white border border-white/20 px-4 py-2 rounded">GIG Logistics</div>
+                <div class="text-xl font-bold text-white border border-white/20 px-4 py-2 rounded">DHL</div>
+                <div class="text-xl font-bold text-white border border-white/20 px-4 py-2 rounded">Uber Package</div>
+            </div>
+        </div>
+    </section>
+
+              <section id="faq" class="py-20 px-6">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="orbitron text-3xl font-bold text-center mb-10">Frequently Asked <span class="gradient-text">Questions</span></h2>
+            
+            <div class="space-y-4">
+                <details class="glass rounded-2xl group">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                        <span class="font-bold text-white">Do you accept Pay on Delivery?</span>
+                        <span class="transition group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-sky-400"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
+                        For Lagos orders, yes! We accept Payment on Delivery for items delivered by our dispatch riders. For orders outside Lagos, we require payment before waybill, but we provide video evidence and company receipts for security.
+                    </div>
+                </details>
+
+                <details class="glass rounded-2xl group">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                        <span class="font-bold text-white">Is there a warranty on Used iPhones?</span>
+                        <span class="transition group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-sky-400"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
+                        Yes. All UK Used devices come with a **7-Day Guarantee**. This covers manufacturer defects. We test every feature (FaceID, Camera, Battery) before selling. Note: Physical damage or water damage voids the warranty.
+                    </div>
+                </details>
+
+                <details class="glass rounded-2xl group">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                        <span class="font-bold text-white">Can I swap my Android for an iPhone?</span>
+                        <span class="transition group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-sky-400"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
+                        Yes, we do swaps! However, the swap value depends on the condition of your current device. Use the "Swap Calculator" section above or chat with us on WhatsApp for a valuation.
+                    </div>
+                </details>
+
+                <details class="glass rounded-2xl group">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+                        <span class="font-bold text-white">Where is your physical store?</span>
+                        <span class="transition group-open:rotate-180">
+                            <i class="fas fa-chevron-down text-sky-400"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
+                        We are located in Lagos. You can choose "Pick Up" at checkout if you prefer to visit us. Contact us on WhatsApp for the exact office description and landmark.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+              
     <footer class="py-12 text-center text-slate-500 text-sm border-t border-white/5">
         <p class="orbitron font-bold text-white text-lg mb-2">HoRly’s_Tech</p>
         <p>Lagos, Nigeria • 09121213936</p>
