@@ -849,6 +849,23 @@
         <p class="orbitron font-bold text-white text-lg mb-2">HoRly’s_Tech</p>
         <p>Lagos, Nigeria • 09121213936</p>
         <p class="mt-4">&copy; 2026. All rights reserved.</p>
+       <div hidden .//delet the hidden to make it show. class="w-full h-96 relative border-t border-white/10 grayscale hover:grayscale-0 transition-all duration-1000">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.428483756475!2d3.350628214771146!3d6.593504995231682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b92390f7d4905%3A0x6272551d542d99b5!2sComputer%20Village%2C%20Ikeja!5e0!3m2!1sen!2sng!4v1645524671428!5m2!1sen!2sng" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
+        
+        <div class="absolute top-10 left-10 bg-slate-900/90 p-6 rounded-xl border border-sky-500/30 backdrop-blur-md max-w-xs hidden md:block">
+            <h4 class="text-white font-bold mb-2">HoRly's Tech HQ</h4>
+            <p class="text-xs text-slate-400 mb-4">No 5, Medical Road, Computer Village, Ikeja, Lagos.</p>
+            <a href="https://maps.google.com" target="_blank" class="text-sky-400 text-xs font-bold hover:underline">Get Directions →</a>
+        </div>
+    </div>
+
       <button onclick="openPolicy()" class="text-xs text-slate-500 underline hover:text-white mt-2">View Warranty & Return Policy</button>
     </footer>
 
@@ -1244,6 +1261,39 @@
                 btn.classList.add('opacity-0', 'pointer-events-none');
             }
         });
+    </script>
+
+      <div id="cookieBanner" class="fixed bottom-0 w-full bg-slate-900/95 border-t border-white/10 p-4 z-[90] flex flex-col md:flex-row items-center justify-between gap-4 transform translate-y-full transition-transform duration-500 backdrop-blur-md">
+        <div class="flex items-center gap-4">
+            <i class="fas fa-cookie-bite text-2xl text-yellow-500"></i>
+            <p class="text-xs text-slate-300 max-w-xl">
+                We use cookies to improve your experience and track sales. By using HoRly's Tech, you agree to our terms.
+            </p>
+        </div>
+        <div class="flex gap-3">
+            <button onclick="acceptCookies()" class="px-6 py-2 bg-white text-black font-bold rounded-full text-xs hover:bg-sky-400 hover:text-white transition-colors">
+                Accept All
+            </button>
+            <button onclick="document.getElementById('cookieBanner').style.display='none'" class="px-6 py-2 border border-white/20 text-white font-bold rounded-full text-xs hover:bg-white/10">
+                Decline
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Check if user already accepted
+        window.addEventListener('load', () => {
+            if (!localStorage.getItem('cookiesAccepted')) {
+                setTimeout(() => {
+                    document.getElementById('cookieBanner').classList.remove('translate-y-full');
+                }, 3000);
+            }
+        });
+
+        function acceptCookies() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.getElementById('cookieBanner').classList.add('translate-y-full');
+        }
     </script>
 
 </body>
