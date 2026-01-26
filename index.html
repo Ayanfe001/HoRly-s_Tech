@@ -78,10 +78,31 @@
 </head>
 <body class="selection:bg-sky-500/30">
 
+      <div id="preloader" class="fixed inset-0 z-[100] bg-[#020617] flex flex-col items-center justify-center transition-opacity duration-1000">
+        <div class="relative w-24 h-24 mb-4">
+            <div class="absolute inset-0 border-t-4 border-sky-500 rounded-full animate-spin"></div>
+            <div class="absolute inset-2 border-r-4 border-indigo-500 rounded-full animate-spin" style="animation-direction: reverse;"></div>
+            <div class="absolute inset-0 flex items-center justify-center font-bold orbitron text-2xl text-white">H</div>
+        </div>
+        <div class="orbitron text-sky-400 text-sm tracking-[0.3em] animate-pulse">HORLY'S TECH</div>
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 1000);
+            }, 1500); // 1.5 seconds loading time
+        });
+    </script>
+
     <a href="https://wa.me/2349121213936" target="_blank" class="fixed bottom-8 right-8 z-50 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(34,197,94,0.5)] hover:scale-110 transition-transform">
         <i class="fab fa-whatsapp text-3xl text-white"></i>
     </a>
-
+  
     <nav class="fixed top-0 w-full z-40 glass border-b border-white/5 bg-slate-900/80">
         <div class="max-w-8xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-2">
@@ -173,7 +194,7 @@
         </div>
     </section>
 
-                  <section class="py-10 px-6 bg-slate-900">
+                  <section id="flashdeal" class="py-10 px-6 bg-slate-900">
         <div class="max-w-6xl mx-auto">
             <div class="relative glass rounded-3xl p-8 md:p-12 border border-orange-500/30 overflow-hidden flex flex-col md:flex-row items-center gap-12 group">
                 
@@ -262,6 +283,55 @@
             window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
         }
     </script>
+
+                  <section id="gadget wars" class="py-20 px-6 bg-slate-900/50">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-10">
+                <h2 class="orbitron text-3xl font-bold">Gadget <span class="gradient-text">Wars</span></h2>
+                <p class="text-slate-400">Can't decide? See the difference.</p>
+            </div>
+
+            <div class="glass rounded-2xl overflow-hidden overflow-x-auto">
+                <table class="w-full text-left text-sm text-slate-400">
+                    <thead class="text-xs text-white uppercase bg-white/5 font-bold orbitron">
+                        <tr>
+                            <th class="px-6 py-4">Feature</th>
+                            <th class="px-6 py-4 text-sky-400">iPhone 14 Pro Max</th>
+                            <th class="px-6 py-4 text-indigo-400">iPhone 15 Pro Max</th>
+                            <th class="px-6 py-4 text-orange-400">Samsung S24 Ultra</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5">
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="px-6 py-4 font-bold text-white">Build Material</td>
+                            <td class="px-6 py-4">Stainless Steel</td>
+                            <td class="px-6 py-4 text-white">Titanium (Lighter)</td>
+                            <td class="px-6 py-4">Titanium</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="px-6 py-4 font-bold text-white">Charging</td>
+                            <td class="px-6 py-4">Lightning Port</td>
+                            <td class="px-6 py-4 text-white">USB-C (Universal)</td>
+                            <td class="px-6 py-4">USB-C (45W Fast)</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="px-6 py-4 font-bold text-white">Camera Zoom</td>
+                            <td class="px-6 py-4">3x Optical</td>
+                            <td class="px-6 py-4">5x Optical</td>
+                            <td class="px-6 py-4 text-white">100x Space Zoom</td>
+                        </tr>
+                        <tr class="hover:bg-white/5 transition-colors">
+                            <td class="px-6 py-4 font-bold text-white">Action Button</td>
+                            <td class="px-6 py-4">Mute Switch</td>
+                            <td class="px-6 py-4 text-white">Customizable Button</td>
+                            <td class="px-6 py-4">Side Key</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-center text-xs text-slate-500 mt-4">*Specs based on manufacturer data. We sell all these models.</p>
+        </div>
+    </section>
 
     <section id="catalog" class="py-20 px-4 md:px-8 bg-slate-900/50 min-h-screen">
         <div class="max-w-8xl mx-auto">
@@ -626,7 +696,37 @@
             </div>
         </div>
     </section>
-              
+
+                  <section id="viplist" class="py-20 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-sky-900/20 to-indigo-900/20 z-0"></div>
+        
+        <div class="max-w-4xl mx-auto glass rounded-3xl p-8 md:p-16 text-center relative z-10 border border-sky-500/30">
+            <i class="fas fa-crown text-5xl text-yellow-400 mb-6 floating"></i>
+            <h2 class="orbitron text-3xl md:text-4xl font-bold mb-4">Join the <span class="text-yellow-400">VIP List</span></h2>
+            <p class="text-slate-300 mb-8 max-w-lg mx-auto">
+                Be the first to know when <strong>UK Used iPhone Stocks</strong> land. VIP members get notified 24 hours before we post on Instagram.
+            </p>
+            
+            <form class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto" onsubmit="joinVip(event)">
+                <input type="text" id="vipPhone" placeholder="Enter WhatsApp Number" required class="flex-1 bg-black/50 border border-white/20 rounded-xl px-6 py-4 text-white outline-none focus:border-yellow-400 transition-colors">
+                <button type="submit" class="bg-yellow-400 hover:bg-yellow-300 text-black font-bold orbitron px-8 py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(250,204,21,0.3)]">
+                    Join Now
+                </button>
+            </form>
+            <p class="text-[10px] text-slate-500 mt-4">No spam. Only gadget deals.</p>
+        </div>
+    </section>
+
+    <script>
+        function joinVip(e) {
+            e.preventDefault();
+            const phone = document.getElementById('vipPhone').value;
+            // Send to WhatsApp
+            const msg = `*VIP LIST SIGNUP* 👑%0A%0AI want to join the HoRly Tech VIP list to get stock updates.%0A*My Number:* ${phone}`;
+            window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
+        }
+    </script>
+
     <footer class="py-12 text-center text-slate-500 text-sm border-t border-white/5">
         <p class="orbitron font-bold text-white text-lg mb-2">HoRly’s_Tech</p>
         <p>Lagos, Nigeria • 09121213936</p>
@@ -874,5 +974,32 @@
         renderProducts('all');
 
     </script>
+
+              <div class="md:hidden fixed bottom-0 left-0 w-full glass-heavy border-t border-white/10 z-40 px-6 py-3 flex justify-between items-center backdrop-blur-xl">
+        <a href="#home" class="flex flex-col items-center gap-1 text-slate-400 hover:text-sky-400 transition-colors">
+            <i class="fas fa-home text-lg"></i>
+            <span class="text-[10px] font-bold">Home</span>
+        </a>
+        <a href="#catalog" class="flex flex-col items-center gap-1 text-slate-400 hover:text-sky-400 transition-colors">
+            <i class="fas fa-store text-lg"></i>
+            <span class="text-[10px] font-bold">Shop</span>
+        </a>
+        
+        <div class="relative -top-8">
+            <a href="#swap" class="w-14 h-14 bg-gradient-to-r from-sky-500 to-indigo-600 rounded-full flex items-center justify-center text-white shadow-[0_0_20px_rgba(14,165,233,0.5)] border-4 border-[#020617]">
+                <i class="fas fa-exchange-alt text-xl"></i>
+            </a>
+        </div>
+
+        <a href="#repair" class="flex flex-col items-center gap-1 text-slate-400 hover:text-sky-400 transition-colors">
+            <i class="fas fa-wrench text-lg"></i>
+            <span class="text-[10px] font-bold">Repair</span>
+        </a>
+        <a href="https://wa.me/2349121213936" target="_blank" class="flex flex-col items-center gap-1 text-slate-400 hover:text-green-400 transition-colors">
+            <i class="fab fa-whatsapp text-lg"></i>
+            <span class="text-[10px] font-bold">Chat</span>
+        </a>
+    </div>
+
 </body>
 </html>
