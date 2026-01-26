@@ -1,0 +1,14 @@
+        /* CUSTOM CURSOR STYLE */
+        body {
+            cursor: crosshair; /* Changes default cursor to a precision cross */
+        }
+        
+        a, button, .cursor-pointer {
+            cursor: pointer; /* Keeps the hand pointer for clickable items */
+        }
+
+        /* Optional: Selection Color */
+        ::selection {
+            background: #0ea5e9; /* Sky blue background */
+            color: white; /* White text */
+        }
