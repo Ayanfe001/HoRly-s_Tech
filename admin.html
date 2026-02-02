@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Command | HoRly's Tech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="firebase-config.js"></script>
+
+    <style>body { background: #0f172a; color: white; }</style>
+</head>
+<body class="p-6">
+
+    <nav class="flex justify-between items-center mb-10 border-b border-white/10 pb-4">
+        <h1 class="font-bold text-2xl font-mono text-red-500">SUPERUSER_CONTROL</h1>
+        <button onclick="auth.signOut().then(()=>window.location.href='login.html')" class="text-xs bg-red-900 px-4 py-2 rounded">LOGOUT</button>
+    </nav>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <div class="bg-black/40 border border-red-500/30 p-6 rounded-xl">
+            <h2 class="text-xl font-bold mb-4 font-mono">⚡ Update Flash Deal</h2>
+            <form id="flashForm" class="space-y-4">
+                <input type="text" id="dealName" placeholder="Product Name (e.g. PS5 Slim)" class="w-full bg-slate-800 p-2 rounded text-white">
+                <input type="text" id="dealPrice" placeholder="New Price (e.g. 980,000)" class="w-full bg-slate-800 p-2 rounded text-white">
+                <button type="submit" class="w-full bg-red-600 hover:bg-red-500 py-2 rounded font-bold">PUBLISH DEAL</button>
+            </form>
+        </div>
+
+        <div class="bg-black/40 border border-sky-500/30 p-6 rounded-xl">
+            <h2 class="text-xl font-bold mb-4 font-mono">💎 Update Inventory Price</h2>
+            <form id="priceForm" class="space-y-4">
+                <select id="productSelect" class="w-full bg-slate-800 p-2 rounded text-white">
+                    <option value="iphone15pm">iPhone 15 Pro Max</option>
+                    <option value="s24ultra">Samsung S24 Ultra</option>
+                    <option value="ps5">PS5 Console</option>
+                </select>
+                <input type="number" id="newPrice" placeholder="Enter New Price" class="w-full bg-slate-800 p-2 rounded text-white">
+                <button type="submit" class="w-full bg-sky-600 hover:bg-sky-500 py-2 rounded font-bold">UPDATE DATABASE</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-8 bg-black/40 border border-white/10 p-6 rounded-xl">
+        <h2 class="text-xl font-bold mb-4 font-mono">System Logs (User History)</h2>
+        <div id="logs" class="h-64 overflow-y-auto text-xs font-mono text-green-400 space-y-2">
+            <div>> System Initialized... Waiting for data...</div>
+        </div>
+    </div>
+
+    <script>
+        // SECURITY CHECK
+        auth.onAuthStateChanged(user => {
+            if(!user || user.email !== "admin@horlys.com") {
+                // Kick them out if not admin
+                window.location.href = "login.html";
+            } else {
+                loadLogs();
+            }
+        });
+
+        // UPDATE FLASH DEAL
+        document.getElementById('flashForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('dealName').value;
+            const price = document.getElementById('dealPrice').value;
+            
+            db.collection('site_settings').doc('flash_deal').set({
+                name: name,
+                price: price,
+                updatedAt: new Date()
+            }).then(() => alert("Flash Deal Updated on Website!"));
+        });
+
+        // LOAD LOGS (Fake data for now, connect to orders later)
+        function loadLogs() {
+            const logsDiv = document.getElementById('logs');
+            // In real life, you pull this from Firebase 'orders' collection
+            logsDiv.innerHTML += `<div>> [${new Date().toLocaleTimeString()}] Admin logged in.</div>`;
+        }
+    </script>
+</body>
+</html>
