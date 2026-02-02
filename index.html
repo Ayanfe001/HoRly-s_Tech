@@ -51,6 +51,11 @@
     /></noscript>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="firebase-config.js"></script>
+
  
   <style>
     :root {
@@ -1546,14 +1551,27 @@
     </div>
 
     <script>
-        // Check if user already accepted
-        window.addEventListener('load', () => {
-            if (!localStorage.getItem('cookiesAccepted')) {
-                setTimeout(() => {
-                    document.getElementById('cookieBanner').classList.remove('translate-y-full');
-                }, 3000);
-            }
-        });
+            // AUTH & PRELOADER LOGIC
+    auth.onAuthStateChanged(user => {
+        const preloader = document.getElementById('preloader');
+        
+        if (user) {
+            // User is logged in -> Hide Preloader & Show Site
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => { preloader.style.display = 'none'; }, 1000);
+            }, 1500);
+            
+            // Optional: Update Navbar to show "My Account" instead of "Login"
+            console.log("User logged in:", user.email);
+            
+        } else {
+            // User is NOT logged in -> Redirect to Login Page
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 2000);
+        }
+    });
 
         function acceptCookies() {
             localStorage.setItem('cookiesAccepted', 'true');
