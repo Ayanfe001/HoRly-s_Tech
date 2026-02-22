@@ -9,1135 +9,973 @@
     <meta name="keywords" content="HoRlys Tech, iPhone Lagos, UK Used iPhone, PS5 Nigeria, Phone Repair Ikeja, Swap iPhone, Gadget Store">
     <meta name="author" content="HoRly's Tech">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#020617">
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="theme-color" content="#000000">
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=GTM-MN7ZRCJX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
-      gtag('config', 'GTM-MN7ZRCJX'); // Replace G-YOUR-ID-HERE with your actual ID
+      gtag('config', 'GTM-MN7ZRCJX'); 
     </script>
 
-
-    
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://horlystech.com/"> <meta property="og:title" content="HoRly’s Tech | Upgrade Your Digital Life">
+    <meta property="og:url" content="https://horlystech.com/"> 
+    <meta property="og:title" content="HoRly’s Tech | Upgrade Your Digital Life">
     <meta property="og:description" content="Premium UK Used iPhones, Swaps, and Expert Repairs in Lagos. Click to browse our inventory.">
-    <meta property="og:image" content="https://image2url.com/r2/default/images/1769401326352-64363a3a-f497-4b59-9cc7-2439da459232.jpeg"> <meta property="twitter:card" content="summary_large_image">
+    <meta property="og:image" content="https://image2url.com/r2/default/images/1769401326352-64363a3a-f497-4b59-9cc7-2439da459232.jpeg"> 
+    <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:title" content="HoRly’s Tech | Gadgets & Repairs">
     <meta property="twitter:description" content="Buy, Swap, Repair. The most trusted tech hub in Lagos.">
     <meta property="twitter:image" content="https://image2url.com/r2/default/images/1769400581546-c0cd2dd2-551c-4538-a560-2670978117d5.jpeg">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-     <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', 'YOUR-PIXEL-ID-HERE'); // Replace with your actual ID later
-        fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=YOUR-PIXEL-ID-HERE&ev=PageView&noscript=1"
-    /></noscript>
+    
+    <!-- 3D Gyroscope Tilt Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="firebase-config.js"></script>
-
- 
-  <style>
-    :root {
+    
+    <style>
+        :root {
             --primary: #0ea5e9;
-            --secondary: #6366f1;
-            --dark: #020617;
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-highlight: rgba(255, 255, 255, 0.2);
         }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--dark);
+            background-color: #000;
             color: white;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.5s ease;
         }
+
         .orbitron { font-family: 'Orbitron', sans-serif; }
-        
-        .glass {
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(16px);
+
+        /* --- LIQUID GLASS iOS 26 STYLES --- */
+        .liquid-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(40px) saturate(150%);
+            -webkit-backdrop-filter: blur(40px) saturate(150%);
             border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 0 var(--glass-highlight);
+            border-radius: 2rem;
+            transition: all 0.5s ease;
         }
         
-        .glass-heavy {
-            background: #0f172a;
-            border: 1px solid var(--glass-border);
+        .liquid-glass-heavy {
+            background: rgba(20, 20, 25, 0.6);
+            backdrop-filter: blur(60px) saturate(200%);
+            -webkit-backdrop-filter: blur(60px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 2.5rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), inset 0 1px 0 0 rgba(255,255,255,0.2);
+            transition: all 0.5s ease;
         }
+
+        .liquid-button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 999px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .liquid-button:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.02); border-color: rgba(255, 255, 255, 0.4); }
+        .liquid-button:active { transform: scale(0.95); }
 
         .gradient-text {
-            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+            background: linear-gradient(135deg, #fff 0%, #a5b4fc 50%, #38bdf8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            transition: all 0.5s ease;
         }
 
-        .card-hover {
-            transition: all 0.3s ease;
+        /* Ambient Animated Background */
+        .ambient-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1; overflow: hidden; background: #000; transition: background 0.5s ease;
         }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.15);
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.6;
+            animation: float 20s infinite alternate ease-in-out; mix-blend-mode: screen; transition: all 0.5s ease;
         }
+        @keyframes float { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(100px, 150px) scale(1.2); } }
 
-        .filter-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
+        .card-hover { transition: border-color 0.4s ease, box-shadow 0.4s ease; transform-style: preserve-3d; }
+        .card-hover:hover { border-color: var(--primary); box-shadow: 0 30px 60px rgba(14, 165, 233, 0.2), inset 0 1px 0 0 rgba(255,255,255,0.3); }
+        .card-hover img { transform: translateZ(30px); } /* 3D pop effect for product images */
 
-        /* Checkbox Custom Styling */
-        .option-radio:checked + div {
-            border-color: #0ea5e9;
-            background: rgba(14, 165, 233, 0.1);
-        }
-        .option-radio:checked + div .check-icon {
-            opacity: 1;
-        }
+        .filter-btn.active { background: #fff; color: #000; border-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.3); }
 
-        /* Modal Animation */
-        .modal { opacity: 0; visibility: hidden; transition: all 0.3s ease; }
-        .modal.active { opacity: 1; visibility: visible; }
-        .modal-content { transform: scale(0.95); transition: all 0.3s ease; }
-        .modal.active .modal-content { transform: scale(1); }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
+        .view-screen { display: none; opacity: 0; transform: scale(0.98) translateY(10px); transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .view-screen.active { display: block; opacity: 1; transform: scale(1) translateY(0); animation: viewFadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        @keyframes viewFadeIn { 0% { opacity: 0; transform: scale(0.96) translateY(20px); filter: blur(10px); } 100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); } }
+
+        .modal { opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); backdrop-filter: blur(0px); }
+        .modal.active { opacity: 1; visibility: visible; backdrop-filter: blur(20px); }
+        .modal-content { transform: scale(0.9) translateY(20px); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .modal.active .modal-content { transform: scale(1) translateY(0); }
+        
+        .option-radio:checked + div { border-color: #fff; background: rgba(255, 255, 255, 0.1); box-shadow: inset 0 0 0 1px #fff; }
+        .option-radio:checked + div .check-icon { opacity: 1; color: #fff; }
+
+        /* ================= DAY GLASS (LIGHT MODE) OVERRIDES ================= */
+        body.light-mode { background-color: #f1f5f9; color: #0f172a; }
+        body.light-mode .text-white { color: #0f172a !important; }
+        body.light-mode .text-white\/70 { color: rgba(15,23,42,0.7) !important; }
+        body.light-mode .text-white\/60 { color: rgba(15,23,42,0.6) !important; }
+        body.light-mode .text-white\/50 { color: rgba(15,23,42,0.5) !important; }
+        body.light-mode .text-white\/40 { color: rgba(15,23,42,0.4) !important; }
+        body.light-mode .text-white\/30 { color: rgba(15,23,42,0.3) !important; }
+        
+        body.light-mode .border-white\/10 { border-color: rgba(0,0,0,0.1) !important; }
+        body.light-mode .border-white\/20 { border-color: rgba(0,0,0,0.2) !important; }
+        body.light-mode .border-white\/5 { border-color: rgba(0,0,0,0.05) !important; }
+        
+        body.light-mode .bg-white\/5 { background-color: rgba(255,255,255,0.4) !important; }
+        body.light-mode .bg-white\/10 { background-color: rgba(255,255,255,0.6) !important; }
+        body.light-mode .bg-white\/20 { background-color: rgba(255,255,255,0.8) !important; }
+        body.light-mode .bg-black\/20, 
+        body.light-mode .bg-black\/30, 
+        body.light-mode .bg-black\/40, 
+        body.light-mode .bg-black\/50 { background-color: rgba(255,255,255,0.5) !important; border-color: rgba(255,255,255,0.8) !important; box-shadow: 0 4px 30px rgba(0,0,0,0.05); }
+        
+        body.light-mode .liquid-glass { background: rgba(255,255,255,0.4); border-color: rgba(255,255,255,0.8); box-shadow: 0 10px 40px 0 rgba(0,0,0,0.05), inset 0 1px 0 0 rgba(255,255,255,1); }
+        body.light-mode .liquid-glass-heavy { background: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.8); }
+        
+        body.light-mode .liquid-button { background: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.9); color: #000; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        body.light-mode .liquid-button:hover { background: rgba(255,255,255,1); }
+        
+        body.light-mode .bg-black { background-color: #fff !important; }
+        body.light-mode .ambient-bg { background: #f8fafc; }
+        body.light-mode .orb { mix-blend-mode: multiply; opacity: 0.3; } /* Softer glow for light mode */
+        
+        body.light-mode .shadow-inner { box-shadow: inset 0 2px 5px 0 rgba(0,0,0,0.05); }
+        body.light-mode .text-sky-400 { color: #0284c7 !important; } /* Darker blue for legibility */
+        body.light-mode .gradient-text { background: linear-gradient(135deg, #0f172a 0%, #4f46e5 50%, #0284c7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Invert solid white buttons to solid dark */
+        body.light-mode .bg-white.text-black { background-color: #0f172a !important; color: #fff !important; box-shadow: 0 10px 30px rgba(15,23,42,0.2) !important; }
+        body.light-mode .filter-btn.active { background-color: #0f172a !important; color: #fff !important; border-color: #0f172a !important; }
+        
+        /* Input text colors */
+        body.light-mode input, body.light-mode select, body.light-mode textarea { color: #0f172a !important; }
+        body.light-mode input::placeholder, body.light-mode textarea::placeholder { color: rgba(15,23,42,0.5) !important; }
+        
+        /* Modals and Toasts */
+        body.light-mode .modal { backdrop-filter: blur(15px); background: rgba(255,255,255,0.2) !important; }
+        body.light-mode .option-radio:checked + div { border-color: #0f172a; background: rgba(15,23,42,0.05); box-shadow: inset 0 0 0 1px #0f172a; }
+        body.light-mode .option-radio:checked + div .check-icon { color: #0f172a; }
     </style>
-
-      <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ElectronicsStore",
-      "name": "HoRly's Tech Gadgets Sales N Repair",
-      "image": "https://your-website-link.com/logo.png",
-      "description": "Premium UK Used iPhones, Gaming Consoles, and Expert Motherboard Repairs in Lagos.",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "No 5, Medical Road, Computer Village",
-        "addressLocality": "Ikeja",
-        "addressRegion": "Lagos",
-        "postalCode": "100001",
-        "addressCountry": "NG"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 6.5965,
-        "longitude": 3.3421
-      },
-      "url": "https://horlystech.com",
-      "telephone": "+2349121213936",
-      "priceRange": "₦₦",
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday"
-          ],
-          "opens": "09:00",
-          "closes": "18:00"
-        }
-      ]
-    }
-    </script>
-
 </head>
 
-<body class="selection:bg-sky-500/30">
+<body class="selection:bg-white/30">
 
-  <script src="js/script.js"></script>
-
-      <div id="preloader" class="fixed inset-0 z-[100] bg-[#020617] flex flex-col items-center justify-center transition-opacity duration-1000">
-        <div class="relative w-24 h-24 mb-4">
-            <div class="absolute inset-0 border-t-4 border-sky-500 rounded-full animate-spin"></div>
-            <div class="absolute inset-2 border-r-4 border-indigo-500 rounded-full animate-spin" style="animation-direction: reverse;"></div>
-            <div class="absolute inset-0 flex items-center justify-center font-bold orbitron text-2xl text-white">H</div>
-        </div>
-        <div class="orbitron text-sky-400 text-sm tracking-[0.3em] animate-pulse">HORLY'S TECH</div>
+    <!-- Ambient Liquid Glass Background -->
+    <div class="ambient-bg">
+        <div class="orb bg-sky-600/40 w-[600px] h-[600px] top-[-10%] left-[-10%]"></div>
+        <div class="orb bg-indigo-600/30 w-[500px] h-[500px] bottom-[-20%] right-[-10%]" style="animation-delay: -5s; animation-duration: 25s;"></div>
+        <div class="orb bg-purple-600/20 w-[400px] h-[400px] top-[40%] left-[30%]" style="animation-delay: -10s; animation-duration: 15s;"></div>
     </div>
 
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-3xl flex flex-col items-center justify-center transition-opacity duration-1000">
+        <div class="relative w-24 h-24 mb-4">
+            <div class="absolute inset-0 border-t-2 border-white/50 rounded-full animate-spin"></div>
+            <div class="absolute inset-2 border-r-2 border-sky-400 rounded-full animate-spin" style="animation-direction: reverse;"></div>
+            <div class="absolute inset-0 flex items-center justify-center font-bold orbitron text-2xl text-white">H</div>
+        </div>
+        <div class="orbitron text-white text-sm tracking-[0.3em] animate-pulse">LIQUID GLASS</div>
+    </div>
+
+    <!-- WhatsApp FAB -->
+    <a href="https://wa.me/2349121213936" target="_blank" class="fixed bottom-24 md:bottom-8 right-6 md:right-8 z-50 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(34,197,94,0.4)] hover:scale-110 transition-transform hover:shadow-[0_10px_40px_rgba(34,197,94,0.6)] interaction-btn">
+        <i class="fab fa-whatsapp text-3xl text-white"></i>
+    </a>
+  
+    <!-- Dynamic Nav (Liquid Glass Pill) - Fully Slidable -->
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl z-40 liquid-glass border-white/10 px-6 py-4 flex items-center justify-start md:justify-between gap-6 overflow-x-auto no-scrollbar flex-nowrap snap-x snap-mandatory transition-all duration-300">
+        
+        <!-- Logo -->
+        <div class="flex items-center gap-3 cursor-pointer flex-shrink-0 snap-start interaction-btn" onclick="switchView('view-home')">
+            <div class="w-10 h-10 bg-white/10 rounded-2xl flex items-center justify-center font-bold text-white shadow-inner border border-white/20">H</div>
+            <h1 class="orbitron text-xl font-bold tracking-tighter whitespace-nowrap hidden sm:block">HoRly’s_<span class="gradient-text">Tech</span></h1>
+        </div>
+        
+        <!-- Navigation Links Menu -->
+        <div class="flex gap-2 p-1 bg-black/20 rounded-full border border-white/5 flex-shrink-0 snap-start">
+            <button onclick="switchView('view-home')" class="nav-btn interaction-btn px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-white/70 hover:text-white hover:bg-white/10 transition-all active-nav whitespace-nowrap">Home</button>
+            <button onclick="switchView('view-store')" class="nav-btn interaction-btn px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-white/70 hover:text-white hover:bg-white/10 transition-all whitespace-nowrap">Store</button>
+            <button onclick="switchView('view-swap')" class="nav-btn interaction-btn px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-white/70 hover:text-white hover:bg-white/10 transition-all whitespace-nowrap">Swap</button>
+            <button onclick="switchView('view-repair')" class="nav-btn interaction-btn px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-white/70 hover:text-white hover:bg-white/10 transition-all whitespace-nowrap">Repair</button>
+            <button onclick="switchView('view-about')" class="nav-btn interaction-btn px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest text-white/70 hover:text-white hover:bg-white/10 transition-all whitespace-nowrap">About</button>
+        </div>
+
+        <!-- Action Icons -->
+        <div class="flex items-center gap-3 flex-shrink-0 pr-2 snap-end">
+            <!-- Day/Night Toggle Button -->
+            <button onclick="toggleDayGlass()" id="themeToggleBtn" class="liquid-button w-10 h-10 rounded-full flex items-center justify-center text-white flex-shrink-0 interaction-btn">
+                <i class="fas fa-sun"></i>
+            </button>
+
+            <button onclick="switchView('view-store')" class="liquid-button px-5 py-2 text-xs font-bold uppercase flex items-center gap-2 whitespace-nowrap interaction-btn">
+                Search <i class="fas fa-search"></i>
+            </button>
+            <button class="w-10 h-10 rounded-full liquid-button flex items-center justify-center text-white flex-shrink-0 interaction-btn">
+                <i class="fas fa-user"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- DYNAMIC SCREENS CONTAINER -->
+    <main id="app-container" class="pt-32 pb-24 min-h-screen">
+
+        <!-- ==================== VIEW: HOME ==================== -->
+        <div id="view-home" class="view-screen active">
+            <!-- Hero with Cinematic Video -->
+            <section class="py-10 px-6 relative z-10">
+                <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+                    <div class="flex-1 space-y-8 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full liquid-glass text-white text-xs font-bold uppercase tracking-[0.2em] shadow-lg">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+                            </span>
+                            Premium Tech Solutions
+                        </div>
+                        <h1 class="orbitron text-5xl md:text-7xl font-black mb-6 leading-tight drop-shadow-2xl">
+                            All Gadgets.<br><span class="gradient-text">One Destination.</span>
+                        </h1>
+                        <p class="text-white/70 max-w-2xl mx-auto lg:mx-0 text-lg mb-10 font-light">
+                            Your one-stop hub for premium gadget sales, precision repairs, and software engineering. From the latest iPhones to complex motherboard microsurgery.
+                        </p>
+                        <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                            <button onclick="switchView('view-store')" class="interaction-btn px-8 py-4 bg-white text-black rounded-2xl font-bold orbitron uppercase tracking-widest hover:scale-105 transition-all shadow-[0_0_30px_rgba(255,255,255,0.3)]">
+                                Browse Inventory
+                            </button>
+                            <button onclick="switchView('view-repair')" class="interaction-btn px-8 py-4 liquid-glass rounded-2xl font-bold orbitron uppercase tracking-widest hover:bg-white/10 transition-all">
+                                Book Repair
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-center lg:justify-start gap-8 pt-8 border-t border-white/10 mt-8">
+                            <div class="text-center">
+                                <div class="orbitron text-2xl font-bold text-white">5k+</div>
+                                <div class="text-[10px] uppercase tracking-tighter text-white/50">Repairs Done</div>
+                            </div>
+                            <div class="w-[1px] h-10 bg-white/20"></div>
+                            <div class="text-center">
+                                <div class="orbitron text-2xl font-bold text-white">100%</div>
+                                <div class="text-[10px] uppercase tracking-tighter text-white/50">Genuine Parts</div>
+                            </div>
+                            <div class="w-[1px] h-10 bg-white/20"></div>
+                            <div class="text-center">
+                                <div class="orbitron text-2xl font-bold text-white">24hr</div>
+                                <div class="text-[10px] uppercase tracking-tighter text-white/50">Rapid Return</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Cinematic Video Container -->
+                    <div class="flex-1 relative w-full">
+                        <div class="relative z-10 liquid-glass p-3 transform lg:rotate-2 hover:rotate-0 transition-all duration-700 shadow-2xl">
+                            <!-- Abstract Liquid Glass Auto-playing Video -->
+                            <video autoplay loop muted playsinline class="w-full h-full object-cover rounded-[2rem] shadow-inner h-[400px]">
+                                <source src="https://assets.mixkit.co/videos/preview/mixkit-liquid-background-with-waves-and-light-reflections-32219-large.mp4" type="video/mp4">
+                            </video>
+                            
+                            <div class="absolute -bottom-8 -left-8 liquid-glass p-6 rounded-3xl animate-bounce shadow-2xl" style="animation-duration: 4s;">
+                                <div class="flex items-center gap-4">
+                                    <div class="p-3 bg-white/20 text-white rounded-2xl backdrop-blur-md shadow-inner">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-white">Certified Techs</div>
+                                        <div class="text-xs text-white/60">Expertise guaranteed</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Flash Deal -->
+            <section class="py-16 px-6 relative z-10">
+                <div class="max-w-6xl mx-auto liquid-glass rounded-[3rem] p-8 md:p-12 border-orange-500/30 overflow-hidden flex flex-col md:flex-row items-center gap-12 group">
+                    <div class="flex-1 relative z-10 text-center md:text-left">
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full liquid-glass border border-orange-500/50 text-white text-[10px] font-bold uppercase tracking-widest mb-6">
+                            <span class="w-2 h-2 rounded-full bg-orange-500 animate-ping"></span> Limited Time Offer
+                        </div>
+                        <h2 class="orbitron text-4xl md:text-5xl font-bold mb-3 drop-shadow-lg">
+                            PlayStation 5 <span class="text-orange-400">Slim</span>
+                        </h2>
+                        <p class="text-white/70 text-sm mb-8">1TB Console + Extra Controller + FIFA 25</p>
+                        <div class="flex items-center justify-center md:justify-start gap-4 mb-8">
+                            <span class="text-white/40 line-through text-lg">₦1,150,000</span>
+                            <span class="text-4xl font-bold text-white drop-shadow-md">₦980,000</span>
+                        </div>
+                        <div class="flex justify-center md:justify-start gap-3 mb-10 text-center">
+                            <div class="liquid-glass p-4 rounded-2xl min-w-[80px]">
+                                <div id="days" class="text-3xl font-bold text-white orbitron">02</div>
+                                <div class="text-[10px] text-white/50 uppercase mt-1">Days</div>
+                            </div>
+                            <div class="liquid-glass p-4 rounded-2xl min-w-[80px]">
+                                <div id="hours" class="text-3xl font-bold text-white orbitron">14</div>
+                                <div class="text-[10px] text-white/50 uppercase mt-1">Hours</div>
+                            </div>
+                            <div class="liquid-glass p-4 rounded-2xl min-w-[80px]">
+                                <div id="minutes" class="text-3xl font-bold text-white orbitron">45</div>
+                                <div class="text-[10px] text-white/50 uppercase mt-1">Mins</div>
+                            </div>
+                            <div class="liquid-glass p-4 rounded-2xl min-w-[80px]">
+                                <div id="seconds" class="text-3xl font-bold text-orange-400 orbitron">12</div>
+                                <div class="text-[10px] text-white/50 uppercase mt-1">Secs</div>
+                            </div>
+                        </div>
+                        <button onclick="claimDeal()" class="interaction-btn px-10 py-5 bg-white text-black rounded-2xl font-bold orbitron uppercase tracking-widest hover:scale-105 transition-transform shadow-[0_0_40px_rgba(255,255,255,0.4)]">
+                            Claim Deal Now
+                        </button>
+                    </div>
+                    <div class="flex-1 relative z-10 w-full">
+                        <img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=2070&auto=format&fit=crop" 
+                             alt="Flash Deal Product" 
+                             class="w-full max-w-md mx-auto rounded-[2rem] shadow-2xl border border-white/10 transform group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gadget Wars -->
+            <section class="py-16 px-6 relative z-10">
+                <div class="max-w-5xl mx-auto liquid-glass rounded-[3rem] p-8 md:p-12">
+                    <div class="text-center mb-10">
+                        <h2 class="orbitron text-3xl font-bold">Gadget <span class="gradient-text">Wars</span></h2>
+                        <p class="text-white/60 mt-2">Can't decide? See the difference.</p>
+                    </div>
+                    <div class="overflow-x-auto custom-scrollbar">
+                        <table class="w-full text-left text-sm text-white/70 min-w-[600px]">
+                            <thead class="text-xs text-white uppercase bg-white/10 font-bold orbitron rounded-t-xl">
+                                <tr>
+                                    <th class="px-6 py-5 rounded-tl-2xl">Feature</th>
+                                    <th class="px-6 py-5 text-sky-400">iPhone 14 Pro Max</th>
+                                    <th class="px-6 py-5 text-indigo-400">iPhone 15 Pro Max</th>
+                                    <th class="px-6 py-5 text-orange-400 rounded-tr-2xl">Samsung S24 Ultra</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/5">
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-6 py-5 font-bold text-white">Build Material</td>
+                                    <td class="px-6 py-5">Stainless Steel</td>
+                                    <td class="px-6 py-5 text-white">Titanium (Lighter)</td>
+                                    <td class="px-6 py-5">Titanium</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-6 py-5 font-bold text-white">Charging</td>
+                                    <td class="px-6 py-5">Lightning Port</td>
+                                    <td class="px-6 py-5 text-white">USB-C (Universal)</td>
+                                    <td class="px-6 py-5">USB-C (45W Fast)</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="px-6 py-5 font-bold text-white">Camera Zoom</td>
+                                    <td class="px-6 py-5">3x Optical</td>
+                                    <td class="px-6 py-5">5x Optical</td>
+                                    <td class="px-6 py-5 text-white">100x Space Zoom</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Super Bundles -->
+            <section class="py-16 px-6 relative z-10">
+                <div class="max-w-7xl mx-auto">
+                    <h2 class="orbitron text-3xl font-bold mb-10 text-center">Super <span class="gradient-text">Bundles</span></h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="liquid-glass p-8 hover:-translate-y-2 transition-transform duration-500 card-hover">
+                            <h3 class="orbitron text-xl font-bold text-white mb-4">The "Starter" Pack</h3>
+                            <ul class="text-sm text-white/70 space-y-3 mb-8">
+                                <li>✨ UK Used iPhone XR/11</li>
+                                <li>✨ Silicon Case</li>
+                                <li>✨ Privacy Screen Guard</li>
+                                <li>✨ Fast Charger Cable</li>
+                            </ul>
+                            <div class="flex items-center justify-between mt-auto">
+                                <span class="text-sky-400 font-bold text-xl">₦2xx,000</span>
+                                <button onclick="buyBundle('Starter Pack')" class="interaction-btn liquid-button px-5 py-2 text-white text-xs font-bold uppercase">Get Bundle</button>
+                            </div>
+                        </div>
+                        <div class="liquid-glass p-8 hover:-translate-y-2 transition-transform duration-500 border-white/30 card-hover">
+                            <h3 class="orbitron text-xl font-bold text-white mb-4">The "Content Creator"</h3>
+                            <ul class="text-sm text-white/70 space-y-3 mb-8">
+                                <li>✨ iPhone 13 Pro Max (256GB)</li>
+                                <li>✨ Ring Light & Tripod</li>
+                                <li>✨ Wireless Lapel Mic</li>
+                                <li>✨ Transparent Bumper Case</li>
+                            </ul>
+                            <div class="flex items-center justify-between mt-auto">
+                                <span class="text-purple-400 font-bold text-xl">₦9xx,000</span>
+                                <button onclick="buyBundle('Creator Pack')" class="interaction-btn bg-white text-black px-5 py-2 rounded-full text-xs font-bold uppercase shadow-lg">Get Bundle</button>
+                            </div>
+                        </div>
+                        <div class="liquid-glass p-8 hover:-translate-y-2 transition-transform duration-500 card-hover">
+                            <h3 class="orbitron text-xl font-bold text-white mb-4">The "Gamer" Setup</h3>
+                            <ul class="text-sm text-white/70 space-y-3 mb-8">
+                                <li>✨ PS5 Console (Standard)</li>
+                                <li>✨ Extra DualSense Controller</li>
+                                <li>✨ FIFA 24 / COD MW3</li>
+                                <li>✨ Vertical Cooling Stand</li>
+                            </ul>
+                            <div class="flex items-center justify-between mt-auto">
+                                <span class="text-orange-400 font-bold text-xl">₦1,xxx,000</span>
+                                <button onclick="buyBundle('Gamer Setup')" class="interaction-btn liquid-button px-5 py-2 text-white text-xs font-bold uppercase">Get Bundle</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rating/Trust -->
+            <section class="py-16 px-6 relative z-10">
+                <div class="max-w-7xl mx-auto liquid-glass rounded-[3rem] p-10">
+                    <div class="text-center mb-12">
+                        <h2 class="orbitron text-3xl font-bold mb-2">Trusted by <span class="gradient-text">Lagos</span></h2>
+                        <div class="flex items-center justify-center gap-2 text-yellow-400 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <span class="text-white/60 ml-2">(500+ Verified Sales)</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white/5 border border-white/10 p-6 rounded-[2rem] relative backdrop-blur-md">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center font-bold text-white shadow-inner">DJ</div>
+                                <div>
+                                    <p class="font-bold text-sm text-white">Daniel J.</p>
+                                    <p class="text-[10px] text-white/50">Bought iPhone 13 Pro Max</p>
+                                </div>
+                            </div>
+                            <p class="text-white/80 text-sm font-light leading-relaxed">"I was scared to buy online initially, but HoRly delivered to Lekki in 2 hours. The phone is clean as new. Battery is 98%. 100% recommended."</p>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 p-6 rounded-[2rem] relative backdrop-blur-md">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center font-bold text-white shadow-inner">FA</div>
+                                <div>
+                                    <p class="font-bold text-sm text-white">Fatima A.</p>
+                                    <p class="text-[10px] text-white/50">Fixed Samsung S22 Ultra</p>
+                                </div>
+                            </div>
+                            <p class="text-white/80 text-sm font-light leading-relaxed">"Computer Village guys said my screen couldn't be fixed. HoRly's lab fixed the ribbon without changing the whole screen. Saved me 150k!"</p>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 p-6 rounded-[2rem] relative backdrop-blur-md">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center font-bold text-white shadow-inner">EM</div>
+                                <div>
+                                    <p class="font-bold text-sm text-white">Emmanuel M.</p>
+                                    <p class="text-[10px] text-white/50">Bought PS5 Console</p>
+                                </div>
+                            </div>
+                            <p class="text-white/80 text-sm font-light leading-relaxed">"Best price for PS5 in Nigeria right now. It came sealed with the extra controller I ordered. Legit vendor."</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== VIEW: STORE (CATALOG) ==================== -->
+        <div id="view-store" class="view-screen">
+            <section class="py-10 px-4 md:px-8 relative z-10 min-h-screen">
+                <div class="max-w-8xl mx-auto">
+                    
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6 liquid-glass p-8 rounded-[2rem]">
+                        <div class="flex-shrink-0 w-full md:w-auto">
+                            <h2 class="orbitron text-4xl font-bold drop-shadow-lg">The <span class="gradient-text">Inventory</span></h2>
+                            <p class="text-white/60 text-sm mt-2 font-light">Select a category or search below.</p>
+                        </div>
+                        
+                        <div class="flex flex-col gap-5 w-full min-w-0">
+                            <div class="relative w-full md:max-w-md md:ml-auto">
+                                <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Search iPhone 15, PS5..." class="w-full bg-black/40 border border-white/20 rounded-full px-6 py-4 text-sm text-white focus:border-white focus:bg-white/10 outline-none transition-all pl-12 backdrop-blur-md shadow-inner">
+                                <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-white/50"></i>
+                            </div>
+                            
+                            <!-- Slidable Inventory Nav -->
+                            <div class="flex flex-nowrap overflow-x-auto pb-2 gap-3 w-full no-scrollbar snap-x snap-mandatory">
+                                <button onclick="filterItems('all')" class="interaction-btn filter-btn active px-6 py-2 rounded-full border border-white/20 bg-white/5 text-sm font-medium whitespace-nowrap transition-all backdrop-blur-md flex-shrink-0 snap-start">All</button>
+                                <button onclick="filterItems('iphone')" class="interaction-btn filter-btn px-6 py-2 rounded-full border border-white/20 bg-white/5 text-sm font-medium whitespace-nowrap transition-all backdrop-blur-md flex-shrink-0 snap-start">iPhones</button>
+                                <button onclick="filterItems('android')" class="interaction-btn filter-btn px-6 py-2 rounded-full border border-white/20 bg-white/5 text-sm font-medium whitespace-nowrap transition-all backdrop-blur-md flex-shrink-0 snap-start">Android</button>
+                                <button onclick="filterItems('laptop')" class="interaction-btn filter-btn px-6 py-2 rounded-full border border-white/20 bg-white/5 text-sm font-medium whitespace-nowrap transition-all backdrop-blur-md flex-shrink-0 snap-start">Laptops</button>
+                                <button onclick="filterItems('gaming')" class="interaction-btn filter-btn px-6 py-2 rounded-full border border-white/20 bg-white/5 text-sm font-medium whitespace-nowrap transition-all backdrop-blur-md flex-shrink-0 snap-start">Gaming</button>
+                                <button onclick="filterItems('accessories')" class="interaction-btn filter-btn px-6 py-2 rounded-full border border-white/20 bg-white/5 text-sm font-medium whitespace-nowrap transition-all backdrop-blur-md flex-shrink-0 snap-start">Accessories</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
+                        <!-- Products rendered here via JS -->
+                    </div>
+
+                    <div class="mt-16 text-center liquid-glass p-8 max-w-xl mx-auto">
+                        <p class="text-white/60 mb-4 font-light">Don't see exactly what you need?</p>
+                        <button onclick="openCustomOrder()" class="interaction-btn text-white font-bold border-b border-white pb-1 hover:text-white/80 transition-colors">Request Specific Device via WhatsApp</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== VIEW: SWAP ==================== -->
+        <div id="view-swap" class="view-screen">
+            <section class="py-10 px-6 relative z-10 min-h-[80vh] flex items-center justify-center">
+                <div class="max-w-5xl mx-auto liquid-glass rounded-[3rem] p-10 md:p-16 w-full">
+                    <div class="text-center mb-12">
+                        <div class="inline-block px-5 py-2 rounded-full border border-white/20 bg-white/5 text-white text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-md">
+                            Trade-In Program
+                        </div>
+                        <h2 class="orbitron text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Upgrade Your <span class="text-white">Device</span></h2>
+                        <p class="text-white/70 max-w-xl mx-auto font-light">Don't have full cash? Swap your old phone + Cash for a new one. We accept iPhones, Samsungs, and Pixels.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                        <div class="space-y-6">
+                            <div>
+                                <label class="text-xs font-bold text-white/50 uppercase ml-2 mb-2 block tracking-widest">I have this device:</label>
+                                <input type="text" id="swapHave" placeholder="e.g. iPhone 14 Pro 128GB" class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 focus:border-white outline-none text-white backdrop-blur-sm shadow-inner transition-colors">
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-white/50 uppercase ml-2 mb-2 block tracking-widest">Its Condition:</label>
+                                <select id="swapCondition" class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 focus:border-white outline-none text-white backdrop-blur-sm shadow-inner transition-colors appearance-none">
+                                    <option class="bg-black text-white">Flawless (No scratches)</option>
+                                    <option class="bg-black text-white">Good (Minor scratches)</option>
+                                    <option class="bg-black text-white">Cracked Screen</option>
+                                    <option class="bg-black text-white">Faulty (Needs repair)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-xs font-bold text-white/50 uppercase ml-2 mb-2 block tracking-widest">I want to swap for:</label>
+                                <input type="text" id="swapWant" placeholder="e.g. iPhone 17 Pro" class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 focus:border-white outline-none text-white backdrop-blur-sm shadow-inner transition-colors">
+                            </div>
+                            <button onclick="sendSwapRequest()" class="interaction-btn w-full bg-white text-black font-bold py-5 rounded-2xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-3 text-lg shadow-[0_0_30px_rgba(255,255,255,0.3)] mt-8">
+                                <i class="fas fa-exchange-alt"></i> Calculate Top-up Price
+                            </button>
+                            <p class="text-[11px] text-center text-white/40">We will evaluate your device instantly via WhatsApp.</p>
+                        </div>
+                        <div class="hidden md:flex justify-center items-center">
+                            <div class="relative w-64 h-64">
+                                <div class="absolute inset-0 bg-white/10 rounded-full blur-[50px]"></div>
+                                <i class="fas fa-mobile-alt text-[8rem] text-white/30 absolute left-0 top-0 transform -translate-x-4 translate-y-4"></i>
+                                <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-black/50 p-6 rounded-full border border-white/20 backdrop-blur-xl shadow-2xl">
+                                    <i class="fas fa-exchange-alt text-4xl text-white"></i>
+                                </div>
+                                <i class="fas fa-mobile-alt text-[8rem] text-white absolute right-0 bottom-0 z-0 drop-shadow-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== VIEW: REPAIR ==================== -->
+        <div id="view-repair" class="view-screen">
+            <section class="py-10 px-6 relative z-10 min-h-[80vh] flex items-center">
+                <div class="max-w-6xl mx-auto liquid-glass rounded-[3rem] p-10 md:p-16 flex flex-col md:flex-row items-center gap-16 w-full">
+                    <div class="flex-1 text-center md:text-left">
+                        <div class="inline-block px-5 py-2 bg-white/10 border border-white/20 text-white rounded-full text-[10px] font-bold uppercase tracking-widest mb-6 backdrop-blur-md">Repair Lab</div>
+                        <h2 class="orbitron text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">Broken Device? <br> <span class="gradient-text">We Fix It.</span></h2>
+                        <p class="text-white/70 mb-10 leading-relaxed font-light text-lg">
+                            We specialize in complex repairs for all the devices we sell. Screen swaps, battery replacement, motherboard microsoldering, and console cleaning. Done perfectly.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6 mb-10">
+                            <div class="bg-black/20 p-6 rounded-3xl border border-white/10 backdrop-blur-md">
+                                <i class="fas fa-mobile-alt text-white text-2xl mb-3"></i>
+                                <div class="text-sm font-medium text-white">Screen & Battery</div>
+                            </div>
+                            <div class="bg-black/20 p-6 rounded-3xl border border-white/10 backdrop-blur-md">
+                                <i class="fas fa-microchip text-white text-2xl mb-3"></i>
+                                <div class="text-sm font-medium text-white">Motherboard</div>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/2349121213936?text=Hi%20HoRly's%20Tech,%20I%20have%20a%20device%20that%20needs%20repair." target="_blank" class="interaction-btn inline-block px-10 py-4 bg-white text-black font-bold rounded-2xl hover:scale-105 transition-transform shadow-[0_0_30px_rgba(255,255,255,0.3)]">Get Repair Quote</a>
+                    </div>
+                    <div class="flex-1 w-full max-w-sm">
+                        <img src="https://image2url.com/r2/default/images/1769372487026-15b9cdd3-cef7-4df7-beb1-e59927d6a51e.png" class="rounded-[2rem] shadow-2xl transform lg:rotate-3 hover:rotate-0 transition-all duration-700 w-full" alt="Repair">
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== VIEW: ABOUT / INQUIRY ==================== -->
+        <div id="view-about" class="view-screen">
+            <div class="max-w-6xl mx-auto space-y-12 px-6 relative z-10 py-10">
+                
+                <!-- About & Meet -->
+                <section class="liquid-glass p-10 md:p-16 text-center space-y-8">
+                    <h2 class="orbitron text-4xl font-bold drop-shadow-lg">About <span class="gradient-text">HoRly’s Tech</span></h2>
+                    <p class="text-white/70 leading-relaxed text-lg max-w-3xl mx-auto font-light">
+                        We are not just a store; we are a technology sanctuary. Founded on the belief that devices should last longer and perform better, HoRly’s Tech brings world-class standards to Nigeria. Whether buying an iPhone or reviving a laptop, we guarantee transparency, speed, and premium quality.
+                    </p>
+                    <div class="flex flex-col md:flex-row items-center gap-10 bg-black/20 p-8 rounded-3xl border border-white/5 mt-10">
+                        <div class="w-48 h-48 flex-shrink-0">
+                            <img src="https://image2url.com/r2/default/images/1769395557131-f633e0b9-4233-4062-b49b-bc9f9b5f1625.jpeg" alt="HoRly" class="w-full h-full object-cover rounded-full border border-white/20 shadow-xl">
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h3 class="orbitron text-2xl font-bold mb-2">Meet HoRly</h3>
+                            <h4 class="text-white/90 font-medium mb-4">"I don't just sell gadgets, I understand their heartbeat."</h4>
+                            <p class="text-white/60 text-sm font-light mb-6">Every phone we sell passes through my personal inspection table. If I wouldn't use it, I won't sell it to you. That is my promise.</p>
+                            <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                                <span class="bg-white/10 px-4 py-1.5 rounded-full border border-white/10 text-[10px] font-bold text-white tracking-widest uppercase">Certified Engineer</span>
+                                <span class="bg-white/10 px-4 py-1.5 rounded-full border border-white/10 text-[10px] font-bold text-white tracking-widest uppercase">5000+ Repairs</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Inquiry Form -->
+                <section class="liquid-glass p-10 md:p-16">
+                    <div class="text-center mb-10">
+                        <h2 class="orbitron text-3xl font-bold mb-3 drop-shadow-lg">General <span class="text-white">Inquiry</span></h2>
+                        <p class="text-white/60 text-sm font-light">Have a question? Need a swap deal? Fill this form to chat directly with us.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-5 p-6 bg-white/5 rounded-3xl border border-white/10 backdrop-blur-md">
+                                <div class="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center text-white text-xl shadow-inner">
+                                    <i class="fas fa-headset"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white">Customer Support</h4>
+                                    <p class="text-xs text-white/50 mb-1">Available 24/hrs</p>
+                                    <p class="text-white font-medium text-lg">09121213936</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-5 p-6 bg-white/5 rounded-3xl border border-white/10 backdrop-blur-md">
+                                <div class="w-14 h-14 bg-white/10 rounded-full flex items-center justify-center text-white text-xl shadow-inner">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-white">Visit Store</h4>
+                                    <p class="text-xs text-white/50 mb-1">Lagos, Nigeria</p>
+                                    <p class="text-white font-medium text-sm">Nationwide Delivery Available</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-5 bg-black/20 p-8 rounded-3xl border border-white/5">
+                            <input type="text" id="inqName" placeholder="Your Name" class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:border-white outline-none text-sm text-white backdrop-blur-sm">
+                            <select id="inqType" class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:border-white outline-none text-sm text-white/70 backdrop-blur-sm appearance-none">
+                                <option class="bg-black text-white" value="General Question">General Question</option>
+                                <option class="bg-black text-white" value="Delivery Inquiry">Delivery Inquiry</option>
+                            </select>
+                            <textarea id="inqMessage" rows="4" placeholder="Type your message here..." class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:border-white outline-none text-sm text-white backdrop-blur-sm"></textarea>
+                            <button onclick="sendInquiry()" class="interaction-btn w-full bg-white text-black font-bold py-4 rounded-2xl hover:scale-105 transition-all flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                                <i class="fab fa-whatsapp"></i> Send Message
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FAQ -->
+                <section class="liquid-glass p-10 md:p-16">
+                    <h2 class="orbitron text-3xl font-bold text-center mb-10 drop-shadow-lg">Frequently Asked <span class="text-white">Questions</span></h2>
+                    <div class="space-y-4">
+                        <details class="bg-white/5 border border-white/10 rounded-2xl group backdrop-blur-md interaction-btn">
+                            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white font-medium">
+                                Do you accept Pay on Delivery?
+                                <span class="transition group-open:rotate-180 opacity-50"><i class="fas fa-chevron-down"></i></span>
+                            </summary>
+                            <div class="px-6 pb-6 text-white/60 text-sm font-light leading-relaxed border-t border-white/5 pt-4">
+                                For Lagos orders, yes! We accept Payment on Delivery for items delivered by our dispatch riders. For orders outside Lagos, we require payment before waybill, but we provide video evidence and company receipts for security.
+                            </div>
+                        </details>
+                        <details class="bg-white/5 border border-white/10 rounded-2xl group backdrop-blur-md interaction-btn">
+                            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white font-medium">
+                                Is there a warranty on Used iPhones?
+                                <span class="transition group-open:rotate-180 opacity-50"><i class="fas fa-chevron-down"></i></span>
+                            </summary>
+                            <div class="px-6 pb-6 text-white/60 text-sm font-light leading-relaxed border-t border-white/5 pt-4">
+                                Yes. All UK Used devices come with a **7-Day Guarantee**. This covers manufacturer defects. We test every feature (FaceID, Camera, Battery) before selling. Note: Physical damage or water damage voids the warranty.
+                            </div>
+                        </details>
+                        <details class="bg-white/5 border border-white/10 rounded-2xl group backdrop-blur-md interaction-btn">
+                            <summary class="flex items-center justify-between p-6 cursor-pointer list-none text-white font-medium">
+                                Where is your physical store?
+                                <span class="transition group-open:rotate-180 opacity-50"><i class="fas fa-chevron-down"></i></span>
+                            </summary>
+                            <div class="px-6 pb-6 text-white/60 text-sm font-light leading-relaxed border-t border-white/5 pt-4">
+                                We are located in Lagos. You can choose "Pick Up" at checkout if you prefer to visit us. Contact us on WhatsApp for the exact office description and landmark.
+                            </div>
+                        </details>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Global Sections visible everywhere at the bottom -->
+    <div class="relative z-10 w-full mt-10">
+        <!-- VIP List -->
+        <section id="viplist" class="py-16 px-6">
+            <div class="max-w-4xl mx-auto liquid-glass rounded-[3rem] p-10 md:p-16 text-center">
+                <i class="fas fa-crown text-5xl text-white mb-6 animate-pulse"></i>
+                <h2 class="orbitron text-3xl md:text-4xl font-bold mb-4 drop-shadow-lg">Join the <span class="text-white">VIP List</span></h2>
+                <p class="text-white/70 mb-8 max-w-lg mx-auto font-light">
+                    Be the first to know when <strong>UK Used iPhone Stocks</strong> land. VIP members get notified 24 hours before we post on Instagram.
+                </p>
+                <form class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto" onsubmit="joinVip(event)">
+                    <input type="text" id="vipPhone" placeholder="Enter WhatsApp Number" required class="flex-1 bg-black/40 border border-white/20 rounded-2xl px-6 py-4 text-white outline-none focus:border-white transition-colors backdrop-blur-sm shadow-inner">
+                    <button type="submit" class="interaction-btn bg-white text-black font-bold orbitron px-8 py-4 rounded-2xl hover:scale-105 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                        Join Now
+                    </button>
+                </form>
+                <p class="text-[10px] text-white/40 mt-5 uppercase tracking-widest">No spam. Only gadget deals.</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-12 text-center text-white/50 text-sm border-t border-white/10 bg-black/50 backdrop-blur-3xl">
+            <p class="orbitron font-bold text-white text-xl mb-2 drop-shadow-md">HoRly’s_Tech</p>
+            <p class="font-light">Lagos, Nigeria • 09121213936</p>
+            <div class="flex justify-center gap-4 my-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                <div class="h-8 bg-white rounded px-2 flex items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" class="h-4"></div>
+                <div class="h-8 bg-white rounded px-2 flex items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" class="h-5"></div>
+                <div class="h-8 bg-white rounded px-2 flex items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" class="h-4"></div>
+            </div>
+            <p class="mb-4 font-light">&copy; 2026. All rights reserved.</p>
+            <button onclick="openPolicy()" class="interaction-btn text-xs text-white/40 hover:text-white transition-colors uppercase tracking-widest border-b border-white/20 pb-1">View Warranty & Return Policy</button>
+        </footer>
+    </div>
+
+    <!-- Modals (Order Form - Direct Buy) -->
+    <div id="orderModal" class="modal fixed inset-0 z-[110] flex items-center justify-center bg-black/40">
+        <div class="modal-content w-full max-w-2xl liquid-glass-heavy p-0 overflow-hidden flex flex-col max-h-[90vh] mx-4 border border-white/20">
+            <div class="p-6 border-b border-white/10 flex justify-between items-center bg-black/20">
+                <div>
+                    <h3 id="modalTitle" class="orbitron text-2xl font-bold text-white drop-shadow-md">iPhone 15 Pro Max</h3>
+                    <p class="text-xs text-white/50 uppercase tracking-widest mt-1">Configure your order</p>
+                </div>
+                <button onclick="closeModal()" class="interaction-btn w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 text-white transition-all shadow-inner border border-white/10">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="p-8 overflow-y-auto custom-scrollbar space-y-8 bg-black/10">
+                <div>
+                    <label class="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-3 block">1. Select Condition</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="cursor-pointer group relative interaction-btn">
+                            <input type="radio" name="condition" value="UK Used" class="option-radio hidden" checked>
+                            <div class="border border-white/10 bg-black/40 p-5 rounded-2xl transition-all text-center backdrop-blur-sm">
+                                <div class="text-sm font-bold text-white mb-1">🇬🇧 UK Used</div>
+                                <div class="text-[10px] text-white/50">Clean, Tested, Affordable</div>
+                                <i class="fas fa-check-circle check-icon absolute top-3 right-3 text-white opacity-0 transition-opacity"></i>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer group relative interaction-btn">
+                            <input type="radio" name="condition" value="Brand New" class="option-radio hidden">
+                            <div class="border border-white/10 bg-black/40 p-5 rounded-2xl transition-all text-center backdrop-blur-sm">
+                                <div class="text-sm font-bold text-white mb-1">✨ Brand New</div>
+                                <div class="text-[10px] text-white/50">Sealed in Box</div>
+                                <i class="fas fa-check-circle check-icon absolute top-3 right-3 text-white opacity-0 transition-opacity"></i>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-2 block">Storage / Spec</label>
+                        <select id="modalSpec" class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-sm focus:border-white outline-none text-white appearance-none backdrop-blur-md">
+                            <option class="bg-black text-white">Lowest Spec (Standard)</option>
+                            <option class="bg-black text-white">Middle Spec</option>
+                            <option class="bg-black text-white">Highest Spec (Max Storage)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-2 block">Preferred Color</label>
+                        <input type="text" id="modalColor" placeholder="e.g. Gold, Midnight..." class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-sm focus:border-white outline-none text-white backdrop-blur-md">
+                    </div>
+                </div>
+                <div class="border-t border-white/10 pt-6">
+                    <label class="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-3 block">3. Delivery Details</label>
+                    <div class="space-y-4">
+                        <input type="text" id="customerName" placeholder="Your Name" class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-sm focus:border-white outline-none text-white backdrop-blur-md">
+                        <select id="customerLocation" class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-sm focus:border-white outline-none text-white appearance-none backdrop-blur-md">
+                            <option class="bg-black text-white" value="">Select Location...</option>
+                            <option class="bg-black text-white" value="Lagos - Mainland">Lagos - Mainland</option>
+                            <option class="bg-black text-white" value="Lagos - Island">Lagos - Island</option>
+                            <option class="bg-black text-white" value="ogun state">ogun state</option>
+                            <option class="bg-black text-white" value="Other State (Waybill)">Other State (Waybill)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6 border-t border-white/10 bg-black/20">
+                <button onclick="sendOrder()" class="interaction-btn w-full bg-white text-black font-bold py-4 rounded-xl orbitron hover:scale-[1.02] transition-transform flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                    <i class="fab fa-whatsapp text-xl"></i> Send Direct Order
+                </button>
+                <p class="text-[10px] text-center text-white/40 mt-4 tracking-widest uppercase">This opens WhatsApp with pre-filled details.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Policy Modal -->
+    <div id="policyModal" class="modal fixed inset-0 z-[120] flex items-center justify-center bg-black/40">
+        <div class="modal-content w-full max-w-lg liquid-glass-heavy rounded-3xl p-8 relative max-h-[80vh] overflow-y-auto mx-4 border border-white/20">
+            <button onclick="document.getElementById('policyModal').classList.remove('active')" class="interaction-btn absolute top-6 right-6 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-all">
+                <i class="fas fa-times"></i>
+            </button>
+            <h3 class="orbitron text-2xl font-bold mb-6 text-white border-b border-white/10 pb-4">Terms & Warranty</h3>
+            <div class="space-y-6 text-sm text-white/70 font-light leading-relaxed">
+                <div>
+                    <h4 class="font-bold text-white mb-2 tracking-wide">1. 7-Day Warranty (UK Used)</h4>
+                    <p>All UK Used devices come with a 7-day testing guarantee covering factory defects. It does NOT cover physical damage, water damage, or screen cracks caused by the user.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-2 tracking-wide">2. Brand New Devices</h4>
+                    <p>Brand new Apple/Samsung devices come with standard 1-Year Manufacturer Warranty, claimed directly from authorized centers.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white mb-2 tracking-wide">3. Return Policy</h4>
+                    <p>Goods bought in good condition cannot be returned for cash. Exchange is possible within 48 hours if proven faulty.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sales Toast -->
+    <div id="sales-toast" class="fixed bottom-28 md:bottom-24 left-4 z-[90] liquid-glass p-4 border-l-4 border-l-sky-500 shadow-2xl transform transition-all duration-700 translate-y-32 opacity-0 flex items-center gap-4 w-80">
+        <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-2xl shadow-inner border border-white/20">🛍️</div>
+        <div>
+            <p class="text-[10px] text-white/60 uppercase tracking-widest">Someone in <span id="toast-loc" class="text-sky-400 font-bold">Lagos</span> purchased</p>
+            <p id="toast-item" class="text-sm font-bold text-white drop-shadow-md">iPhone 13 Pro Max</p>
+        </div>
+    </div>
+
+    <!-- Mobile Nav (Liquid Glass Bottom Dock) -->
+    <div class="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 w-[90%] liquid-glass border border-white/10 z-40 px-6 py-3 flex justify-between items-center shadow-2xl transition-all duration-300">
+        <button onclick="switchView('view-home')" class="nav-btn-mobile interaction-btn flex flex-col items-center gap-1 text-white/50 active-nav transition-colors" data-target="view-home">
+            <i class="fas fa-home text-xl mb-1"></i>
+        </button>
+        <button onclick="switchView('view-store')" class="nav-btn-mobile interaction-btn flex flex-col items-center gap-1 text-white/50 transition-colors" data-target="view-store">
+            <i class="fas fa-store text-xl mb-1"></i>
+        </button>
+        <div class="relative -top-8">
+            <button onclick="switchView('view-swap')" class="nav-btn-mobile interaction-btn w-14 h-14 bg-white rounded-full flex items-center justify-center text-black shadow-[0_0_20px_rgba(255,255,255,0.4)] border-4 border-black transition-colors" data-target="view-swap">
+                <i class="fas fa-exchange-alt text-xl"></i>
+            </button>
+        </div>
+        <button onclick="switchView('view-repair')" class="nav-btn-mobile interaction-btn flex flex-col items-center gap-1 text-white/50 transition-colors" data-target="view-repair">
+            <i class="fas fa-wrench text-xl mb-1"></i>
+        </button>
+        <button onclick="switchView('view-about')" class="nav-btn-mobile interaction-btn flex flex-col items-center gap-1 text-white/50 transition-colors" data-target="view-about">
+            <i class="fas fa-info-circle text-xl mb-1"></i>
+        </button>
+    </div>
+
+    <!-- Scripts -->
     <script>
+        // --- 1. DAY GLASS (LIGHT MODE) TOGGLE ---
+        function toggleDayGlass() {
+            const body = document.body;
+            const icon = document.querySelector('#themeToggleBtn i');
+            
+            body.classList.toggle('light-mode');
+            
+            if(body.classList.contains('light-mode')) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            } else {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        }
+
+        // --- 2. NATIVE HAPTIC FEEDBACK ---
+        function playInteractionFeedback() {
+            // Trigger physical device vibration (if supported by browser/device)
+            if (navigator.vibrate) {
+                navigator.vibrate(15); // A gentle 15ms physical thud
+            }
+
+            // Fallback audio beep
+            if(audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            oscillator.type = 'sine';
+            oscillator.frequency.setValueAtTime(800, audioCtx.currentTime); 
+            oscillator.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.1); 
+            gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime); 
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 0.1);
+        }
+
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // Attach Haptics to all interaction buttons
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.interaction-btn, a, input[type="radio"]').forEach(btn => {
+                btn.addEventListener('click', playInteractionFeedback);
+            });
+        });
+
+        // --- 3. VIEW SWITCHING LOGIC (SPA) ---
+        function switchView(viewId) {
+            const views = document.querySelectorAll('.view-screen');
+            const desktopBtns = document.querySelectorAll('.nav-btn');
+            const mobileBtns = document.querySelectorAll('.nav-btn-mobile');
+
+            views.forEach(v => v.classList.remove('active'));
+
+            setTimeout(() => {
+                const target = document.getElementById(viewId);
+                if(target) target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 300);
+
+            desktopBtns.forEach(btn => {
+                btn.classList.remove('text-white', 'bg-white/10');
+                btn.classList.add('text-white/70');
+                if(btn.innerText.toLowerCase() === viewId.replace('view-', '')) {
+                    btn.classList.add('text-white', 'bg-white/10');
+                    btn.classList.remove('text-white/70');
+                }
+            });
+
+            mobileBtns.forEach(btn => {
+                if(btn.dataset.target === viewId) {
+                    btn.classList.remove('text-white/50');
+                    btn.classList.add('text-white');
+                    if(!btn.classList.contains('bg-white')) btn.style.transform = "scale(1.1)";
+                } else {
+                    btn.classList.add('text-white/50');
+                    btn.classList.remove('text-white');
+                    if(!btn.classList.contains('bg-white')) btn.style.transform = "scale(1)";
+                }
+            });
+        }
+
         window.addEventListener('load', () => {
             const preloader = document.getElementById('preloader');
             setTimeout(() => {
                 preloader.style.opacity = '0';
-                setTimeout(() => {
-                    preloader.style.display = 'none';
-                }, 1000);
-            }, 1500); // 1.5 seconds loading time
+                setTimeout(() => preloader.style.display = 'none', 1000);
+            }, 1000);
+            
+            document.querySelector('.nav-btn-mobile[data-target="view-home"]').classList.add('text-white');
+            document.querySelector('.nav-btn-mobile[data-target="view-home"]').classList.remove('text-white/50');
+            document.querySelector('.nav-btn-mobile[data-target="view-home"]').style.transform = "scale(1.1)";
         });
-    </script>
 
-    <a href="https://wa.me/2349121213936" target="_blank" class="fixed bottom-8 right-8 z-50 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(34,197,94,0.5)] hover:scale-110 transition-transform">
-        <i class="fab fa-whatsapp text-3xl text-white"></i>
-    </a>
-  
-        <nav class="fixed top-0 w-full z-40 glass border-b border-white/5 bg-slate-900/80">
-        <div class="max-w-8xl mx-auto px-6 h-20 flex items-center justify-between">
-            
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-sky-500 rounded flex items-center justify-center font-bold">H</div>
-                <a href="#home"><h1 class="orbitron text-xl font-bold tracking-tighter">HoRly’s_<span class="gradient-text">Tech</span></h1></a>
-            </div>
-            
-            <div class="hidden md:flex gap-6 lg:gap-8 text-[10px] lg:text-xs font-bold uppercase tracking-widest text-slate-400">
-                <a href="#home" class="hover:text-white transition-colors"></a> <a href="#catalog" class="hover:text-white transition-colors">Store</a>
-                <a href="#swap" class="hover:text-white transition-colors">Swap</a>
-                <a href="#repair" class="hover:text-white transition-colors">Repair</a>
-                <a href="#inquiry" class="hover:text-white transition-colors">Inquiry</a>
-                <a href="#rating" class="hover:text-white transition-colors">Our Ratings</a>
-                <a href="#about" class="hover:text-white transition-colors">About Us</a>
-                <a href="#faq" class="hover:text-white transition-colors">Faq</a>
-            </div>
-
-            <div class="hidden md:flex items-center gap-3">
-                
-                <button onclick="document.getElementById('catalog').scrollIntoView()" class="px-5 py-2 bg-white/5 border border-white/10 rounded-full text-xs font-bold uppercase hover:bg-white/10 transition-all flex items-center gap-2">
-                    Search <i class="fas fa-search text-slate-400"></i>
-                </button>
-
-                <div class="relative group">
-                    <button class="w-9 h-9 rounded-full bg-sky-600/20 border border-sky-500/50 flex items-center justify-center text-sky-400 hover:bg-sky-500 hover:text-white transition-all">
-                        <i class="fas fa-user"></i>
-                    </button>
-
-                    <div class="absolute right-0 top-full mt-3 w-48 bg-[#0f172a] border border-white/10 rounded-xl shadow-2xl opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 transform z-50 overflow-hidden">
-                        
-                        <div class="px-4 py-3 border-b border-white/5 bg-white/5">
-                            <p class="text-[10px] text-slate-400 uppercase font-bold">Signed in as</p>
-                            <p id="navUserEmail" class="text-xs text-white truncate font-mono">user@horlys.com</p>
-                        </div>
-
-                        <a href="#" class="block px-4 py-3 text-xs text-slate-300 hover:bg-white/5 hover:text-sky-400 transition-colors flex items-center gap-2">
-                            <i class="fas fa-history"></i> My Orders
-                        </a>
-                        
-                        <button onclick="logoutUser()" class="w-full text-left px-4 py-3 text-xs text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors border-t border-white/5 flex items-center gap-2">
-                            <i class="fas fa-sign-out-alt"></i> Log Out
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </nav>
-
-
-    <section id="home" class="pt-32 pb-16 px-6 relative overflow-hidden">
-              <div class="absolute inset-0 z-0 opacity-20 pointer-events-none">
-            <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-            <div class="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-sky-500 opacity-20 blur-[100px]"></div>
-        </div>
-
-        <div class="max-w-7xl mx-auto text-center relative z-10">
-            <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-            <div class="flex-1 space-y-8 text-center lg:text-left">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-sky-500/30 text-sky-400 text-xs font-bold uppercase tracking-[0.2em]">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
-                    </span>
-                    Professional Tech Solutions
-                </div>
-            <h1 class="orbitron text-5xl md:text-7xl font-black mb-6 leading-tight">
-                All Gadgets.<br><span class="gradient-text">One Destination.</span>
-            </h1>
-            <p class="text-slate-400 max-w-2xl mx-auto text-lg mb-10">
-                Your one-stop hub for premium gadget sales, precision repairs, and software engineering. From the latest iPhones to complex motherboard microsurgery.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#catalog" class="px-8 py-4 bg-sky-500 rounded-xl font-bold orbitron uppercase tracking-widest hover:bg-sky-400 transition-all shadow-[0_0_30px_rgba(14,165,233,0.3)]">
-                    Browse Inventory
-                </a>
-                <a href="#repair" class="px-8 py-4 glass rounded-xl font-bold orbitron uppercase tracking-widest hover:bg-white/5 transition-all">
-                    Book Repair
-                </a>
-            </div>
-        </div>
-
-      <div class="flex items-center justify-center lg:justify-start gap-8 pt-8 opacity-60">
-                    <div class="text-center">
-                        <div class="orbitron text-2xl font-bold">5k+</div>
-                        <div class="text-[10px] uppercase tracking-tighter">Repairs Done</div>
-                    </div>
-                    <div class="w-[1px] h-10 bg-white/10"></div>
-                    <div class="text-center">
-                        <div class="orbitron text-2xl font-bold">100%</div>
-                        <div class="text-[10px] uppercase tracking-tighter">Genuine Parts</div>
-                    </div>
-                    <div class="w-[1px] h-10 bg-white/10"></div>
-                    <div class="text-center">
-                        <div class="orbitron text-2xl font-bold">24hr</div>
-                        <div class="text-[10px] uppercase tracking-tighter">Rapid Return</div>
-                    </div>
-                </div>
-
-            <div class="flex-1 relative">
-                <div class="hero-3d relative z-10">
-                    <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=800&q=80" alt="Tech Setup" class="rounded-[2.5rem] shadow-2xl border border-white/10">
-                    <div class="absolute -bottom-10 -left-10 glass p-6 rounded-3xl floating border-sky-500/50">
-                        <div class="flex items-center gap-4">
-                            <div class="p-3 bg-emerald-500/20 text-emerald-400 rounded-2xl">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                            </div>
-                            <div>
-                                <div class="font-bold">Certified Techs</div>
-                                <div class="text-xs text-slate-400">Expertise guaranteed</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-      
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-6xl pointer-events-none">
-            <div class="absolute top-1/4 left-0 w-64 h-64 bg-purple-600/20 rounded-full blur-[100px]"></div>
-            <div class="absolute bottom-0 right-0 w-96 h-96 bg-sky-600/10 rounded-full blur-[100px]"></div>
-        </div>
-    </section>
-
-                  <section id="flashdeal" class="py-10 px-6 bg-slate-900">
-        <div class="max-w-6xl mx-auto">
-            <div class="relative glass rounded-3xl p-8 md:p-12 border border-orange-500/30 overflow-hidden flex flex-col md:flex-row items-center gap-12 group">
-                
-                <div class="absolute -left-20 -top-20 w-64 h-64 bg-orange-600/20 rounded-full blur-[100px] animate-pulse"></div>
-                
-                <div class="flex-1 relative z-10 text-center md:text-left">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[10px] font-bold uppercase tracking-widest mb-4">
-                        <span class="w-2 h-2 rounded-full bg-orange-500 animate-ping"></span>
-                        Limited Time Offer
-                    </div>
-                    
-                    <h2 class="orbitron text-3xl md:text-5xl font-bold mb-2">
-                        PlayStation 5 <span class="text-orange-500">Slim</span>
-                    </h2>
-                    <p class="text-slate-400 text-sm mb-6">1TB Console + Extra Controller + FIFA 25</p>
-                    
-                    <div class="flex items-center justify-center md:justify-start gap-4 mb-8">
-                        <span class="text-slate-500 line-through text-lg">₦1,150,000</span>
-                        <span class="text-3xl font-bold text-white">₦980,000</span>
-                    </div>
-
-                    <div class="flex justify-center md:justify-start gap-4 mb-8 text-center">
-                        <div class="bg-black/40 border border-white/10 rounded-lg p-3 min-w-[70px]">
-                            <div id="days" class="text-2xl font-bold text-orange-400 orbitron">02</div>
-                            <div class="text-[10px] text-slate-500 uppercase">Days</div>
-                        </div>
-                        <div class="bg-black/40 border border-white/10 rounded-lg p-3 min-w-[70px]">
-                            <div id="hours" class="text-2xl font-bold text-orange-400 orbitron">14</div>
-                            <div class="text-[10px] text-slate-500 uppercase">Hours</div>
-                        </div>
-                        <div class="bg-black/40 border border-white/10 rounded-lg p-3 min-w-[70px]">
-                            <div id="minutes" class="text-2xl font-bold text-orange-400 orbitron">45</div>
-                            <div class="text-[10px] text-slate-500 uppercase">Mins</div>
-                        </div>
-                        <div class="bg-black/40 border border-white/10 rounded-lg p-3 min-w-[70px]">
-                            <div id="seconds" class="text-2xl font-bold text-white orbitron">12</div>
-                            <div class="text-[10px] text-slate-500 uppercase">Secs</div>
-                        </div>
-                    </div>
-
-                    <button onclick="claimDeal()" class="px-8 py-4 bg-gradient-to-r from-orange-500 to-red-600 rounded-xl font-bold orbitron uppercase tracking-widest hover:scale-105 transition-transform shadow-[0_0_30px_rgba(249,115,22,0.4)]">
-                        Claim Deal Now
-                    </button>
-                </div>
-
-                <div class="flex-1 relative z-10">
-                    <img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=2070&auto=format&fit=crop" 
-                         alt="Flash Deal Product" 
-                         class="w-full max-w-md mx-auto rounded-2xl shadow-2xl border border-white/10 transform group-hover:scale-105 transition-transform duration-500">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        // --- COUNTDOWN TIMER LOGIC ---
-        // Set the date we're counting down to (3 days from now for demo)
-        const countDownDate = new Date().getTime() + (3 * 24 * 60 * 60 * 1000); 
-
-        const x = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = countDownDate - now;
-
-            // Calculations
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Output result
-            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
-            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
-            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
-            document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
-
-            // If the count down is over
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("days").innerHTML = "00";
-                document.getElementById("hours").innerHTML = "00";
-            }
-        }, 1000);
-
-        function claimDeal() {
-          triggerConfetti();
-          
-            const msg = `*FLASH DEAL CLAIM* 🔥%0A%0AI want to claim the *PS5 Slim Promo* for ₦980,000.%0A%0APlease reserve this for me immediately!`;
-            window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
-        }
-    </script>
-
-                  <section id="gadget wars" class="py-20 px-6 bg-slate-900/50">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-10">
-                <h2 class="orbitron text-3xl font-bold">Gadget <span class="gradient-text">Wars</span></h2>
-                <p class="text-slate-400">Can't decide? See the difference.</p>
-            </div>
-
-            <div class="glass rounded-2xl overflow-hidden overflow-x-auto">
-                <table class="w-full text-left text-sm text-slate-400">
-                    <thead class="text-xs text-white uppercase bg-white/5 font-bold orbitron">
-                        <tr>
-                            <th class="px-6 py-4">Feature</th>
-                            <th class="px-6 py-4 text-sky-400">iPhone 14 Pro Max</th>
-                            <th class="px-6 py-4 text-indigo-400">iPhone 15 Pro Max</th>
-                            <th class="px-6 py-4 text-orange-400">Samsung S24 Ultra</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-white/5">
-                        <tr class="hover:bg-white/5 transition-colors">
-                            <td class="px-6 py-4 font-bold text-white">Build Material</td>
-                            <td class="px-6 py-4">Stainless Steel</td>
-                            <td class="px-6 py-4 text-white">Titanium (Lighter)</td>
-                            <td class="px-6 py-4">Titanium</td>
-                        </tr>
-                        <tr class="hover:bg-white/5 transition-colors">
-                            <td class="px-6 py-4 font-bold text-white">Charging</td>
-                            <td class="px-6 py-4">Lightning Port</td>
-                            <td class="px-6 py-4 text-white">USB-C (Universal)</td>
-                            <td class="px-6 py-4">USB-C (45W Fast)</td>
-                        </tr>
-                        <tr class="hover:bg-white/5 transition-colors">
-                            <td class="px-6 py-4 font-bold text-white">Camera Zoom</td>
-                            <td class="px-6 py-4">3x Optical</td>
-                            <td class="px-6 py-4">5x Optical</td>
-                            <td class="px-6 py-4 text-white">100x Space Zoom</td>
-                        </tr>
-                        <tr class="hover:bg-white/5 transition-colors">
-                            <td class="px-6 py-4 font-bold text-white">Action Button</td>
-                            <td class="px-6 py-4">Mute Switch</td>
-                            <td class="px-6 py-4 text-white">Customizable Button</td>
-                            <td class="px-6 py-4">Side Key</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <p class="text-center text-xs text-slate-500 mt-4">*Specs based on manufacturer data. We sell all these models.</p>
-        </div>
-    </section>
-
-    <section id="catalog" class="py-20 px-4 md:px-8 bg-slate-900/50 min-h-screen">
-        <div class="max-w-8xl mx-auto">
-            
-                        <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
-                <div>
-                    <h2 class="orbitron text-3xl font-bold">The <span class="gradient-text">Inventory</span></h2>
-                    <p class="text-slate-400 text-sm mt-2">Select a category or search below.</p>
-                </div>
-                
-                <div class="flex flex-col gap-4 w-full md:w-auto">
-                    <div class="relative w-full md:w-80">
-                        <input type="text" id="searchInput" onkeyup="searchProducts()" placeholder="Type to search (e.g. iPhone 15)..." class="w-full bg-white/5 border border-white/10 rounded-full px-5 py-3 text-sm text-white focus:border-sky-500 focus:bg-white/10 outline-none transition-all pl-12">
-                        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
-                    </div>
-
-                    <div class="flex overflow-x-auto pb-2 gap-2 w-full no-scrollbar">
-                        <button onclick="filterItems('all')" class="filter-btn active px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-xs font-bold whitespace-nowrap hover:bg-white/10 transition-all">All</button>
-                        <button onclick="filterItems('iphone')" class="filter-btn px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-xs font-bold whitespace-nowrap hover:bg-white/10 transition-all">iPhones</button>
-                        <button onclick="filterItems('android')" class="filter-btn px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-xs font-bold whitespace-nowrap hover:bg-white/10 transition-all">Android</button>
-                        <button onclick="filterItems('laptop')" class="filter-btn px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-xs font-bold whitespace-nowrap hover:bg-white/10 transition-all">Laptops</button>
-                        <button onclick="filterItems('gaming')" class="filter-btn px-4 py-2 rounded-lg border border-white/10 bg-white/5 text-xs font-bold whitespace-nowrap hover:bg-white/10 transition-all">Gaming</button>
-                    </div>
-                </div>
-            </div>
-
-                
-                <div class="flex overflow-x-auto pb-2 gap-2 w-full md:w-auto no-scrollbar">
-                    <button onclick="filterItems('all')" class="filter-btn active px-6 py-2 rounded-lg border border-white/10 bg-white/5 text-sm font-bold whitespace-nowrap hover:bg-white/10 transition-all">All</button>
-                    <button onclick="filterItems('iphone')" class="filter-btn px-6 py-2 rounded-lg border border-white/10 bg-white/5 text-sm font-bold whitespace-nowrap hover:bg-white/10 transition-all">iPhones</button>
-                    <button onclick="filterItems('android')" class="filter-btn px-6 py-2 rounded-lg border border-white/10 bg-white/5 text-sm font-bold whitespace-nowrap hover:bg-white/10 transition-all">Android</button>
-                    <button onclick="filterItems('laptop')" class="filter-btn px-6 py-2 rounded-lg border border-white/10 bg-white/5 text-sm font-bold whitespace-nowrap hover:bg-white/10 transition-all">Laptops</button>
-                    <button onclick="filterItems('gaming')" class="filter-btn px-6 py-2 rounded-lg border border-white/10 bg-white/5 text-sm font-bold whitespace-nowrap hover:bg-white/10 transition-all">Gaming</button>
-                    <button onclick="filterItems('accessories')" class="filter-btn px-6 py-2 rounded-lg border border-white/10 bg-white/5 text-sm font-bold whitespace-nowrap hover:bg-white/10 transition-all">Accessories</button>
-                </div>
-            </div>
-
-            <div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
-                </div>
-
-            <div class="mt-16 text-center">
-                <p class="text-slate-500 mb-4">Don't see exactly what you need?</p>
-                <button onclick="openCustomOrder()" class="text-sky-400 font-bold border-b border-sky-400 pb-1 hover:text-white hover:border-white transition-colors">Request Specific Device via WhatsApp</button>
-            </div>
-        </div>
-    </section>
-
-<section id="rating" class="py-20 px-6 bg-slate-900 border-t border-white/5">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="orbitron text-3xl font-bold mb-2">Trusted by <span class="gradient-text">Lagos</span></h2>
-                <div class="flex items-center justify-center gap-2 text-yellow-500 text-sm">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    <span class="text-slate-400 ml-2">(500+ Verified Sales)</span>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass p-6 rounded-2xl relative">
-                    <div class="absolute -top-3 -right-3 bg-green-500 text-white text-[10px] font-bold px-3 py-1 rounded-full border border-slate-900">
-                        VERIFIED PURCHASE
-                    </div>
-                    <div class="flex items-center gap-3 mb-4 border-b border-white/5 pb-3">
-                        <div class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center font-bold text-slate-300">DJ</div>
-                        <div>
-                            <p class="font-bold text-sm">Daniel J.</p>
-                            <p class="text-[10px] text-slate-400">Bought iPhone 13 Pro Max</p>
-                        </div>
-                    </div>
-                    <p class="text-slate-300 text-sm italic">
-                        "I was scared to buy online initially, but HoRly delivered to Lekki in 2 hours. The phone is clean as new. Battery is 98%. 100% recommended."
-                    </p>
-                </div>
-
-                <div class="glass p-6 rounded-2xl relative">
-                    <div class="absolute -top-3 -right-3 bg-green-500 text-white text-[10px] font-bold px-3 py-1 rounded-full border border-slate-900">
-                        REPAIR SERVICE
-                    </div>
-                    <div class="flex items-center gap-3 mb-4 border-b border-white/5 pb-3">
-                        <div class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center font-bold text-slate-300">FA</div>
-                        <div>
-                            <p class="font-bold text-sm">Fatima A.</p>
-                            <p class="text-[10px] text-slate-400">Fixed Samsung S22 Ultra</p>
-                        </div>
-                    </div>
-                    <p class="text-slate-300 text-sm italic">
-                        "Computer Village guys said my screen couldn't be fixed. HoRly's lab fixed the ribbon without changing the whole screen. Saved me 150k!"
-                    </p>
-                </div>
-
-                <div class="glass p-6 rounded-2xl relative">
-                    <div class="absolute -top-3 -right-3 bg-green-500 text-white text-[10px] font-bold px-3 py-1 rounded-full border border-slate-900">
-                        VERIFIED PURCHASE
-                    </div>
-                    <div class="flex items-center gap-3 mb-4 border-b border-white/5 pb-3">
-                        <div class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center font-bold text-slate-300">EM</div>
-                        <div>
-                            <p class="font-bold text-sm">Emmanuel M.</p>
-                            <p class="text-[10px] text-slate-400">Bought PS5 Console</p>
-                        </div>
-                    </div>
-                    <p class="text-slate-300 text-sm italic">
-                        "Best price for PS5 in Nigeria right now. It came sealed with the extra controller I ordered. Legit vendor."
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-                  <section id="superbundle" class="py-20 px-6 bg-slate-900 border-t border-white/5">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="orbitron text-3xl font-bold mb-8 text-center">Super <span class="gradient-text">Bundles</span></h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="glass p-6 rounded-3xl border border-sky-500/30 relative overflow-hidden group">
-                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-sky-500/20 rounded-full blur-xl group-hover:bg-sky-500/40 transition-all"></div>
-                    <div class="relative z-10">
-                        <h3 class="orbitron text-xl font-bold text-white mb-2">The "Starter" Pack</h3>
-                        <ul class="text-sm text-slate-400 space-y-2 mb-6">
-                            <li>✅ UK Used iPhone XR/11</li>
-                            <li>✅ Silicon Case</li>
-                            <li>✅ Privacy Screen Guard</li>
-                            <li>✅ Fast Charger Cable</li>
-                        </ul>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sky-400 font-bold text-lg">₦2xx,000</span>
-                            <button onclick="buyBundle('Starter Pack')" class="px-4 py-2 bg-sky-500 rounded-lg text-white text-xs font-bold uppercase hover:scale-105 transition-transform">
-                                Get Bundle
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass p-6 rounded-3xl border border-purple-500/30 relative overflow-hidden group">
-                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-purple-500/20 rounded-full blur-xl group-hover:bg-purple-500/40 transition-all"></div>
-                    <div class="relative z-10">
-                        <h3 class="orbitron text-xl font-bold text-white mb-2">The "Content Creator"</h3>
-                        <ul class="text-sm text-slate-400 space-y-2 mb-6">
-                            <li>✅ iPhone 13 Pro Max (256GB)</li>
-                            <li>✅ Ring Light & Tripod</li>
-                            <li>✅ Wireless Lapel Mic</li>
-                            <li>✅ Transparent Bumper Case</li>
-                        </ul>
-                        <div class="flex items-center justify-between">
-                            <span class="text-purple-400 font-bold text-lg">₦9xx,000</span>
-                            <button onclick="buyBundle('Creator Pack')" class="px-4 py-2 bg-purple-500 rounded-lg text-white text-xs font-bold uppercase hover:scale-105 transition-transform">
-                                Get Bundle
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass p-6 rounded-3xl border border-orange-500/30 relative overflow-hidden group">
-                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-orange-500/20 rounded-full blur-xl group-hover:bg-orange-500/40 transition-all"></div>
-                    <div class="relative z-10">
-                        <h3 class="orbitron text-xl font-bold text-white mb-2">The "Gamer" Setup</h3>
-                        <ul class="text-sm text-slate-400 space-y-2 mb-6">
-                            <li>✅ PS5 Console (Standard)</li>
-                            <li>✅ Extra DualSense Controller</li>
-                            <li>✅ FIFA 24 / COD MW3</li>
-                            <li>✅ Vertical Cooling Stand</li>
-                        </ul>
-                        <div class="flex items-center justify-between">
-                            <span class="text-orange-400 font-bold text-lg">₦1,xxx,000</span>
-                            <button onclick="buyBundle('Gamer Setup')" class="px-4 py-2 bg-orange-500 rounded-lg text-white text-xs font-bold uppercase hover:scale-105 transition-transform">
-                                Get Bundle
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        function buyBundle(packName) {
-            const msg = `*BUNDLE ORDER* 📦%0A%0AI am interested in the *${packName}*.%0A%0APlease confirm the total price and availability.`;
-            window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
-        }
-    </script>
-
-              <section id="swap" class="py-20 px-6 bg-slate-900 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-green-500/10 rounded-full blur-[100px] pointer-events-none"></div>
-
-        <div class="max-w-4xl mx-auto glass rounded-3xl p-8 md:p-12 border border-green-500/30 relative z-10">
-            <div class="text-center mb-10">
-                <div class="inline-block px-4 py-1 rounded-full border border-green-500/30 bg-green-500/10 text-green-400 text-xs font-bold uppercase tracking-widest mb-4">
-                    Trade-In Program
-                </div>
-                <h2 class="orbitron text-3xl font-bold mb-3">Upgrade Your <span class="text-green-400">Device</span></h2>
-                <p class="text-slate-400">Don't have full cash? Swap your old phone + Cash for a new one. We accept iPhones, Samsungs, and Pixels.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div class="space-y-4">
-                    <div>
-                        <label class="text-xs font-bold text-slate-500 uppercase ml-2">I have this device:</label>
-                        <input type="text" id="swapHave" placeholder="e.g. iPhone 14 Pro 128GB" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 focus:border-green-500 outline-none text-white">
-                    </div>
-                    
-                    <div>
-                        <label class="text-xs font-bold text-slate-500 uppercase ml-2">Its Condition:</label>
-                        <select id="swapCondition" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 focus:border-green-500 outline-none text-slate-300">
-                            <option>Flawless (No scratches)</option>
-                            <option>Good (Minor scratches)</option>
-                            <option>Cracked Screen</option>
-                            <option>Faulty (Needs repair)</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="text-xs font-bold text-slate-500 uppercase ml-2">I want to swap for:</label>
-                        <input type="text" id="swapWant" placeholder="e.g. iPhone 17 Pro" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 focus:border-green-500 outline-none text-white">
-                    </div>
-
-                    <button onclick="sendSwapRequest()" class="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold py-4 rounded-xl hover:scale-[1.02] transition-transform flex items-center justify-center gap-2">
-                        <i class="fas fa-exchange-alt"></i> Calculate Top-up Price
-                    </button>
-                    <p class="text-[10px] text-center text-slate-500">We will evaluate your device instantly via WhatsApp.</p>
-                </div>
-
-                <div class="hidden md:flex justify-center items-center">
-                    <div class="relative">
-                        <i class="fas fa-mobile-alt text-8xl text-slate-700 absolute left-0 top-0 transform -translate-x-12 translate-y-4"></i>
-                        <i class="fas fa-exchange-alt text-4xl text-green-500 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 bg-slate-900 p-2 rounded-full border border-green-500"></i>
-                        <i class="fas fa-mobile-alt text-8xl text-white relative z-0"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        function sendSwapRequest() {
-            const have = document.getElementById('swapHave').value;
-            const condition = document.getElementById('swapCondition').value;
-            const want = document.getElementById('swapWant').value;
-
-            if(!have || !want) {
-                alert("Please tell us what phone you have and what you want.");
-                return;
-            }
-
-            const msg = `*SWAP DEAL REQUEST* 🔄%0A%0A` +
-                        `🔴 *I Have:* ${have}%0A` +
-                        `📊 *Condition:* ${condition}%0A` +
-                        `🟢 *I Want:* ${want}%0A%0A` +
-                        `_How much do I need to add (Top-up)?_`;
-            
-            window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
-        }
-    </script>
-              
-    <section id="repair" class="py-24 px-6 bg-gradient-to-b from-transparent to-sky-900/10">
-        <div class="max-w-6xl mx-auto glass rounded-[3rem] p-8 md:p-16 relative overflow-hidden text-center md:text-left flex flex-col md:flex-row items-center gap-12">
-            <div class="relative z-10 flex-1">
-                <div class="inline-block px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-[10px] font-bold uppercase tracking-widest mb-4">Repair Lab</div>
-                <h2 class="orbitron text-3xl md:text-5xl font-bold mb-6">Broken Device? <br> We Fix It.</h2>
-                <p class="text-slate-300 mb-8 leading-relaxed">
-                    We specialize in complex repairs for all the devices we sell. Screen swaps, battery replacement, motherboard microsoldering, and console cleaning.
-                </p>
-                <div class="grid grid-cols-2 gap-4 mb-8">
-                    <div class="bg-black/20 p-4 rounded-xl">
-                        <i class="fas fa-mobile-alt text-sky-400 mb-2"></i>
-                        <div class="text-xs font-bold text-slate-300">Screen & Battery</div>
-                    </div>
-                    <div class="bg-black/20 p-4 rounded-xl">
-                        <i class="fas fa-microchip text-indigo-400 mb-2"></i>
-                        <div class="text-xs font-bold text-slate-300">Motherboard</div>
-                    </div>
-                </div>
-                <a href="https://wa.me/2349121213936?text=Hi%20HoRly's%20Tech,%20I%20have%20a%20device%20that%20needs%20repair." class="inline-block px-8 py-3 bg-white text-black font-bold rounded-lg hover:bg-slate-200 transition-colors">Get Repair Quote</a>
-            </div>
-            <div class="flex-1 w-full max-w-sm">
-                <img src="https://image2url.com/r2/default/images/1769372487026-15b9cdd3-cef7-4df7-beb1-e59927d6a51e.png" class="rounded-3xl shadow-2xl rotate-3 border border-white/10" alt="Repair">
-            </div>
-        </div>
-    </section>
-
-              <section id="inquiry" class="py-20 px-6">
-        <div class="max-w-5xl mx-auto glass rounded-3xl p-8 md:p-12 border-t border-sky-500/30 shadow-[0_0_50px_rgba(14,165,233,0.1)]">
-            <div class="text-center mb-10">
-                <h2 class="orbitron text-3xl font-bold mb-3">General <span class="gradient-text">Inquiry</span></h2>
-                <p class="text-slate-400 text-sm">Have a question? Need a swap deal? Fill this form to chat directly with us.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="space-y-6">
-                    <div class="flex items-start gap-4 p-4 bg-white/5 rounded-xl border border-white/5">
-                        <div class="w-10 h-10 bg-sky-500/20 rounded-full flex items-center justify-center text-sky-400 text-xl">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white">Customer Support</h4>
-                            <p class="text-xs text-slate-400">Available 24/hrs</p>
-                            <p class="text-sky-400 font-bold mt-1">09121213936</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4 p-4 bg-white/5 rounded-xl border border-white/5">
-                        <div class="w-10 h-10 bg-indigo-500/20 rounded-full flex items-center justify-center text-indigo-400 text-xl">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white">Visit Store</h4>
-                            <p class="text-xs text-slate-400">Lagos, Nigeria</p>
-                            <p class="text-indigo-400 font-bold mt-1 text-xs">Nationwide Delivery Available</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="space-y-4">
-                    <div class="grid grid-cols-2 gap-4">
-                        <input type="text" id="inqName" placeholder="Your Name" class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 focus:border-sky-500 outline-none text-sm">
-                        <select id="inqType" class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 focus:border-sky-500 outline-none text-sm text-slate-300">
-                            <option value="General Question">General Question</option>
-                            <option value="Delivery Inquiry">Delivery Inquiry</option>
-                        </select>
-                    </div>
-                    <textarea id="inqMessage" rows="4" placeholder="Type your message here..." class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 focus:border-sky-500 outline-none text-sm"></textarea>
-                    
-                    <button onclick="sendInquiry()" class="w-full bg-white text-black font-bold py-3 rounded-lg hover:bg-sky-400 hover:text-white transition-all flex items-center justify-center gap-2">
-                        <i class="fab fa-whatsapp"></i> Send Message
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-              <section id="about" class="py-24 px-6 bg-slate-900/50">
-        <div class="max-w-4xl mx-auto text-center space-y-6">
-            <h2 class="orbitron text-3xl font-bold">About <span class="gradient-text">HoRly’s Tech</span></h2>
-            <p class="text-slate-300 leading-relaxed text-lg">
-                We are not just a store; we are a technology sanctuary. Founded on the belief that devices should last longer and perform better, HoRly’s Tech brings world-class repair standards to Nigeria. Whether you are buying a UK-used iPhone, upgrading your gaming rig, or reviving a dead laptop, we guarantee transparency, speed, and premium quality.
-            </p>
-            <div class="flex justify-center gap-4 text-3xl text-slate-600 mt-8">
-                <i class="fab fa-apple hover:text-white transition-colors"></i>
-                <i class="fab fa-android hover:text-green-500 transition-colors"></i>
-                <i class="fab fa-windows hover:text-blue-500 transition-colors"></i>
-                <i class="fab fa-playstation hover:text-indigo-500 transition-colors"></i>
-            </div>
-        </div>
-    </section>
-
-      <section id="meet horlys" class="py-20 px-6 bg-slate-900/50 border-y border-white/5 relative overflow-hidden">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
-            
-            <div class="relative w-64 h-64 md:w-80 md:h-80 flex-shrink-0 group">
-                <div class="absolute inset-0 bg-sky-500 rounded-full blur-[50px] opacity-20 group-hover:opacity-40 transition-opacity"></div>
-                <img src="https://image2url.com/r2/default/images/1769395557131-f633e0b9-4233-4062-b49b-bc9f9b5f1625.jpeg" alt="HoRly" class="w-full h-full object-cover rounded-full border-4 border-slate-800 relative z-10 grayscale group-hover:grayscale-0 transition-all duration-500">
-                <div class="absolute bottom-0 right-0 bg-sky-500 text-white text-xs font-bold px-4 py-2 rounded-full z-20 border-4 border-slate-900">
-                    CEO & Lead Tech
-                </div>
-            </div>
-
-            <div class="text-center md:text-left">
-                <h2 class="orbitron text-3xl font-bold mb-4">Meet <span class="gradient-text">HoRly</span></h2>
-                <h3 class="text-white font-bold text-lg mb-4">"I don't just sell gadgets, I understand their heartbeat."</h3>
-                <p class="text-slate-400 leading-relaxed mb-6">
-                    With over 5 years of experience in micro-soldering and gadget diagnostics, I started HoRly's Tech to solve one problem: <strong>Reliability</strong>. 
-                    <br><br>
-                    Every phone we sell passes through my personal inspection table. If I wouldn't use it, I won't sell it to you. That is my promise.
-                </p>
-                <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-                    <div class="bg-white/5 px-4 py-2 rounded-lg border border-white/10 text-xs font-bold text-sky-400">
-                        Certified Engineer
-                    </div>
-                    <div class="bg-white/5 px-4 py-2 rounded-lg border border-white/10 text-xs font-bold text-indigo-400">
-                        5000+ Repairs
-                    </div>
-                    <div class="bg-white/5 px-4 py-2 rounded-lg border border-white/10 text-xs font-bold text-green-400">
-                        Lagos Based
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-                  <section id="" class="py-20 px-6 bg-slate-900 border-t border-white/5">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="orbitron text-3xl font-bold mb-4">Nationwide <span class="gradient-text">Delivery</span></h2>
-                <p class="text-slate-400 max-w-2xl mx-auto">
-                    We deliver to all 36 states in Nigeria via GIG Logistics or Driver Waybill. 
-                    Here is how we ensure you get exactly what you ordered.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
-                <div class="hidden md:block absolute top-12 left-[10%] w-[80%] h-0.5 bg-gradient-to-r from-sky-500/20 to-sky-500/0 z-0"></div>
-
-                <div class="relative z-10 text-center group">
-                    <div class="w-24 h-24 mx-auto glass rounded-full flex items-center justify-center border border-white/10 mb-6 group-hover:border-sky-500 group-hover:shadow-[0_0_30px_rgba(14,165,233,0.3)] transition-all">
-                        <i class="fas fa-shopping-bag text-3xl text-sky-400"></i>
-                    </div>
-                    <h4 class="font-bold text-white text-lg mb-2">1. Place Order</h4>
-                    <p class="text-xs text-slate-400 px-4">Select your gadget and make payment securely.</p>
-                </div>
-
-                <div class="relative z-10 text-center group">
-                    <div class="w-24 h-24 mx-auto glass rounded-full flex items-center justify-center border border-white/10 mb-6 group-hover:border-green-500 group-hover:shadow-[0_0_30px_rgba(34,197,94,0.3)] transition-all">
-                        <i class="fas fa-video text-3xl text-green-400"></i>
-                    </div>
-                    <h4 class="font-bold text-white text-lg mb-2">2. Video Confirm</h4>
-                    <p class="text-xs text-slate-400 px-4">We send a live video of your device (IMEI & Condition) before packing.</p>
-                </div>
-
-                <div class="relative z-10 text-center group">
-                    <div class="w-24 h-24 mx-auto glass rounded-full flex items-center justify-center border border-white/10 mb-6 group-hover:border-indigo-500 group-hover:shadow-[0_0_30px_rgba(99,102,241,0.3)] transition-all">
-                        <i class="fas fa-truck-fast text-3xl text-indigo-400"></i>
-                    </div>
-                    <h4 class="font-bold text-white text-lg mb-2">3. Dispatch</h4>
-                    <p class="text-xs text-slate-400 px-4">Package is sent via GIG/Park. You get a Tracking Number/Driver Number.</p>
-                </div>
-
-                <div class="relative z-10 text-center group">
-                    <div class="w-24 h-24 mx-auto glass rounded-full flex items-center justify-center border border-white/10 mb-6 group-hover:border-orange-500 group-hover:shadow-[0_0_30px_rgba(249,115,22,0.3)] transition-all">
-                        <i class="fas fa-box-open text-3xl text-orange-400"></i>
-                    </div>
-                    <h4 class="font-bold text-white text-lg mb-2">4. Receive</h4>
-                    <p class="text-xs text-slate-400 px-4">Pick up at your park or doorstep delivery (Lagos only).</p>
-                </div>
-            </div>
-
-            <div class="mt-16 flex flex-wrap justify-center gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                <div class="text-xl font-bold text-white border border-white/20 px-4 py-2 rounded">GIG Logistics</div>
-                <div class="text-xl font-bold text-white border border-white/20 px-4 py-2 rounded">DHL</div>
-                <div class="text-xl font-bold text-white border border-white/20 px-4 py-2 rounded">Uber Package</div>
-            </div>
-        </div>
-    </section>
-
-              <section id="faq" class="py-20 px-6">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="orbitron text-3xl font-bold text-center mb-10">Frequently Asked <span class="gradient-text">Questions</span></h2>
-            
-            <div class="space-y-4">
-                <details class="glass rounded-2xl group">
-                    <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
-                        <span class="font-bold text-white">Do you accept Pay on Delivery?</span>
-                        <span class="transition group-open:rotate-180">
-                            <i class="fas fa-chevron-down text-sky-400"></i>
-                        </span>
-                    </summary>
-                    <div class="px-6 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
-                        For Lagos orders, yes! We accept Payment on Delivery for items delivered by our dispatch riders. For orders outside Lagos, we require payment before waybill, but we provide video evidence and company receipts for security.
-                    </div>
-                </details>
-
-                <details class="glass rounded-2xl group">
-                    <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
-                        <span class="font-bold text-white">Is there a warranty on Used iPhones?</span>
-                        <span class="transition group-open:rotate-180">
-                            <i class="fas fa-chevron-down text-sky-400"></i>
-                        </span>
-                    </summary>
-                    <div class="px-6 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
-                        Yes. All UK Used devices come with a **7-Day Guarantee**. This covers manufacturer defects. We test every feature (FaceID, Camera, Battery) before selling. Note: Physical damage or water damage voids the warranty.
-                    </div>
-                </details>
-
-                <details class="glass rounded-2xl group">
-                    <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
-                        <span class="font-bold text-white">Can I swap my Android for an iPhone?</span>
-                        <span class="transition group-open:rotate-180">
-                            <i class="fas fa-chevron-down text-sky-400"></i>
-                        </span>
-                    </summary>
-                    <div class="px-6 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
-                        Yes, we do swaps! However, the swap value depends on the condition of your current device. Use the "Swap Calculator" section above or chat with us on WhatsApp for a valuation.
-                    </div>
-                </details>
-
-                <details class="glass rounded-2xl group">
-                    <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
-                        <span class="font-bold text-white">Where is your physical store?</span>
-                        <span class="transition group-open:rotate-180">
-                            <i class="fas fa-chevron-down text-sky-400"></i>
-                        </span>
-                    </summary>
-                    <div class="px-6 pb-6 text-slate-400 text-sm leading-relaxed border-t border-white/5 pt-4">
-                        We are located in Lagos. You can choose "Pick Up" at checkout if you prefer to visit us. Contact us on WhatsApp for the exact office description and landmark.
-                    </div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-      <section id="IG" class="py-20 px-6 bg-slate-900 border-t border-white/5">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-6">
-                <div>
-                    <h2 class="orbitron text-3xl font-bold">Latest on <span class="gradient-text">The Gram</span></h2>
-                    <p class="text-slate-400">Follow @Horlys_Tech for daily unboxing videos.</p>
-                </div>
-                <a href="https://instagram.com/REPLACE_URL" target="_blank" class="px-6 py-3 border border-white/20 rounded-full hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 hover:border-transparent transition-all flex items-center gap-2">
-                    <i class="fab fa-instagram text-xl"></i> Follow Us
-                </a>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="group relative aspect-square overflow-hidden rounded-xl cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?q=80&w=800" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 text-white">
-                        <span><i class="fas fa-heart"></i> 1.2k</span>
-                        <span><i class="fas fa-comment"></i> 45</span>
-                    </div>
-                </div>
-                <div class="group relative aspect-square overflow-hidden rounded-xl cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?q=80&w=800" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 text-white">
-                        <span><i class="fas fa-heart"></i> 850</span>
-                        <span><i class="fas fa-comment"></i> 22</span>
-                    </div>
-                </div>
-                <div class="group relative aspect-square overflow-hidden rounded-xl cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?q=80&w=800" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 text-white">
-                        <span><i class="fas fa-heart"></i> 2.1k</span>
-                        <span><i class="fas fa-comment"></i> 105</span>
-                    </div>
-                </div>
-                <div class="group relative aspect-square overflow-hidden rounded-xl cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?q=80&w=800" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 text-white">
-                        <span><i class="fas fa-heart"></i> 500</span>
-                        <span><i class="fas fa-comment"></i> 12</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-                  <section id="viplist" class="py-20 px-6 relative overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-sky-900/20 to-indigo-900/20 z-0"></div>
-        
-        <div class="max-w-4xl mx-auto glass rounded-3xl p-8 md:p-16 text-center relative z-10 border border-sky-500/30">
-            <i class="fas fa-crown text-5xl text-yellow-400 mb-6 floating"></i>
-            <h2 class="orbitron text-3xl md:text-4xl font-bold mb-4">Join the <span class="text-yellow-400">VIP List</span></h2>
-            <p class="text-slate-300 mb-8 max-w-lg mx-auto">
-                Be the first to know when <strong>UK Used iPhone Stocks</strong> land. VIP members get notified 24 hours before we post on Instagram.
-            </p>
-            
-            <form class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto" onsubmit="joinVip(event)">
-                <input type="text" id="vipPhone" placeholder="Enter WhatsApp Number" required class="flex-1 bg-black/50 border border-white/20 rounded-xl px-6 py-4 text-white outline-none focus:border-yellow-400 transition-colors">
-                <button type="submit" class="bg-yellow-400 hover:bg-yellow-300 text-black font-bold orbitron px-8 py-4 rounded-xl transition-all shadow-[0_0_20px_rgba(250,204,21,0.3)]">
-                    Join Now
-                </button>
-            </form>
-            <p class="text-[10px] text-slate-500 mt-4">No spam. Only gadget deals.</p>
-        </div>
-    </section>
-
-    <script>
-        function joinVip(e) {
-            e.preventDefault();
-            const phone = document.getElementById('vipPhone').value;
-
-          triggerConfetti();
-          
-            // Send to WhatsApp
-            const msg = `*VIP LIST SIGNUP* 👑%0A%0AI want to join the HoRly Tech VIP list to get stock updates.%0A*My Number:* ${phone}`;
-            window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
-        }
-    </script>
-
-    <footer class="py-12 text-center text-slate-500 text-sm border-t border-white/5">
-        <p class="orbitron font-bold text-white text-lg mb-2">HoRly’s_Tech</p>
-        <p>Lagos, Nigeria • 09121213936</p>
-                  <div class="flex justify-center gap-4 mb-6 opacity-70 grayscale hover:grayscale-0 transition-all">
-                <div class="h-8 bg-white rounded px-2 flex items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" class="h-4"></div>
-                <div class="h-8 bg-white rounded px-2 flex items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" class="h-5"></div>
-                <div class="h-8 bg-white rounded px-2 flex items-center"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" class="h-4"></div>
-                <div class="h-8 bg-white rounded px-2 flex items-center gap-1">
-                    <i class="fas fa-lock text-green-600"></i> <span class="text-[10px] font-bold text-black">WhatsApp Secured</span>
-                </div>
-            </div>
-
-        <p class="mt-4">&copy; 2026. All rights reserved.</p>
-       <div class="w-full h-96 relative border-t border-white/10 grayscale hover:grayscale-0 transition-all duration-1000">
-        <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.428483756475!2d3.350628214771146!3d6.593504995231682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b92390f7d4905%3A0x6272551d542d99b5!2sComputer%20Village%2C%20Ikeja!5e0!3m2!1sen!2sng!4v1645524671428!5m2!1sen!2sng" 
-            width="100%" 
-            height="100%" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy">
-        </iframe>
-        
-        <div class="absolute top-10 left-10 bg-slate-900/90 p-6 rounded-xl border border-sky-500/30 backdrop-blur-md max-w-xs hidden md:block">
-            <h4 class="text-white font-bold mb-2">HoRly's Tech HQ</h4>
-            <p class="text-xs text-slate-400 mb-4">No 5, Medical Road, Computer Village, Ikeja, Lagos.</p>
-            <a href="https://maps.google.com" target="_blank" class="text-sky-400 text-xs font-bold hover:underline">Get Directions →</a>
-        </div>
-    </div>
-
-      <button onclick="openPolicy()" class="text-xs text-slate-500 underline hover:text-white mt-2">View Warranty & Return Policy</button>
-    </footer>
-
-    <div id="orderModal" class="modal fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm">
-        <div class="modal-content w-full max-w-2xl glass-heavy rounded-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            
-            <div class="p-6 border-b border-white/5 flex justify-between items-center bg-slate-900">
-                <div>
-                    <h3 id="modalTitle" class="orbitron text-xl font-bold text-white">iPhone 15 Pro Max</h3>
-                    <p class="text-xs text-slate-400 uppercase tracking-wider">Configure your order</p>
-                </div>
-                <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-
-            <div class="p-6 overflow-y-auto custom-scrollbar space-y-8">
-                
-                <div>
-                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 block">1. Select Condition</label>
-                    <div class="grid grid-cols-2 gap-4">
-                        <label class="cursor-pointer group relative">
-                            <input type="radio" name="condition" value="UK Used" class="option-radio hidden" checked>
-                            <div class="border border-white/10 bg-white/5 p-4 rounded-xl hover:border-sky-500/50 transition-all text-center">
-                                <div class="text-sm font-bold text-white mb-1">🇬🇧 UK Used</div>
-                                <div class="text-[10px] text-slate-400">Clean, Tested, Affordable</div>
-                                <i class="fas fa-check-circle check-icon absolute top-2 right-2 text-sky-500 opacity-0 transition-opacity"></i>
-                            </div>
-                        </label>
-                        <label class="cursor-pointer group relative">
-                            <input type="radio" name="condition" value="Brand New" class="option-radio hidden">
-                            <div class="border border-white/10 bg-white/5 p-4 rounded-xl hover:border-sky-500/50 transition-all text-center">
-                                <div class="text-sm font-bold text-white mb-1">✨ Brand New</div>
-                                <div class="text-[10px] text-slate-400">Sealed in Box</div>
-                                <i class="fas fa-check-circle check-icon absolute top-2 right-2 text-sky-500 opacity-0 transition-opacity"></i>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2 block">Storage / Spec</label>
-                        <select id="modalSpec" class="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-sky-500 outline-none">
-                            <option>Lowest Spec (Standard)</option>
-                            <option>Middle Spec</option>
-                            <option>Highest Spec (Max Storage)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2 block">Preferred Color</label>
-                        <input type="text" id="modalColor" placeholder="e.g. Gold, Midnight..." class="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-sky-500 outline-none">
-                    </div>
-                </div>
-
-                <div class="border-t border-white/5 pt-6">
-                    <label class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-3 block">3. Delivery Details</label>
-                    <div class="space-y-4">
-                        <input type="text" id="customerName" placeholder="Your Name" class="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-sky-500 outline-none">
-                        <select id="customerLocation" class="w-full bg-black border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-sky-500 outline-none">
-                            <option value="">Select Location...</option>
-                            <option value="Lagos - Mainland">Lagos - Mainland</option>
-                            <option value="Lagos - Island">Lagos - Island</option>
-                            <option value="ogun state">ogun state</option>
-                            <option value="Other State (Waybill)">Other State (Waybill)</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="p-6 border-t border-white/5 bg-slate-900">
-                <button onclick="sendOrder()" class="w-full bg-gradient-to-r from-green-600 to-green-500 text-white font-bold py-4 rounded-xl orbitron hover:shadow-[0_0_20px_rgba(34,197,94,0.4)] transition-all flex items-center justify-center gap-3">
-                    <i class="fab fa-whatsapp text-xl"></i> Send Order Request
-                </button>
-                <p class="text-[10px] text-center text-slate-500 mt-3">This will open WhatsApp with your pre-filled order details.</p>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // --- DATABASE ---
-        // This array simulates a database. Add as many items as you want here.
+        // --- 4. DATABASE & 3D GYROSCOPE RENDERER ---
         const products = [
             // IPHONES
             { id: 1, name: "iPhone 17 / Pro / Max", category: "iphone", image: "https://image2url.com/r2/default/images/1769369124620-819c437f-3a7d-4665-9da4-42e172e1a5a2.jpeg", desc: "The Future. Titanium finish." },
@@ -1149,62 +987,52 @@
             { id: 7, name: "iPhone 11 / Pro / Max", category: "iphone", image: "https://image2url.com/r2/default/images/1769379977926-a7873fe9-258d-4de7-a117-4490265c91c0.jpeg", desc: "Triple Camera System." },
             { id: 8, name: "iPhone XR / XS Max", category: "iphone", image: "https://image2url.com/r2/default/images/1769380134652-d25514b4-9124-4d35-9537-f7876078e60a.jpeg", desc: "Reliable classics." },
             { id: 9, name: "iPhone 8 Plus / 7 / 6s", category: "iphone", image: "https://image2url.com/r2/default/images/1769380329635-5b963d2e-6270-49e4-9d88-5fc97f85fab9.webp", desc: "Budget friendly starters." },
-
             // ANDROID
             { id: 10, name: "Samsung S24 Ultra", category: "android", image: "https://image2url.com/r2/default/images/1769380511279-0aaa088f-397d-4e5d-b997-61ba73fc5130.jpeg", desc: "AI Integrated. S-Pen." },
             { id: 11, name: "Samsung S23 Ultra", category: "android", image: "https://images.unsplash.com/photo-1678911820864-e2c567c655d7?auto=format&fit=crop&q=80&w=500", desc: "200MP Camera Zoom." },
             { id: 12, name: "Google Pixel 8 Pro", category: "android", image: "https://image2url.com/r2/default/images/1769380648493-01cd65ee-0e7b-4eab-a354-84335b4caa8d.webp", desc: "Pure Android Experience." },
             { id: 13, name: "Redmi Note Series", category: "android", image: "https://image2url.com/r2/default/images/1769380779658-af0a6c8e-c0c0-4103-a1ce-9dbb3835c29c.jpeg", desc: "Best value for money." },
             { id: 14, name: "Samsung A-Series", category: "android", image: "https://image2url.com/r2/default/images/1769380997884-2423747a-3927-4da0-b903-84c783e35136.jpeg", desc: "Solid mid-range power." },
-
             // LAPTOPS
             { id: 15, name: "MacBook Pro M3", category: "laptop", image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&q=80&w=500", desc: "Space Black. Extreme Power." },
             { id: 16, name: "MacBook Air M1/M2", category: "laptop", image: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&q=80&w=500", desc: "Slim. Silent. Powerful." },
             { id: 17, name: "Dell XPS 13/15", category: "laptop", image: "https://image2url.com/r2/default/images/1769381145239-3f495806-c868-47f6-929a-0e9b295ae0d0.jpeg", desc: "InfinityEdge Display." },
             { id: 18, name: "HP Spectre x360", category: "laptop", image: "https://image2url.com/r2/default/images/1769381465800-e0e29d5b-3806-4c0c-adc5-9d23b9b4c56f.jpeg", desc: "Convertible Touchscreen." },
             { id: 19, name: "Gaming Laptops", category: "laptop", image: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&q=80&w=500", desc: "Alienware, ROG, Predator." },
-
             // GAMING
             { id: 20, name: "Sony PS5 Pro", category: "gaming", image: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?auto=format&fit=crop&q=80&w=500", desc: "8K Gaming. High FPS." },
             { id: 21, name: "Sony PS5 Slim", category: "gaming", image: "https://images.unsplash.com/photo-1622297845775-5ff3fef71d13?auto=format&fit=crop&q=80&w=500", desc: "Compact Powerhouse." },
             { id: 22, name: "PS4 Pro / Slim", category: "gaming", image: "https://images.unsplash.com/photo-1507457379470-08b800bebc67?auto=format&fit=crop&q=80&w=500", desc: "The Legend. Jailbreak available." },
             { id: 23, name: "Mobile Phone Cooler", category: "gaming", image: "https://image2url.com/r2/default/images/1769379748862-f13c407b-ba9b-4bd1-be5b-7e8449220729.webp", desc: "Keep your phone cold while gaming." },
-
             // ACCESSORIES
             { id: 24, name: "AirPods Pro 3", category: "accessories", image: "https://image2url.com/r2/default/images/1769381331101-439644eb-2dfa-4edb-b41e-d9fe9a62fd8f.webp", desc: "Active Noise Cancellation." },
             { id: 25, name: "Smart Watches", category: "accessories", image: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&q=80&w=500", desc: "Apple Watch & Android wear." },
             { id: 26, name: "JBL/Sony Headphones", category: "accessories", image: "https://images.unsplash.com/photo-1613040809024-b4ef7ba99bc3?auto=format&fit=crop&q=80&w=500", desc: "Deep Bass. Wireless." },
-            { id: 27, name: "Power Banks", category: "accessories", image: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&q=80&w=500", desc: "20,000mAh - 50,000mAh." },
+            { id: 27, name: "Power Banks", category: "accessories", image: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&q=80&w=500", desc: "20,000mAh - 50,000mAh." }
         ];
-
-        // --- FUNCTIONS ---
 
         const grid = document.getElementById('productGrid');
         const btns = document.querySelectorAll('.filter-btn');
 
-        // 1. Render Products
         function renderProducts(filter = 'all') {
-            grid.innerHTML = ''; // Clear grid
-            
-            const filteredData = filter === 'all' 
-                ? products 
-                : products.filter(p => p.category === filter);
+            grid.innerHTML = ''; 
+            const filteredData = filter === 'all' ? products : products.filter(p => p.category === filter);
 
             filteredData.forEach(item => {
                 const card = `
-                    <div class="glass rounded-2xl overflow-hidden card-hover group relative">
-                        <div class="h-48 overflow-hidden bg-slate-800">
-                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded-lg text-[10px] uppercase font-bold text-white border border-white/10">
+                    <div class="liquid-glass overflow-hidden card-hover group relative p-3 flex flex-col h-full">
+                        <div class="h-40 md:h-48 rounded-xl overflow-hidden bg-white/5 border border-white/5 flex-shrink-0 relative">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <div class="absolute top-5 right-5 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[10px] uppercase font-bold text-white border border-white/20 shadow-inner">
                                 In Stock
                             </div>
                         </div>
-                        <div class="p-4">
-                            <div class="text-[10px] text-sky-400 font-bold uppercase tracking-wider mb-1">${item.category}</div>
-                            <h3 class="font-bold text-sm md:text-base text-white mb-1 leading-tight">${item.name}</h3>
-                            <p class="text-xs text-slate-400 mb-4 line-clamp-1">${item.desc}</p>
+                        <div class="p-2 pt-4 flex flex-col flex-grow">
+                            <div class="text-[10px] text-white/50 font-bold uppercase tracking-widest mb-1">${item.category}</div>
+                            <h3 class="font-bold text-sm md:text-base text-white mb-1 leading-tight drop-shadow-sm">${item.name}</h3>
+                            <p class="text-xs text-white/60 mb-5 line-clamp-1 font-light">${item.desc}</p>
                             
-                            <button onclick="openOrderModal('${item.name}')" class="w-full py-2 bg-white/10 hover:bg-sky-500 text-white rounded-lg text-xs font-bold uppercase transition-all flex items-center justify-center gap-2">
+                            <button onclick="openOrderModal('${item.name}')" class="interaction-btn mt-auto w-full py-3 bg-white/10 hover:bg-white text-white hover:text-black rounded-xl text-xs font-bold uppercase transition-all shadow-inner border border-white/10 text-center flex items-center justify-center gap-2">
                                 <i class="fas fa-shopping-cart"></i> Buy
                             </button>
                         </div>
@@ -1212,19 +1040,35 @@
                 `;
                 grid.innerHTML += card;
             });
+
+            // Initialize VanillaTilt for 3D Gyroscope/Mouse Physics
+            setTimeout(() => {
+                VanillaTilt.init(document.querySelectorAll(".card-hover"), {
+                    max: 12,
+                    speed: 400,
+                    glare: true,
+                    "max-glare": 0.25,
+                    scale: 1.02
+                });
+            }, 100);
         }
 
-        // 2. Filter Logic
         function filterItems(category) {
-            // Update buttons
             btns.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-            
-            // Render
             renderProducts(category);
         }
 
-        // 3. Modal Logic
+        function searchProducts() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const allCards = document.querySelectorAll('#productGrid > div');
+            allCards.forEach(card => {
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                card.style.display = (title.includes(input)) ? "flex" : "none";
+            });
+        }
+
+        // --- ORIGINAL DIRECT BUY (ORDER MODAL) ---
         const modal = document.getElementById('orderModal');
         const modalTitle = document.getElementById('modalTitle');
         let currentProduct = '';
@@ -1234,17 +1078,12 @@
             modalTitle.innerText = productName;
             modal.classList.add('active');
         }
+        function closeModal() { modal.classList.remove('active'); }
+        function openPolicy() { document.getElementById('policyModal').classList.add('active'); }
+        
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+        document.getElementById('policyModal').addEventListener('click', (e) => { if (e.target === document.getElementById('policyModal')) document.getElementById('policyModal').classList.remove('active'); });
 
-        function closeModal() {
-            modal.classList.remove('active');
-        }
-
-        // Close on click outside
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) closeModal();
-        });
-
-        // 4. Send Order (WhatsApp)
         function sendOrder() {
             const condition = document.querySelector('input[name="condition"]:checked').value;
             const spec = document.getElementById('modalSpec').value;
@@ -1252,14 +1091,9 @@
             const name = document.getElementById('customerName').value;
             const location = document.getElementById('customerLocation').value;
 
-            if(!name || !location) {
-                alert("Please fill in your Name and Location.");
-                return;
-            }
-          
-          triggerConfetti();
+            if(!name || !location) { alert("Please fill in your Name and Location."); return; }
+            triggerConfetti();
 
-            // Create Message
             const msg = `*NEW ORDER ALERT - HoRly's Tech* 🚀%0A%0A` +
                         `*Device:* ${currentProduct}%0A` +
                         `*Condition:* ${condition}%0A` +
@@ -1275,366 +1109,116 @@
             closeModal();
         }
 
-        function openCustomOrder() {
-             window.open(`https://wa.me/2349121213936?text=Hello HoRly's Tech, I am looking for a specific device not listed on your site...`, '_blank');
+        function openCustomOrder() { window.open(`https://wa.me/2349121213936?text=Hello HoRly's Tech, I am looking for a specific device not listed on your site...`, '_blank'); }
+
+        // --- OTHER FORMS (Swap, Inquiry, VIP, Bundles) ---
+        function sendSwapRequest() {
+            const have = document.getElementById('swapHave').value;
+            const condition = document.getElementById('swapCondition').value;
+            const want = document.getElementById('swapWant').value;
+            if(!have || !want) { alert("Please tell us what phone you have and what you want."); return; }
+
+            const msg = `*SWAP DEAL REQUEST* 🔄%0A%0A` +
+                        `🔴 *I Have:* ${have}%0A` +
+                        `📊 *Condition:* ${condition}%0A` +
+                        `🟢 *I Want:* ${want}%0A%0A` +
+                        `_How much do I need to add (Top-up)?_`;
+            window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
         }
 
-      // 5. Inquiry Function
         function sendInquiry() {
             const name = document.getElementById('inqName').value;
             const type = document.getElementById('inqType').value;
             const message = document.getElementById('inqMessage').value;
-
-            if(!name || !message) {
-                alert("Please enter your name and message.");
-                return;
-            }
-
-            const waMsg = `*GENERAL INQUIRY - HoRly's Tech* ❓%0A%0A` +
-                          `*Name:* ${name}%0A` +
-                          `*Topic:* ${type}%0A` +
-                          `*Message:* ${message}`;
-            
+            if(!name || !message) { alert("Please enter your name and message."); return; }
+            const waMsg = `*GENERAL INQUIRY - HoRly's Tech* ❓%0A%0A*Name:* ${name}%0A*Topic:* ${type}%0A*Message:* ${message}`;
             window.open(`https://wa.me/2349121213936?text=${waMsg}`, '_blank');
         }
 
-              // 6. Real-Time Search Logic
-        function searchProducts() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const allCards = document.querySelectorAll('#productGrid > div'); // Selects all product cards
-            let hasResults = false;
-
-            allCards.forEach(card => {
-                const title = card.querySelector('h3').innerText.toLowerCase();
-                const desc = card.querySelector('p').innerText.toLowerCase();
-                
-                // If title OR description matches the search
-                if (title.includes(input) || desc.includes(input)) {
-                    card.style.display = "block"; // Show
-                    hasResults = true;
-                } else {
-                    card.style.display = "none"; // Hide
-                }
-            });
-
-            // Optional: Show a "No results" message if nothing matches
-            // (You would need a hidden div with id="noResults" in your HTML)
+        function buyBundle(packName) {
+            const msg = `*BUNDLE ORDER* 📦%0A%0AI am interested in the *${packName}*.%0A%0APlease confirm the total price and availability.`;
+            window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
         }
 
-              // ANTI-THEFT PROTECTION
-        document.addEventListener('contextmenu', event => event.preventDefault()); // Disable Right Click
-        
-        document.onkeydown = function(e) {
-            // Disable F12, Ctrl+U, Ctrl+Shift+I (Dev Tools)
-            if(event.keyCode == 123) {
-               return false;
-            }
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-               return false;
-            }
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-               return false;
-            }
-            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-               return false;
-            }
+        function joinVip(e) {
+            e.preventDefault();
+            const phone = document.getElementById('vipPhone').value;
+            triggerConfetti();
+            const msg = `*VIP LIST SIGNUP* 👑%0A%0AI want to join the HoRly Tech VIP list to get stock updates.%0A*My Number:* ${phone}`;
+            window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
         }
 
-              // UI SOUND EFFECTS
-        // Create audio context
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-        function playClickSound() {
-            const oscillator = audioCtx.createOscillator();
-            const gainNode = audioCtx.createGain();
-
-            oscillator.type = 'sine';
-            oscillator.frequency.setValueAtTime(800, audioCtx.currentTime); // High pitch beep
-            oscillator.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.1); // Drop pitch
-
-            gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime); // Low volume
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-
-            oscillator.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-
-            oscillator.start();
-            oscillator.stop(audioCtx.currentTime + 0.1);
+        function claimDeal() {
+            triggerConfetti();
+            const msg = `*FLASH DEAL CLAIM* 🔥%0A%0AI want to claim the *PS5 Slim Promo* for ₦980,000.%0A%0APlease reserve this for me immediately!`;
+            window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
         }
 
-        // Add sound to all buttons
-        document.querySelectorAll('button, a').forEach(btn => {
-            btn.addEventListener('mouseenter', () => {
-                // Optional: distinct hover sound could go here
-            });
-            btn.addEventListener('click', () => {
-                if(audioCtx.state === 'suspended') audioCtx.resume();
-                playClickSound();
-            });
-        });
+        // --- FLASH DEAL COUNTDOWN ---
+        const countDownDate = new Date().getTime() + (3 * 24 * 60 * 60 * 1000); 
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-              // VICTORY CONFETTI
+            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+            }
+        }, 1000);
+
+        // --- CONFETTI ---
         function triggerConfetti() {
             var duration = 3 * 1000;
             var animationEnd = Date.now() + duration;
             var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 999 };
-
-            function randomInOut(min, max) {
-                return Math.random() * (max - min) + min;
-            }
-
+            function randomInOut(min, max) { return Math.random() * (max - min) + min; }
             var interval = setInterval(function() {
                 var timeLeft = animationEnd - Date.now();
-
-                if (timeLeft <= 0) {
-                    return clearInterval(interval);
-                }
-
+                if (timeLeft <= 0) return clearInterval(interval);
                 var particleCount = 50 * (timeLeft / duration);
-                
-                // Shoot confetti from left and right
                 confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInOut(0.1, 0.3), y: Math.random() - 0.2 } }));
                 confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInOut(0.7, 0.9), y: Math.random() - 0.2 } }));
             }, 250);
         }
 
-        // Attach to all "Buy" and "Join" buttons
-        // Update your existing sendOrder() and joinVip() functions to call triggerConfetti() first!
-
-              // DATA SAVER (LAZY LOAD)
-        document.addEventListener("DOMContentLoaded", function() {
-            var lazyImages = [].slice.call(document.querySelectorAll("img"));
-
-            if ("IntersectionObserver" in window) {
-                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
-                    entries.forEach(function(entry) {
-                        if (entry.isIntersecting) {
-                            let lazyImage = entry.target;
-                            // Simulate high-res load
-                            lazyImage.classList.add("opacity-100");
-                            lazyImage.classList.remove("opacity-0");
-                            lazyImageObserver.unobserve(lazyImage);
-                        }
-                    });
-                });
-
-                lazyImages.forEach(function(lazyImage) {
-                    lazyImage.classList.add("transition-opacity", "duration-700");
-                    lazyImageObserver.observe(lazyImage);
-                });
-            }
-        });
-
-        // Initial Load
-        renderProducts('all');
-
-    </script>
-
-              <div class="md:hidden fixed bottom-0 left-0 w-full glass-heavy border-t border-white/10 z-40 px-6 py-3 flex justify-between items-center backdrop-blur-xl">
-        <a href="#home" class="flex flex-col items-center gap-1 text-slate-400 hover:text-sky-400 transition-colors">
-            <i class="fas fa-home text-lg"></i>
-            <span class="text-[10px] font-bold">Home</span>
-        </a>
-        <a href="#catalog" class="flex flex-col items-center gap-1 text-slate-400 hover:text-sky-400 transition-colors">
-            <i class="fas fa-store text-lg"></i>
-            <span class="text-[10px] font-bold">Shop</span>
-        </a>
-        
-        <div class="relative -top-8">
-            <a href="#swap" class="w-14 h-14 bg-gradient-to-r from-sky-500 to-indigo-600 rounded-full flex items-center justify-center text-white shadow-[0_0_20px_rgba(14,165,233,0.5)] border-4 border-[#020617]">
-                <i class="fas fa-exchange-alt text-xl"></i>
-            </a>
-        </div>
-
-        <a href="#repair" class="flex flex-col items-center gap-1 text-slate-400 hover:text-sky-400 transition-colors">
-            <i class="fas fa-wrench text-lg"></i>
-            <span class="text-[10px] font-bold">Repair</span>
-        </a>
-        <a href="https://wa.me/2349121213936" target="_blank" class="flex flex-col items-center gap-1 text-slate-400 hover:text-green-400 transition-colors">
-            <i class="fab fa-whatsapp text-lg"></i>
-            <span class="text-[10px] font-bold">Chat</span>
-        </a>
-    </div>
-
-                  <div id="policyModal" class="modal fixed inset-0 z-[80] flex items-center justify-center bg-black/90 p-4">
-        <div class="modal-content w-full max-w-lg glass-heavy rounded-2xl p-8 relative max-h-[80vh] overflow-y-auto">
-            <button onclick="document.getElementById('policyModal').classList.remove('active')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-            
-            <h3 class="orbitron text-xl font-bold mb-6 text-white border-b border-white/10 pb-4">Terms & Warranty</h3>
-            
-            <div class="space-y-4 text-sm text-slate-400 leading-relaxed">
-                <div>
-                    <h4 class="font-bold text-sky-400 mb-1">1. 7-Day Warranty (UK Used)</h4>
-                    <p>All UK Used devices come with a 7-day testing guarantee. This covers factory defects (e.g., Network issues, Camera failure). It does NOT cover physical damage, water damage, or screen cracks caused by the user.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-sky-400 mb-1">2. Brand New Devices</h4>
-                    <p>Brand new Apple/Samsung devices come with the standard 1-Year Manufacturer Warranty, claimed directly from Apple/Samsung or authorized centers.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-sky-400 mb-1">3. Return Policy</h4>
-                    <p>Goods bought in good condition cannot be returned for cash. Exchange is possible within 48 hours if the device is proven faulty and cannot be fixed.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-sky-400 mb-1">4. Delivery</h4>
-                    <p>Delivery fees are non-refundable once the dispatch rider/logistics company has moved.</p>
-                </div>
-            </div>
-            
-            <div class="mt-6 pt-4 border-t border-white/10 text-center">
-                <button onclick="document.getElementById('policyModal').classList.remove('active')" class="px-6 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white font-bold text-xs uppercase">
-                    I Understand
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function openPolicy() {
-            document.getElementById('policyModal').classList.add('active');
-        }
-    </script>
-
-                  <div id="sales-toast" class="fixed bottom-20 left-4 z-50 glass p-4 rounded-xl border-l-4 border-green-500 shadow-2xl transform transition-all duration-500 translate-y-20 opacity-0 flex items-center gap-3 w-72">
-        <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-xl">🛍️</div>
-        <div>
-            <p class="text-xs text-slate-400">Someone in <span id="toast-loc" class="text-green-400 font-bold">Lagos</span> purchased</p>
-            <p id="toast-item" class="text-sm font-bold text-white">iPhone 13 Pro Max</p>
-            <p class="text-[10px] text-slate-500">2 minutes ago</p>
-        </div>
-    </div>
-
-    <script>
+        // --- SALES TOAST ---
         const salesData = [
             { loc: 'Lekki, Lagos', item: 'iPhone 14 Pro Max' },
             { loc: 'Gwarinpa, Abuja', item: 'Samsung S23 Ultra' },
             { loc: 'Port Harcourt', item: 'PS5 Console' },
             { loc: 'Ikeja, Lagos', item: 'MacBook Air M1' },
-            { loc: 'Ibadan', item: 'Google Pixel 7' },
-            { loc: 'Enugu', item: 'JBL Headset' },
-            { loc: 'Victoria Island', item: 'iPhone 12 Pro' }
+            { loc: 'Ibadan', item: 'Google Pixel 7' }
         ];
-
         const toast = document.getElementById('sales-toast');
-        const toastLoc = document.getElementById('toast-loc');
-        const toastItem = document.getElementById('toast-item');
-
         function showToast() {
-            // Pick random data
             const random = salesData[Math.floor(Math.random() * salesData.length)];
-            toastLoc.innerText = random.loc;
-            toastItem.innerText = random.item;
+            document.getElementById('toast-loc').innerText = random.loc;
+            document.getElementById('toast-item').innerText = random.item;
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            setTimeout(() => toast.classList.add('translate-y-32', 'opacity-0'), 4000);
+        }
+        setTimeout(() => { showToast(); setInterval(showToast, 12000); }, 3000);
 
-            // Animate In
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            
-            // Hide after 4 seconds
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 4000);
+        // Anti-theft
+        document.addEventListener('contextmenu', event => event.preventDefault()); 
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) || (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) return false;
         }
 
-        // Start loop: Show every 20 seconds
-        setTimeout(() => {
-            showToast(); // Show first one
-            setInterval(showToast, 12000); // Repeat
-        }, 3000);
+        // Init
+        renderProducts('all');
     </script>
-
-                  <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
-    class="fixed bottom-32 right-6 z-40 w-10 h-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white opacity-0 transition-all duration-300 hover:bg-sky-500">
-    <i class="fas fa-arrow-up"></i>
-</button>
-
-<script>
-    // Show button only when scrolled down
-    window.addEventListener('scroll', () => {
-        const btn = document.getElementById('backToTop');
-        if (window.scrollY > 500) {
-            btn.classList.remove('opacity-0', 'pointer-events-none');
-        } else {
-            btn.classList.add('opacity-0', 'pointer-events-none');
-        }
-    });
-</script>
-
-      <div id="cookieBanner" class="fixed bottom-0 w-full bg-slate-900/95 border-t border-white/10 p-4 z-[90] flex flex-col md:flex-row items-center justify-between gap-4 transform translate-y-full transition-transform duration-500 backdrop-blur-md">
-        <div class="flex items-center gap-4">
-            <i class="fas fa-cookie-bite text-2xl text-yellow-500"></i>
-            <p class="text-xs text-slate-300 max-w-xl">
-                We use cookies to improve your experience and track sales. By using HoRly's Tech, you agree to our terms.
-            </p>
-        </div>
-        <div class="flex gap-3">
-            <button onclick="acceptCookies()" class="px-6 py-2 bg-white text-black font-bold rounded-full text-xs hover:bg-sky-400 hover:text-white transition-colors">
-                Accept All
-            </button>
-            <button onclick="document.getElementById('cookieBanner').style.display='none'" class="px-6 py-2 border border-white/20 text-white font-bold rounded-full text-xs hover:bg-white/10">
-                Decline
-            </button>
-        </div>
-    </div>
-
-    <script>
-                // --- AUTHENTICATION & UI LOGIC ---
-    auth.onAuthStateChanged(user => {
-        const preloader = document.getElementById('preloader');
-        const userMenu = document.getElementById('userMenu');
-        const emailDisplay = document.getElementById('userEmailDisplay');
-        const emailFull = document.getElementById('userEmailFull');
-
-        if (user) {
-            // 1. User IS Logged In
-            console.log("User detected:", user.email);
-            
-            // Show the User Menu
-            if(userMenu) userMenu.classList.remove('hidden');
-            
-            // Update Name in UI
-            if(emailDisplay) emailDisplay.innerText = user.email.split('@')[0]; // Shows "john" instead of "john@gmail.com"
-            if(emailFull) emailFull.innerText = user.email;
-
-            // Remove Preloader
-            setTimeout(() => {
-                if(preloader) {
-                    preloader.style.opacity = '0';
-                    setTimeout(() => preloader.style.display = 'none', 1000);
-                }
-            }, 1000);
-
-        } else {
-            // 2. User is NOT Logged In
-            console.log("No user. Redirecting...");
-            window.location.href = "login.html"; // Send back to login
-        }
-    });
-
-    // --- LOGOUT FUNCTION ---
-    function handleLogout() {
-        if(confirm("Are you sure you want to log out?")) {
-            auth.signOut().then(() => {
-                window.location.href = "login.html";
-            }).catch(error => {
-                alert("Error logging out: " + error.message);
-            });
-        }
-    }
-
-    // --- HISTORY FUNCTION ---
-    function openOrderHistory() {
-        document.getElementById('historyModal').classList.remove('hidden');
-    }
-
-
-        function acceptCookies() {
-            localStorage.setItem('cookiesAccepted', 'true');
-            document.getElementById('cookieBanner').classList.add('translate-y-full');
-        }
-    </script>
-
-  
 </body>
 </html>
+
 
