@@ -805,6 +805,7 @@
                     <label class="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-3 block">3. Delivery Details</label>
                     <div class="space-y-4">
                         <input type="text" id="customerName" placeholder="Your Name" class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-sm focus:border-white outline-none text-white backdrop-blur-md">
+                        <input type="number" id="customerNumber" placeholder="Your Number" class="w-full bg-black/50 border border-white/10 rounded-x1 px-5 py-4 text-sm focus:border-white outline-none text-white backdrop-blur-md">
                         <select id="customerLocation" class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-sm focus:border-white outline-none text-white appearance-none backdrop-blur-md">
                             <option class="bg-black text-white" value="">Select Location...</option>
                             <option class="bg-black text-white" value="Lagos - Mainland">Lagos - Mainland</option>
@@ -1089,6 +1090,7 @@
             const spec = document.getElementById('modalSpec').value;
             const color = document.getElementById('modalColor').value || "Any Color";
             const name = document.getElementById('customerName').value;
+            const number = document.getElementById('customerNumber').value;
             const location = document.getElementById('customerLocation').value;
 
             if(!name || !location) { alert("Please fill in your Name and Location."); return; }
@@ -1101,6 +1103,7 @@
                         `*Color:* ${color}%0A` +
                         `------------------%0A` +
                         `*Customer Name:* ${name}%0A` +
+                        `*Customer Number:* ${number}%0A` +
                         `*Location:* ${location}%0A` +
                         `------------------%0A` +
                         `_Please confirm availability and price._`;
