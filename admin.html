@@ -8,29 +8,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #000; color: white; overflow-x: hidden; }
         .orbitron { font-family: 'Orbitron', sans-serif; }
         .liquid-glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(40px); border: 1px solid rgba(255,255,255,0.1); border-radius: 1.5rem; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
         .gradient-text { background: linear-gradient(135deg, #fff 0%, #a5b4fc 50%, #38bdf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+        
+        .modal { opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .modal.active { opacity: 1; visibility: visible; backdrop-filter: blur(10px); }
+        .modal-content { transform: scale(0.95); transition: all 0.3s ease; }
+        .modal.active .modal-content { transform: scale(1); }
     </style>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
 </head>
 <body class="flex h-screen overflow-hidden">
 
     <div class="w-64 liquid-glass m-4 flex flex-col p-6 hidden md:flex">
         <h1 class="orbitron text-xl font-bold tracking-tighter mb-10"><span class="text-red-500">Admin</span>_<span class="gradient-text">Panel</span></h1>
-        
         <nav class="space-y-4 flex-1">
             <button onclick="switchTab('dashboard')" class="w-full text-left px-4 py-3 rounded-xl bg-white/10 text-white font-medium hover:bg-white/20 transition"><i class="fas fa-chart-line w-6"></i> Dashboard</button>
             <button onclick="switchTab('users')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-users w-6"></i> Customers</button>
-            <button onclick="switchTab('inventory')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-box w-6"></i> Inventory</button>
-            <button onclick="switchTab('deals')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-bolt w-6"></i> Flash Deals</button>
+            <button onclick="switchTab('inventory')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-box w-6"></i> Live Inventory</button>
         </nav>
-        
         <button onclick="adminLogout()" class="mt-auto px-4 py-3 rounded-xl border border-red-500/30 text-red-400 hover:bg-red-500/10 transition"><i class="fas fa-sign-out-alt w-6"></i> Exit Admin</button>
     </div>
 
@@ -38,9 +40,9 @@
         <div id="tab-dashboard" class="tab-content">
             <h2 class="orbitron text-3xl font-bold mb-8">System <span class="gradient-text">Overview</span></h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="liquid-glass p-6"><h3 class="text-white/50 text-sm">Total Customers</h3><p id="stat-users" class="text-4xl font-bold orbitron mt-2">0</p></div>
-                <div class="liquid-glass p-6"><h3 class="text-white/50 text-sm">Active Inventory</h3><p id="stat-inv" class="text-4xl font-bold orbitron mt-2">0</p></div>
-                <div class="liquid-glass p-6"><h3 class="text-white/50 text-sm">System Status</h3><p class="text-xl font-bold text-green-400 mt-2"><i class="fas fa-check-circle"></i> Online</p></div>
+                <div class="liquid-glass p-6"><h3 class="text-white/50 text-sm">Total Customers</h3><p id="stat-users" class="text-4xl font-bold orbitron mt-2">...</p></div>
+                <div class="liquid-glass p-6"><h3 class="text-white/50 text-sm">Active Inventory</h3><p id="stat-inv" class="text-4xl font-bold orbitron mt-2">...</p></div>
+                <div class="liquid-glass p-6"><h3 class="text-white/50 text-sm">Database Status</h3><p class="text-xl font-bold text-green-400 mt-2"><i class="fas fa-check-circle"></i> Connected</p></div>
             </div>
         </div>
 
@@ -49,7 +51,7 @@
             <div class="liquid-glass p-6 overflow-x-auto">
                 <table class="w-full text-left text-sm">
                     <thead class="text-white/50 uppercase border-b border-white/10">
-                        <tr><th class="pb-4">Name</th><th class="pb-4">Email</th><th class="pb-4">Purchase History</th></tr>
+                        <tr><th class="pb-4">Name</th><th class="pb-4">Email</th><th class="pb-4">Orders</th></tr>
                     </thead>
                     <tbody id="userTableBody" class="divide-y divide-white/5"></tbody>
                 </table>
@@ -59,18 +61,42 @@
         <div id="tab-inventory" class="tab-content hidden">
             <div class="flex justify-between items-center mb-8">
                 <h2 class="orbitron text-3xl font-bold">Manage <span class="gradient-text">Inventory</span></h2>
-                <button onclick="alert('In a real app, this opens an upload form!')" class="bg-white text-black px-4 py-2 rounded-lg font-bold text-sm"><i class="fas fa-plus"></i> Add Item</button>
+                <button onclick="document.getElementById('addModal').classList.add('active')" class="bg-white text-black px-5 py-3 rounded-lg font-bold text-sm hover:scale-105 transition"><i class="fas fa-plus"></i> Add Product</button>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="adminInventoryGrid"></div>
+        </div>
+    </div>
+
+    <div id="addModal" class="modal fixed inset-0 z-50 flex items-center justify-center bg-black/80">
+        <div class="modal-content w-full max-w-md liquid-glass p-8 relative mx-4">
+            <button onclick="document.getElementById('addModal').classList.remove('active')" class="absolute top-4 right-4 text-white/50 hover:text-white"><i class="fas fa-times text-xl"></i></button>
+            <h3 class="orbitron text-2xl font-bold mb-6 text-white">Add to Cloud <span class="gradient-text">Stock</span></h3>
+            
+            <form class="space-y-4" onsubmit="saveNewItem(event)">
+                <input type="text" id="newItemName" placeholder="Product Name (e.g. iPhone 16)" required class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-sm text-white focus:border-white outline-none">
+                
+                <select id="newItemCat" required class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-sm text-white/70 focus:border-white outline-none appearance-none">
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="iphone" class="text-black">iPhone</option>
+                    <option value="android" class="text-black">Android</option>
+                    <option value="laptop" class="text-black">Laptop</option>
+                    <option value="gaming" class="text-black">Gaming</option>
+                    <option value="accessories" class="text-black">Accessories</option>
+                </select>
+                
+                <input type="url" id="newItemImg" placeholder="Image URL Link (https://...)" required class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-sm text-white focus:border-white outline-none">
+                
+                <input type="text" id="newItemDesc" placeholder="Short Description" required class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-sm text-white focus:border-white outline-none">
+                
+                <button type="submit" id="addSubmitBtn" class="w-full bg-sky-500 text-white font-bold py-4 rounded-xl hover:bg-sky-400 transition mt-4"><i class="fas fa-cloud-upload-alt"></i> Push to Live Site</button>
+            </form>
         </div>
     </div>
 
     <script>
         // Security Check
         const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (!currentUser || currentUser.role !== 'admin') {
-            window.location.href = 'index.html'; // Kick out intruders
-        }
+        if (!currentUser || currentUser.role !== 'admin') window.location.href = 'index.html';
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -82,46 +108,93 @@
             window.location.href = 'index.html';
         }
 
-        // Load Data
+        // --- REPLACE THIS WITH YOUR FIREBASE CONFIG ---
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "your-project-id.firebaseapp.com",
+            projectId: "your-project-id",
+            storageBucket: "your-project-id.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_ID",
+            appId: "YOUR_APP_ID"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Load Data from Cloud
         function loadAdminData() {
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            const inventory = JSON.parse(localStorage.getItem('inventory')) || [];
+            // Fetch Users
+            db.collection("users").get().then((snapshot) => {
+                document.getElementById('stat-users').innerText = snapshot.size;
+                const userTable = document.getElementById('userTableBody');
+                userTable.innerHTML = '';
+                snapshot.forEach(doc => {
+                    const u = doc.data();
+                    const recordsCount = u.records ? u.records.length : 0;
+                    userTable.innerHTML += `
+                        <tr class="hover:bg-white/5 transition">
+                            <td class="py-4 font-bold text-white">${u.name}</td>
+                            <td class="py-4 text-white/70">${u.email}</td>
+                            <td class="py-4 text-sky-400 font-bold">${recordsCount} orders</td>
+                        </tr>
+                    `;
+                });
+            });
+
+            // Fetch Live Inventory
+            db.collection("inventory").get().then((snapshot) => {
+                document.getElementById('stat-inv').innerText = snapshot.size;
+                const invGrid = document.getElementById('adminInventoryGrid');
+                invGrid.innerHTML = '';
+                snapshot.forEach(doc => {
+                    const item = doc.data();
+                    invGrid.innerHTML += `
+                        <div class="liquid-glass p-4 flex gap-4 items-center">
+                            <img src="${item.image}" class="w-16 h-16 rounded-xl object-cover border border-white/10">
+                            <div class="flex-1">
+                                <h4 class="font-bold text-sm text-white">${item.name}</h4>
+                                <p class="text-[10px] text-white/50 uppercase tracking-widest mb-2">${item.category}</p>
+                                <button onclick="deleteItem('${doc.id}')" class="text-xs text-red-400 border border-red-500/30 hover:bg-red-500/10 px-3 py-1.5 rounded transition"><i class="fas fa-trash"></i> Delete</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+        }
+
+        // Delete permanently from Cloud
+        function deleteItem(docId) {
+            if(confirm("Are you sure you want to permanently delete this from the live website?")) {
+                db.collection("inventory").doc(docId).delete().then(() => {
+                    alert("Deleted successfully!");
+                    loadAdminData(); // Refresh Grid
+                });
+            }
+        }
+
+        // Save new item directly to Cloud
+        function saveNewItem(e) {
+            e.preventDefault();
+            const btn = document.getElementById('addSubmitBtn');
+            btn.innerText = "Pushing to Cloud...";
             
-            // Stats
-            document.getElementById('stat-users').innerText = users.length;
-            document.getElementById('stat-inv').innerText = inventory.length;
+            const itemData = {
+                name: document.getElementById('newItemName').value,
+                category: document.getElementById('newItemCat').value,
+                image: document.getElementById('newItemImg').value,
+                desc: document.getElementById('newItemDesc').value,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
 
-            // Load Users
-            const userTable = document.getElementById('userTableBody');
-            userTable.innerHTML = users.map(u => `
-                <tr class="hover:bg-white/5">
-                    <td class="py-4 font-bold">${u.name}</td>
-                    <td class="py-4 text-white/70">${u.email}</td>
-                    <td class="py-4 text-sky-400 text-xs">${u.records.length > 0 ? u.records.length + ' orders' : 'No orders yet'}</td>
-                </tr>
-            `).join('');
-
-            // Load Inventory
-            const invGrid = document.getElementById('adminInventoryGrid');
-            invGrid.innerHTML = inventory.map((item, index) => `
-                <div class="liquid-glass p-4 flex gap-4">
-                    <img src="${item.image}" class="w-16 h-16 rounded-lg object-cover">
-                    <div>
-                        <h4 class="font-bold text-sm">${item.name}</h4>
-                        <p class="text-xs text-white/50 mb-2">${item.category}</p>
-                        <button onclick="deleteItem(${index})" class="text-xs text-red-400 border border-red-500/30 px-2 py-1 rounded">Delete</button>
-                    </div>
-                </div>
-            `).join('');
+            db.collection("inventory").add(itemData).then(() => {
+                document.getElementById('addModal').classList.remove('active');
+                e.target.reset(); // clear form
+                btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Push to Live Site';
+                alert("Product successfully added to live inventory!");
+                loadAdminData(); // Refresh grid
+            }).catch(error => alert("Error: " + error.message));
         }
 
-        function deleteItem(index) {
-            let inventory = JSON.parse(localStorage.getItem('inventory'));
-            inventory.splice(index, 1);
-            localStorage.setItem('inventory', JSON.stringify(inventory));
-            loadAdminData();
-        }
-
+        // Init
         loadAdminData();
     </script>
 </body>
