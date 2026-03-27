@@ -160,18 +160,21 @@
         
         body.light-mode .bg-black { background-color: #fff !important; }
         body.light-mode .ambient-bg { background: #f8fafc; }
-        body.light-mode .orb { mix-blend-mode: multiply; opacity: 0.3; } 
+        body.light-mode .orb { mix-blend-mode: multiply; opacity: 0.3; } /* Softer glow for light mode */
         
         body.light-mode .shadow-inner { box-shadow: inset 0 2px 5px 0 rgba(0,0,0,0.05); }
-        body.light-mode .text-sky-400 { color: #0284c7 !important; } 
+        body.light-mode .text-sky-400 { color: #0284c7 !important; } /* Darker blue for legibility */
         body.light-mode .gradient-text { background: linear-gradient(135deg, #0f172a 0%, #4f46e5 50%, #0284c7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
+        /* Invert solid white buttons to solid dark */
         body.light-mode .bg-white.text-black { background-color: #0f172a !important; color: #fff !important; box-shadow: 0 10px 30px rgba(15,23,42,0.2) !important; }
         body.light-mode .filter-btn.active { background-color: #0f172a !important; color: #fff !important; border-color: #0f172a !important; }
         
+        /* Input text colors */
         body.light-mode input, body.light-mode select, body.light-mode textarea { color: #0f172a !important; }
         body.light-mode input::placeholder, body.light-mode textarea::placeholder { color: rgba(15,23,42,0.5) !important; }
         
+        /* Modals and Toasts */
         body.light-mode .modal { backdrop-filter: blur(15px); background: rgba(255,255,255,0.2) !important; }
         body.light-mode .option-radio:checked + div { border-color: #0f172a; background: rgba(15,23,42,0.05); box-shadow: inset 0 0 0 1px #0f172a; }
         body.light-mode .option-radio:checked + div .check-icon { color: #0f172a; }
@@ -194,7 +197,7 @@
             <div class="absolute inset-2 border-r-2 border-sky-400 rounded-full animate-spin" style="animation-direction: reverse;"></div>
             <div class="absolute inset-0 flex items-center justify-center font-bold orbitron text-2xl text-white">H</div>
         </div>
-        <div class="orbitron text-white text-sm tracking-[0.3em] animate-pulse">HORL'S_TECH</div>
+        <div class="orbitron text-white text-sm tracking-[0.3em] animate-pulse">HORLY'S TECH</div>
     </div>
 
     <!-- WhatsApp FAB -->
@@ -241,7 +244,7 @@
 
         <!-- ==================== VIEW: HOME ==================== -->
         <div id="view-home" class="view-screen active">
-            <!-- Hero -->
+            <!-- Hero with Cinematic Video -->
             <section class="py-10 px-6 relative z-10">
                 <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
                     <div class="flex-1 space-y-8 text-center lg:text-left">
@@ -284,21 +287,14 @@
                         </div>
                     </div>
                     
-                    <!-- Cinematic Video Hero Container with Image Fallback -->
+                    <!-- Cinematic Video Container -->
                     <div class="flex-1 relative w-full">
-                        <div class="relative z-10 liquid-glass p-3 transform lg:rotate-2 hover:rotate-0 transition-all duration-700 shadow-2xl rounded-[2.5rem] overflow-hidden">
-                            
-                            <!-- Sleek Cinematic Auto-playing Tech Loop with Poster Fallback -->
-                            <video autoplay loop muted playsinline 
-                                   poster="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=800&q=80" 
-                                   class="w-full h-full object-cover rounded-[2rem] shadow-inner h-[400px]">
-                                <!-- Premium abstract glowing fluid tech background from Pexels -->
+                        <div class="relative z-10 liquid-glass p-3 transform lg:rotate-2 hover:rotate-0 transition-all duration-700 shadow-2xl">
+                            <!-- Abstract Liquid Glass Auto-playing Video -->
+                            <video autoplay loop muted playsinline class="w-full h-full object-cover rounded-[2rem] shadow-inner h-[400px]">
                                 <source src="https://videos.pexels.com/video-files/3129957/3129957-uhd_2560_1440_25fps.mp4" type="video/mp4">
-                                <!-- Fallback secondary MP4 from Pixabay -->
-                                <source src="https://cdn.pixabay.com/video/2022/11/01/137350-766782299_tiny.mp4" type="video/mp4">
                             </video>
-
-                            <!-- Floating Glass Badge overlaying the video -->
+                            
                             <div class="absolute -bottom-8 -left-8 liquid-glass p-6 rounded-3xl animate-bounce shadow-2xl" style="animation-duration: 4s;">
                                 <div class="flex items-center gap-4">
                                     <div class="p-3 bg-white/20 text-white rounded-2xl backdrop-blur-md shadow-inner">
@@ -312,7 +308,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </section>
 
@@ -810,6 +805,7 @@
                     <label class="text-[10px] font-bold text-white/50 uppercase tracking-widest mb-3 block">3. Delivery Details</label>
                     <div class="space-y-4">
                         <input type="text" id="customerName" placeholder="Your Name" class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-sm focus:border-white outline-none text-white backdrop-blur-md">
+                        <input type="number" id="customerNumber" placeholder="Your Number" class="w-full bg-black/50 border border-white/10 rounded-x1 px-5 py-4 text-sm focus:border-white outline-none text-white backdrop-blur-md">
                         <select id="customerLocation" class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-sm focus:border-white outline-none text-white appearance-none backdrop-blur-md">
                             <option class="bg-black text-white" value="">Select Location...</option>
                             <option class="bg-black text-white" value="Lagos - Mainland">Lagos - Mainland</option>
@@ -1094,6 +1090,7 @@
             const spec = document.getElementById('modalSpec').value;
             const color = document.getElementById('modalColor').value || "Any Color";
             const name = document.getElementById('customerName').value;
+            const number = document.getElementById('customerNumber').value;
             const location = document.getElementById('customerLocation').value;
 
             if(!name || !location) { alert("Please fill in your Name and Location."); return; }
@@ -1106,6 +1103,7 @@
                         `*Color:* ${color}%0A` +
                         `------------------%0A` +
                         `*Customer Name:* ${name}%0A` +
+                        `*Customer Number:* ${number}%0A` +
                         `*Location:* ${location}%0A` +
                         `------------------%0A` +
                         `_Please confirm availability and price._`;
@@ -1225,5 +1223,4 @@
     </script>
 </body>
 </html>
-
 
