@@ -176,70 +176,83 @@
     </div>
 
     <script>
-        // Haptic Feedback
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        function playInteractionFeedback() {
-            if (navigator.vibrate) navigator.vibrate(15);
-            if(audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-            const oscillator = audioCtx.createOscillator();
-            const gainNode = audioCtx.createGain();
-            oscillator.type = 'sine';
-            oscillator.frequency.setValueAtTime(800, audioCtx.currentTime); 
-            oscillator.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.1); 
-            gainNode.gain.setValueAtTime(0.02, audioCtx.currentTime); 
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-            oscillator.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-            oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.1);
-        }
-
-        document.querySelectorAll('.interaction-btn, input').forEach(btn => {
-            btn.addEventListener('click', playInteractionFeedback);
-        });
-
-function toggleForms() {
-    const login = document.getElementById('loginForm');
-    const register = document.getElementById('registerForm');
-    // ... [Your existing toggle code] ...
-}
-
-// REAL FIREBASE AUTHENTICATION
-async function handleAuth(e, type) {
-    e.preventDefault();
-    const btn = e.target.querySelector('button[type="submit"]');
-    const originalText = btn.innerText;
-    btn.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Processing...`;
-    
-    try {
-        if (type === 'login') {
-            const email = document.getElementById('loginEmail').value;
-            const pass = document.getElementById('loginPass').value;
-            await auth.signInWithEmailAndPassword(email, pass);
-            window.location.href = 'index.html';
-        } else {
-            const name = document.getElementById('regName').value;
-            const email = document.getElementById('regEmail').value;
-            const pass = document.getElementById('regPass').value;
-            
-            // Create user
-            const userCredential = await auth.createUserWithEmailAndPassword(email, pass);
-            const user = userCredential.user;
-            
-            // Save additional user info to Firestore
-            await db.collection('users').doc(user.uid).set({
-                name: name,
-                email: email,
-                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                role: 'customer'
-            });
-            window.location.href = 'index.html';
-        }
-    } catch (error) {
-        alert("Authentication Error: " + error.message);
-        btn.innerText = originalText;
+    // Haptic Feedback
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playInteractionFeedback() {
+        if (navigator.vibrate) navigator.vibrate(15);
+        if(audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(800, audioCtx.currentTime); 
+        oscillator.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.1); 
+        gainNode.gain.setValueAtTime(0.02, audioCtx.currentTime); 
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.1);
     }
-}
-    </script>
+
+    document.querySelectorAll('.interaction-btn, input').forEach(btn => {
+        btn.addEventListener('click', playInteractionFeedback);
+    });
+
+    // FORM TOGGLE LOGIC (Restored!)
+    function toggleForms() {
+        const login = document.getElementById('loginForm');
+        const register = document.getElementById('registerForm');
+        
+        if (login.classList.contains('active-form')) {
+            login.classList.remove('active-form');
+            login.classList.add('hidden-form');
+            register.classList.remove('hidden-form');
+            register.classList.add('active-form');
+        } else {
+            register.classList.remove('active-form');
+            register.classList.add('hidden-form');
+            login.classList.remove('hidden-form');
+            login.classList.add('active-form');
+        }
+    }
+
+    // REAL FIREBASE AUTHENTICATION
+    async function handleAuth(e, type) {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Processing...`;
+        
+        try {
+            if (type === 'login') {
+                const email = document.getElementById('loginEmail').value;
+                const pass = document.getElementById('loginPass').value;
+                await auth.signInWithEmailAndPassword(email, pass);
+                window.location.href = 'index.html';
+            } else {
+                const name = document.getElementById('regName').value;
+                const email = document.getElementById('regEmail').value;
+                const pass = document.getElementById('regPass').value;
+                
+                // Create user
+                const userCredential = await auth.createUserWithEmailAndPassword(email, pass);
+                const user = userCredential.user;
+                
+                // Save additional user info to Firestore
+                await db.collection('users').doc(user.uid).set({
+                    name: name,
+                    email: email,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    role: 'customer'
+                });
+                window.location.href = 'index.html';
+            }
+        } catch (error) {
+            alert("Authentication Error: " + error.message);
+            btn.innerHTML = originalText;
+        }
+    }
+</script>
+
 </body>
 </html>
 
