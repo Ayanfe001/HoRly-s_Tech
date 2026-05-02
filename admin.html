@@ -118,147 +118,141 @@
 </div>
 
    <script>
-    // Security Check
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (!currentUser || currentUser.role !== 'admin') window.location.href = 'index.html';
-
     // UI Tab Switching
-    function switchTab(tabId) {
-        document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-        document.getElementById('tab-' + tabId).classList.remove('hidden');
-    }
+function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    document.getElementById('tab-' + tabId).classList.remove('hidden');
+}
 
-    function adminLogout() {
-        localStorage.removeItem('currentUser');
+function adminLogout() {
+    auth.signOut().then(() => {
+        window.location.href = 'index.html';
+    });
+}
+
+// --- AUTH & ADMIN SECURITY CHECK ---
+auth.onAuthStateChanged(async (user) => {
+    if (!user) {
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    // Check if the user is an admin
+    const doc = await db.collection('users').doc(user.uid).get();
+    if (doc.exists && doc.data().role === 'admin') {
+        loadAdminData(); // They are admin, load the data
+    } else {
+        alert("Access Denied. Admin portal is restricted.");
         window.location.href = 'index.html';
     }
+});
 
-    // --- FIREBASE INITIALIZATION ---
-    const firebaseConfig = {
-        apiKey: "AIzaSyCK_erqUPZFXF2K9RIlkBKoZ_8Bd-Z1toQ",
-        authDomain: "horly-tech.firebaseapp.com",
-        projectId: "horly-tech",
-        storageBucket: "horly-tech.firebasestorage.app",
-        messagingSenderId: "520852914677",
-        appId: "1:520852914677:web:eed0099680514b1c0aa0bc"
-    };
-    
-    // Initialize Firebase
-    if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-    }
-    const db = firebase.firestore();
-
-    // --- 1. LOAD DATA (USERS & INVENTORY) ---
-    function loadAdminData() {
-        // Fetch Users
-        db.collection("users").get().then((snapshot) => {
-            document.getElementById('stat-users').innerText = snapshot.size;
-            const userTable = document.getElementById('userTableBody');
-            userTable.innerHTML = '';
-            snapshot.forEach(doc => {
-                const u = doc.data();
-                const recordsCount = u.records ? u.records.length : 0;
-                userTable.innerHTML += `
-                    <tr class="hover:bg-white/5 transition">
-                        <td class="py-4 font-bold text-white">${u.name}</td>
-                        <td class="py-4 text-white/70">${u.email}</td>
-                        <td class="py-4 text-sky-400 font-bold">${recordsCount} orders</td>
-                    </tr>
-                `;
-            });
+// --- LOAD DATA (USERS & INVENTORY) ---
+function loadAdminData() {
+    // Fetch Users
+    db.collection("users").get().then((snapshot) => {
+        document.getElementById('stat-users').innerText = snapshot.size;
+        const userTable = document.getElementById('userTableBody');
+        userTable.innerHTML = '';
+        snapshot.forEach(doc => {
+            const u = doc.data();
+            userTable.innerHTML += `
+                <tr class="hover:bg-white/5 transition">
+                    <td class="py-4 font-bold text-white">${u.name || "Customer"}</td>
+                    <td class="py-4 text-white/70">${u.email}</td>
+                    <td class="py-4 text-sky-400 font-bold">${u.role === 'admin' ? 'Admin' : 'User'}</td>
+                </tr>
+            `;
         });
+    });
 
-        // Fetch Live Inventory (Now with Edit and Delete buttons)
-        db.collection("inventory").get().then((snapshot) => {
-            document.getElementById('stat-inv').innerText = snapshot.size;
-            const invGrid = document.getElementById('adminInventoryGrid');
-            invGrid.innerHTML = '';
-            snapshot.forEach(doc => {
-                const item = doc.data();
-                invGrid.innerHTML += `
-                    <div class="liquid-glass p-4 flex gap-4 items-center">
-                        <img src="${item.image}" class="w-16 h-16 rounded-xl object-cover border border-white/10">
-                        <div class="flex-1">
-                            <h4 class="font-bold text-sm text-white">${item.name}</h4>
-                            <p class="text-[10px] text-white/50 uppercase tracking-widest mb-2">${item.category}</p>
-                            <div class="flex gap-2 mt-2">
-                                <button onclick="editItem('${doc.id}')" class="text-xs text-sky-400 border border-sky-500/30 hover:bg-sky-500/10 px-3 py-1.5 rounded transition"><i class="fas fa-edit"></i> Edit</button>
-                                <button onclick="deleteItem('${doc.id}')" class="text-xs text-red-400 border border-red-500/30 hover:bg-red-500/10 px-3 py-1.5 rounded transition"><i class="fas fa-trash"></i></button>
-                            </div>
+    // Fetch Live Inventory
+    db.collection("inventory").get().then((snapshot) => {
+        document.getElementById('stat-inv').innerText = snapshot.size;
+        const invGrid = document.getElementById('adminInventoryGrid');
+        invGrid.innerHTML = '';
+        snapshot.forEach(doc => {
+            const item = doc.data();
+            invGrid.innerHTML += `
+                <div class="liquid-glass p-4 flex gap-4 items-center">
+                    <img src="${item.image}" class="w-16 h-16 rounded-xl object-cover border border-white/10">
+                    <div class="flex-1">
+                        <h4 class="font-bold text-sm text-white">${item.name}</h4>
+                        <p class="text-[10px] text-white/50 uppercase tracking-widest mb-2">${item.category}</p>
+                        <div class="flex gap-2 mt-2">
+                            <button onclick="editItem('${doc.id}')" class="text-xs text-sky-400 border border-sky-500/30 hover:bg-sky-500/10 px-3 py-1.5 rounded transition"><i class="fas fa-edit"></i> Edit</button>
+                            <button onclick="deleteItem('${doc.id}')" class="text-xs text-red-400 border border-red-500/30 hover:bg-red-500/10 px-3 py-1.5 rounded transition"><i class="fas fa-trash"></i></button>
                         </div>
                     </div>
-                `;
-            });
+                </div>
+            `;
+        });
+    });
+}
+
+// --- DELETE ITEM ---
+function deleteItem(docId) {
+    if(confirm("Are you sure you want to permanently delete this from the live website?")) {
+        db.collection("inventory").doc(docId).delete().then(() => {
+            alert("Deleted successfully!");
+            loadAdminData(); 
         });
     }
+}
 
-    // --- 2. DELETE ITEM ---
-    function deleteItem(docId) {
-        if(confirm("Are you sure you want to permanently delete this from the live website?")) {
-            db.collection("inventory").doc(docId).delete().then(() => {
-                alert("Deleted successfully!");
-                loadAdminData(); // Refresh Grid
-            });
+// --- EDIT ITEM ---
+async function editItem(docId) {
+    const docRef = db.collection('inventory').doc(docId);
+    const doc = await docRef.get();
+    if(doc.exists) {
+        const newName = prompt("Enter new product name:", doc.data().name);
+        if(newName) {
+            await docRef.update({ name: newName });
+            loadAdminData(); 
         }
     }
+}
 
-    // --- 3. EDIT ITEM ---
-    async function editItem(docId) {
-        const docRef = db.collection('inventory').doc(docId);
-        const doc = await docRef.get();
-        if(doc.exists) {
-            // Simple prompt to edit the name as a starting point
-            const newName = prompt("Enter new product name:", doc.data().name);
-            if(newName) {
-                await docRef.update({ name: newName });
-                loadAdminData(); // Refresh grid
-            }
-        }
-    }
+// --- SAVE NEW ITEM ---
+function saveNewItem(e) {
+    e.preventDefault();
+    const btn = document.getElementById('addSubmitBtn');
+    btn.innerHTML = "Pushing to Cloud...";
+    
+    const itemData = {
+        name: document.getElementById('newItemName').value,
+        category: document.getElementById('newItemCat').value,
+        image: document.getElementById('newItemImg').value,
+        desc: document.getElementById('newItemDesc').value,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
 
-    // --- 4. SAVE NEW ITEM ---
-    function saveNewItem(e) {
-        e.preventDefault();
-        const btn = document.getElementById('addSubmitBtn');
-        btn.innerHTML = "Pushing to Cloud...";
-        
-        const itemData = {
-            name: document.getElementById('newItemName').value,
-            category: document.getElementById('newItemCat').value,
-            image: document.getElementById('newItemImg').value,
-            desc: document.getElementById('newItemDesc').value,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        };
+    db.collection("inventory").add(itemData).then(() => {
+        document.getElementById('addModal').classList.remove('active');
+        e.target.reset(); 
+        btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Push to Live Site';
+        alert("Product successfully added to live inventory!");
+        loadAdminData(); 
+    }).catch(error => alert("Error: " + error.message));
+}
 
-        db.collection("inventory").add(itemData).then(() => {
-            document.getElementById('addModal').classList.remove('active');
-            e.target.reset(); // clear form
-            btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Push to Live Site';
-            alert("Product successfully added to live inventory!");
-            loadAdminData(); // Refresh grid
-        }).catch(error => alert("Error: " + error.message));
-    }
+// --- UPDATE FLASH SALE ---
+function updateFlashSale(e) {
+    e.preventDefault();
+    const flashData = {
+        title: document.getElementById('fsTitle').value,
+        desc: document.getElementById('fsDesc').value,
+        oldPrice: document.getElementById('fsOldPrice').value,
+        newPrice: document.getElementById('fsNewPrice').value,
+        image: document.getElementById('fsImage').value,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
 
-    // --- 5. UPDATE FLASH SALE ---
-    function updateFlashSale(e) {
-        e.preventDefault();
-        const flashData = {
-            title: document.getElementById('fsTitle').value,
-            desc: document.getElementById('fsDesc').value,
-            oldPrice: document.getElementById('fsOldPrice').value,
-            newPrice: document.getElementById('fsNewPrice').value,
-            image: document.getElementById('fsImage').value,
-            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        };
+    db.collection("settings").doc("flashSale").set(flashData).then(() => {
+        alert("Flash Sale updated on live site!");
+    }).catch(err => alert(err.message));
+}
 
-        db.collection("settings").doc("flashSale").set(flashData).then(() => {
-            alert("Flash Sale updated on live site!");
-        }).catch(err => alert(err.message));
-    }
-
-    // Initialize Dashboard Data
-    loadAdminData();
 </script>
 </body>
 </html>
