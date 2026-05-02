@@ -1003,9 +1003,9 @@
             document.querySelector('.nav-btn-mobile[data-target="view-home"]').style.transform = "scale(1.1)";
         });
 
-        // --- 4. FIREBASE DATABASE, AUTH & RENDERER ---
+       // --- 4. FIREBASE DATABASE, AUTH & RENDERER ---
 let currentUser = null;
-let liveProducts = []; // This replaces your old hardcoded array
+let liveProducts = []; 
 
 // Listen for who is logged in
 auth.onAuthStateChanged(user => {
@@ -1023,13 +1023,13 @@ async function fetchStoreData() {
         snapshot.forEach(doc => {
             liveProducts.push({ id: doc.id, ...doc.data() });
         });
-        renderProducts('all'); // Render the cards after fetching
+        renderProducts('all'); 
     } catch (error) {
         console.error("Error fetching inventory:", error);
     }
 }
 
-// Render the products (Modified to use liveProducts instead of products)
+// Render the products
 function renderProducts(filter = 'all') {
     grid.innerHTML = ''; 
     const filteredData = filter === 'all' ? liveProducts : liveProducts.filter(p => p.category === filter);
@@ -1057,7 +1057,6 @@ function renderProducts(filter = 'all') {
         grid.innerHTML += card;
     });
 
-    // Re-initialize your 3D tilt effect on the new cards
     setTimeout(() => {
         VanillaTilt.init(document.querySelectorAll(".card-hover"), {
             max: 12, speed: 400, glare: true, "max-glare": 0.25, scale: 1.02
@@ -1065,84 +1064,38 @@ function renderProducts(filter = 'all') {
     }, 100);
 }
 
-// Call this immediately so the store loads when the page opens!
-fetchStoreData();
+function filterItems(category) {
+    btns.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    renderProducts(category);
+}
 
-        const grid = document.getElementById('productGrid');
-        const btns = document.querySelectorAll('.filter-btn');
+function searchProducts() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const allCards = document.querySelectorAll('#productGrid > div');
+    allCards.forEach(card => {
+        const title = card.querySelector('h3').innerText.toLowerCase();
+        card.style.display = (title.includes(input)) ? "flex" : "none";
+    });
+}
 
-        function renderProducts(filter = 'all') {
-            grid.innerHTML = ''; 
-            const filteredData = filter === 'all' ? products : products.filter(p => p.category === filter);
+// --- ORDER MODAL & CHECKOUT ---
+const modal = document.getElementById('orderModal');
+const modalTitle = document.getElementById('modalTitle');
+let currentProduct = '';
 
-            filteredData.forEach(item => {
-                const card = `
-                    <div class="liquid-glass overflow-hidden card-hover group relative p-3 flex flex-col h-full">
-                        <div class="h-40 md:h-48 rounded-xl overflow-hidden bg-white/5 border border-white/5 flex-shrink-0 relative">
-                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                            <div class="absolute top-5 right-5 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[10px] uppercase font-bold text-white border border-white/20 shadow-inner">
-                                In Stock
-                            </div>
-                        </div>
-                        <div class="p-2 pt-4 flex flex-col flex-grow">
-                            <div class="text-[10px] text-white/50 font-bold uppercase tracking-widest mb-1">${item.category}</div>
-                            <h3 class="font-bold text-sm md:text-base text-white mb-1 leading-tight drop-shadow-sm">${item.name}</h3>
-                            <p class="text-xs text-white/60 mb-5 line-clamp-1 font-light">${item.desc}</p>
-                            
-                            <button onclick="openOrderModal('${item.name}')" class="interaction-btn mt-auto w-full py-3 bg-white/10 hover:bg-white text-white hover:text-black rounded-xl text-xs font-bold uppercase transition-all shadow-inner border border-white/10 text-center flex items-center justify-center gap-2">
-                                <i class="fas fa-shopping-cart"></i> Buy
-                            </button>
-                        </div>
-                    </div>
-                `;
-                grid.innerHTML += card;
-            });
+function openOrderModal(productName) {
+    currentProduct = productName;
+    modalTitle.innerText = productName;
+    modal.classList.add('active');
+}
+function closeModal() { modal.classList.remove('active'); }
+function openPolicy() { document.getElementById('policyModal').classList.add('active'); }
 
-            // Initialize VanillaTilt for 3D Gyroscope/Mouse Physics
-            setTimeout(() => {
-                VanillaTilt.init(document.querySelectorAll(".card-hover"), {
-                    max: 12,
-                    speed: 400,
-                    glare: true,
-                    "max-glare": 0.25,
-                    scale: 1.02
-                });
-            }, 100);
-        }
+modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+document.getElementById('policyModal').addEventListener('click', (e) => { if (e.target === document.getElementById('policyModal')) document.getElementById('policyModal').classList.remove('active'); });
 
-        function filterItems(category) {
-            btns.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            renderProducts(category);
-        }
-
-        function searchProducts() {
-            const input = document.getElementById('searchInput').value.toLowerCase();
-            const allCards = document.querySelectorAll('#productGrid > div');
-            allCards.forEach(card => {
-                const title = card.querySelector('h3').innerText.toLowerCase();
-                card.style.display = (title.includes(input)) ? "flex" : "none";
-            });
-        }
-
-        // --- ORIGINAL DIRECT BUY (ORDER MODAL) ---
-        const modal = document.getElementById('orderModal');
-        const modalTitle = document.getElementById('modalTitle');
-        let currentProduct = '';
-
-        function openOrderModal(productName) {
-            currentProduct = productName;
-            modalTitle.innerText = productName;
-            modal.classList.add('active');
-        }
-        function closeModal() { modal.classList.remove('active'); }
-        function openPolicy() { document.getElementById('policyModal').classList.add('active'); }
-        
-        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-        document.getElementById('policyModal').addEventListener('click', (e) => { if (e.target === document.getElementById('policyModal')) document.getElementById('policyModal').classList.remove('active'); });
-
-        function sendOrder() {
-    // 1. Guard check: Are they logged in?
+function sendOrder() {
     if (!currentUser) {
         alert("Please create an account or log in to place an order.");
         window.location.href = "login.html";
@@ -1159,7 +1112,6 @@ fetchStoreData();
     if(!name || !location) { alert("Please fill in your Name and Location."); return; }
     triggerConfetti();
 
-    // 2. Save order to Firebase History
     db.collection("users").doc(currentUser.uid).collection("orders").add({
         product: currentProduct,
         condition: condition,
@@ -1168,7 +1120,6 @@ fetchStoreData();
         date: firebase.firestore.FieldValue.serverTimestamp(),
         status: "Pending WhatsApp Confirmation"
     }).then(() => {
-        // 3. Proceed to WhatsApp
         const msg = `*NEW ORDER ALERT - HoRly's Tech* 🚀%0A%0A` +
                     `*Device:* ${currentProduct}%0A` +
                     `*Condition:* ${condition}%0A` +
@@ -1184,119 +1135,121 @@ fetchStoreData();
         window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
         closeModal();
     }).catch((error) => {
-        console.error("Error saving order history:", error);
-        alert("Something went wrong saving your order. Please try again.");
+        alert("Something went wrong saving your order.");
     });
 }
 
-        function openCustomOrder() { window.open(`https://wa.me/2349121213936?text=Hello HoRly's Tech, I am looking for a specific device not listed on your site...`, '_blank'); }
+function openCustomOrder() { window.open(`https://wa.me/2349121213936?text=Hello HoRly's Tech, I am looking for a specific device not listed on your site...`, '_blank'); }
 
-        // --- OTHER FORMS (Swap, Inquiry, VIP, Bundles) ---
-        function sendSwapRequest() {
-            const have = document.getElementById('swapHave').value;
-            const condition = document.getElementById('swapCondition').value;
-            const want = document.getElementById('swapWant').value;
-            if(!have || !want) { alert("Please tell us what phone you have and what you want."); return; }
+// --- OTHER FORMS ---
+function sendSwapRequest() {
+    const have = document.getElementById('swapHave').value;
+    const condition = document.getElementById('swapCondition').value;
+    const want = document.getElementById('swapWant').value;
+    if(!have || !want) { alert("Please tell us what phone you have and what you want."); return; }
 
-            const msg = `*SWAP DEAL REQUEST* 🔄%0A%0A` +
-                        `🔴 *I Have:* ${have}%0A` +
-                        `📊 *Condition:* ${condition}%0A` +
-                        `🟢 *I Want:* ${want}%0A%0A` +
-                        `_How much do I need to add (Top-up)?_`;
-            window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
-        }
+    const msg = `*SWAP DEAL REQUEST* 🔄%0A%0A🔴 *I Have:* ${have}%0A📊 *Condition:* ${condition}%0A🟢 *I Want:* ${want}%0A%0A_How much do I need to add (Top-up)?_`;
+    window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
+}
 
-        function sendInquiry() {
-            const name = document.getElementById('inqName').value;
-            const type = document.getElementById('inqType').value;
-            const message = document.getElementById('inqMessage').value;
-            if(!name || !message) { alert("Please enter your name and message."); return; }
-            const waMsg = `*GENERAL INQUIRY - HoRly's Tech* ❓%0A%0A*Name:* ${name}%0A*Topic:* ${type}%0A*Message:* ${message}`;
-            window.open(`https://wa.me/2349121213936?text=${waMsg}`, '_blank');
-        }
+function sendInquiry() {
+    const name = document.getElementById('inqName').value;
+    const type = document.getElementById('inqType').value;
+    const message = document.getElementById('inqMessage').value;
+    if(!name || !message) { alert("Please enter your name and message."); return; }
+    const waMsg = `*GENERAL INQUIRY - HoRly's Tech* ❓%0A%0A*Name:* ${name}%0A*Topic:* ${type}%0A*Message:* ${message}`;
+    window.open(`https://wa.me/2349121213936?text=${waMsg}`, '_blank');
+}
 
-        function buyBundle(packName) {
-            const msg = `*BUNDLE ORDER* 📦%0A%0AI am interested in the *${packName}*.%0A%0APlease confirm the total price and availability.`;
-            window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
-        }
+function buyBundle(packName) {
+    const msg = `*BUNDLE ORDER* 📦%0A%0AI am interested in the *${packName}*.%0A%0APlease confirm the total price and availability.`;
+    window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
+}
 
-        function joinVip(e) {
-            e.preventDefault();
-            const phone = document.getElementById('vipPhone').value;
-            triggerConfetti();
-            const msg = `*VIP LIST SIGNUP* 👑%0A%0AI want to join the HoRly Tech VIP list to get stock updates.%0A*My Number:* ${phone}`;
-            window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
-        }
+function joinVip(e) {
+    e.preventDefault();
+    const phone = document.getElementById('vipPhone').value;
+    triggerConfetti();
+    const msg = `*VIP LIST SIGNUP* 👑%0A%0AI want to join the HoRly Tech VIP list to get stock updates.%0A*My Number:* ${phone}`;
+    window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
+}
 
-        function claimDeal() {
-            triggerConfetti();
-            const msg = `*FLASH DEAL CLAIM* 🔥%0A%0AI want to claim the *PS5 Slim Promo* for ₦980,000.%0A%0APlease reserve this for me immediately!`;
-            window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
-        }
+function claimDeal() {
+    triggerConfetti();
+    const msg = `*FLASH DEAL CLAIM* 🔥%0A%0AI want to claim the *PS5 Slim Promo* for ₦980,000.%0A%0APlease reserve this for me immediately!`;
+    window.open(`https://wa.me/2349121213936?text=${msg}`, '_blank');
+}
 
-        // --- FLASH DEAL COUNTDOWN ---
-        const countDownDate = new Date().getTime() + (3 * 24 * 60 * 60 * 1000); 
-        const x = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = countDownDate - now;
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+// Flash Deal Countdown
+const countDownDate = new Date().getTime() + (3 * 24 * 60 * 60 * 1000); 
+setInterval(function() {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+    if(distance > 0) {
+        document.getElementById("days").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+        document.getElementById("hours").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+        document.getElementById("minutes").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+        document.getElementById("seconds").innerHTML = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+    }
+}, 1000);
 
-            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
-            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
-            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
-            document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+function triggerConfetti() {
+    var duration = 3 * 1000;
+    var animationEnd = Date.now() + duration;
+    var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 999 };
+    function randomInOut(min, max) { return Math.random() * (max - min) + min; }
+    var interval = setInterval(function() {
+        var timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) return clearInterval(interval);
+        var particleCount = 50 * (timeLeft / duration);
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInOut(0.1, 0.3), y: Math.random() - 0.2 } }));
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInOut(0.7, 0.9), y: Math.random() - 0.2 } }));
+    }, 250);
+}
 
-            if (distance < 0) {
-                clearInterval(x);
-                document.getElementById("days").innerHTML = "00";
-                document.getElementById("hours").innerHTML = "00";
-            }
-        }, 1000);
+// User Profile Actions
+async function openProfile() {
+    if (!currentUser) {
+        window.location.href = "login.html";
+        return;
+    }
+    document.getElementById('profileEmail').innerText = currentUser.email;
+    document.getElementById('profileModal').classList.add('active');
+    
+    const ordersList = document.getElementById('orderHistoryList');
+    const snapshot = await db.collection("users").doc(currentUser.uid).collection("orders").orderBy("date", "desc").get();
+    
+    ordersList.innerHTML = '';
+    if(snapshot.empty) {
+        ordersList.innerHTML = '<p class="text-white/40 text-sm">No previous orders found.</p>';
+        return;
+    }
+    
+    snapshot.forEach(doc => {
+        const data = doc.data();
+        ordersList.innerHTML += `
+            <div class="bg-black/40 border border-white/10 p-4 rounded-xl">
+                <h5 class="font-bold text-white text-sm">${data.product}</h5>
+                <p class="text-[10px] text-white/50">${data.spec} • ${data.color}</p>
+                <p class="text-xs text-sky-400 mt-2">${data.status}</p>
+            </div>
+        `;
+    });
+}
 
-        // --- CONFETTI ---
-        function triggerConfetti() {
-            var duration = 3 * 1000;
-            var animationEnd = Date.now() + duration;
-            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 999 };
-            function randomInOut(min, max) { return Math.random() * (max - min) + min; }
-            var interval = setInterval(function() {
-                var timeLeft = animationEnd - Date.now();
-                if (timeLeft <= 0) return clearInterval(interval);
-                var particleCount = 50 * (timeLeft / duration);
-                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInOut(0.1, 0.3), y: Math.random() - 0.2 } }));
-                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInOut(0.7, 0.9), y: Math.random() - 0.2 } }));
-            }, 250);
-        }
+function logoutUser() {
+    auth.signOut().then(() => {
+        document.getElementById('profileModal').classList.remove('active');
+        alert("Logged out successfully");
+        window.location.reload();
+    });
+}
 
-        // --- SALES TOAST ---
-        const salesData = [
-            { loc: 'Lekki, Lagos', item: 'iPhone 14 Pro Max' },
-            { loc: 'Gwarinpa, Abuja', item: 'Samsung S23 Ultra' },
-            { loc: 'Port Harcourt', item: 'PS5 Console' },
-            { loc: 'Ikeja, Lagos', item: 'MacBook Air M1' },
-            { loc: 'Ibadan', item: 'Google Pixel 7' }
-        ];
-        const toast = document.getElementById('sales-toast');
-        function showToast() {
-            const random = salesData[Math.floor(Math.random() * salesData.length)];
-            document.getElementById('toast-loc').innerText = random.loc;
-            document.getElementById('toast-item').innerText = random.item;
-            toast.classList.remove('translate-y-32', 'opacity-0');
-            setTimeout(() => toast.classList.add('translate-y-32', 'opacity-0'), 4000);
-        }
-        setTimeout(() => { showToast(); setInterval(showToast, 12000); }, 3000);
+document.addEventListener('contextmenu', event => event.preventDefault()); 
 
-        // Anti-theft
-        document.addEventListener('contextmenu', event => event.preventDefault()); 
-        document.onkeydown = function(e) {
-            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) || (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) return false;
-        }
+// Init Store
+fetchStoreData();
 
-        // Init
-        renderProducts('all');
     </script>
 </body>
 </html>
