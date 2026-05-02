@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
     <title>HoRly’s Tech | Admin Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
@@ -39,6 +39,7 @@
             <button onclick="switchTab('dashboard')" class="w-full text-left px-4 py-3 rounded-xl bg-white/10 text-white font-medium hover:bg-white/20 transition"><i class="fas fa-chart-line w-6"></i> Dashboard</button>
             <button onclick="switchTab('users')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-users w-6"></i> Customers</button>
             <button onclick="switchTab('inventory')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-box w-6"></i> Live Inventory</button>
+            <button onclick="switchTab('flashsale')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-bolt w-6"></i> Flash Sale</button>
         </nav>
         <button onclick="adminLogout()" class="mt-auto px-4 py-3 rounded-xl border border-red-500/30 text-red-400 hover:bg-red-500/10 transition"><i class="fas fa-sign-out-alt w-6"></i> Exit Admin</button>
     </div>
@@ -99,6 +100,22 @@
             </form>
         </div>
     </div>
+
+<div id="tab-flashsale" class="tab-content hidden">
+    <h2 class="orbitron text-3xl font-bold mb-8">Manage <span class="gradient-text">Flash Sale</span></h2>
+    <div class="liquid-glass p-8 max-w-2xl">
+        <form class="space-y-4" onsubmit="updateFlashSale(event)">
+            <input type="text" id="fsTitle" placeholder="Title (e.g. PlayStation 5 Slim)" class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white">
+            <input type="text" id="fsDesc" placeholder="Description (e.g. 1TB Console + FIFA 26)" class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white">
+            <div class="grid grid-cols-2 gap-4">
+                <input type="text" id="fsOldPrice" placeholder="Old Price (₦)" class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white">
+                <input type="text" id="fsNewPrice" placeholder="New Price (₦)" class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white">
+            </div>
+            <input type="url" id="fsImage" placeholder="Image URL" class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-4 text-white">
+            <button type="submit" class="bg-orange-500 text-white font-bold py-4 px-8 rounded-xl hover:bg-orange-400 transition w-full">Update Flash Sale Live</button>
+        </form>
+    </div>
+</div>
 
     <script>
         // Security Check
