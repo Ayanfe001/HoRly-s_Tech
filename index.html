@@ -885,6 +885,27 @@
         </button>
     </div>
 
+    <!-- User Profile & History Modal -->
+<div id="profileModal" class="modal fixed inset-0 z-[120] flex items-center justify-center bg-black/40">
+    <div class="modal-content w-full max-w-lg liquid-glass-heavy rounded-3xl p-8 relative max-h-[80vh] overflow-y-auto mx-4 border border-white/20">
+        <button onclick="document.getElementById('profileModal').classList.remove('active')" class="interaction-btn absolute top-6 right-6 w-10 h-10 bg-white/10 rounded-full flex items-center justify-center text-white/60 hover:text-white">
+            <i class="fas fa-times"></i>
+        </button>
+        <h3 class="orbitron text-2xl font-bold mb-2 text-white">Your <span class="gradient-text">Profile</span></h3>
+        <p id="profileEmail" class="text-white/50 text-sm mb-6"></p>
+        
+        <h4 class="font-bold text-white mb-4 border-b border-white/10 pb-2">Order History</h4>
+        <div id="orderHistoryList" class="space-y-4 mb-8">
+            <!-- Order history injects here -->
+            <p class="text-white/40 text-sm">Loading history...</p>
+        </div>
+        
+        <button onclick="logoutUser()" class="w-full bg-red-500/20 text-red-400 border border-red-500/30 font-bold py-3 rounded-xl hover:bg-red-500/40 transition">
+            Log Out
+        </button>
+    </div>
+</div>
+
     <!-- Scripts -->
     <script>
         // --- 1. DAY GLASS (LIGHT MODE) TOGGLE ---
