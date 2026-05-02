@@ -197,40 +197,48 @@
             btn.addEventListener('click', playInteractionFeedback);
         });
 
-        function toggleForms() {
-            const login = document.getElementById('loginForm');
-            const register = document.getElementById('registerForm');
-            
-            if (login.classList.contains('active-form')) {
-                login.classList.remove('active-form');
-                login.classList.add('hidden-form');
-                register.classList.remove('hidden-form');
-                register.classList.add('active-form');
-            } else {
-                register.classList.remove('active-form');
-                register.classList.add('hidden-form');
-                login.classList.remove('hidden-form');
-                login.classList.add('active-form');
-            }
-        }
+function toggleForms() {
+    const login = document.getElementById('loginForm');
+    const register = document.getElementById('registerForm');
+    // ... [Your existing toggle code] ...
+}
 
-        // Mock Authentication linking to index.html
-        function handleAuth(e, type) {
-            e.preventDefault();
-            const email = type === 'login' ? document.getElementById('loginEmail').value : document.getElementById('regEmail').value;
+// REAL FIREBASE AUTHENTICATION
+async function handleAuth(e, type) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    const originalText = btn.innerText;
+    btn.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Processing...`;
+    
+    try {
+        if (type === 'login') {
+            const email = document.getElementById('loginEmail').value;
+            const pass = document.getElementById('loginPass').value;
+            await auth.signInWithEmailAndPassword(email, pass);
+            window.location.href = 'index.html';
+        } else {
+            const name = document.getElementById('regName').value;
+            const email = document.getElementById('regEmail').value;
+            const pass = document.getElementById('regPass').value;
             
-            // Save to local storage to simulate a session
-            localStorage.setItem('horlys_user', email);
+            // Create user
+            const userCredential = await auth.createUserWithEmailAndPassword(email, pass);
+            const user = userCredential.user;
             
-            // Visual feedback
-            const btn = e.target.querySelector('button[type="submit"]');
-            const originalText = btn.innerText;
-            btn.innerHTML = `<i class="fas fa-circle-notch fa-spin"></i> Authenticating...`;
-            
-            setTimeout(() => {
-                window.location.href = 'index.html'; // Redirect to store
-            }, 1000);
+            // Save additional user info to Firestore
+            await db.collection('users').doc(user.uid).set({
+                name: name,
+                email: email,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                role: 'customer'
+            });
+            window.location.href = 'index.html';
         }
+    } catch (error) {
+        alert("Authentication Error: " + error.message);
+        btn.innerText = originalText;
+    }
+}
     </script>
 </body>
 </html>
