@@ -1036,9 +1036,14 @@ function renderProducts(filter = 'all') {
             <div class="liquid-glass overflow-hidden card-hover group relative p-3 flex flex-col h-full">
                 <div class="h-40 md:h-48 rounded-xl overflow-hidden bg-white/5 border border-white/5 flex-shrink-0 relative">
                     <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute top-5 right-5 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full text-[10px] uppercase font-bold text-white border border-white/20 shadow-inner">
-                        In Stock
-                    </div>
+                    <div class="absolute top-5 right-5 flex flex-col gap-1 items-end">
+    <div class="bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] uppercase font-bold text-white border border-white/20 shadow-inner tracking-widest">
+        UPDATE FOR ALL
+    </div>
+    <div class="bg-sky-500/90 backdrop-blur-md px-2 py-0.5 rounded-full text-[8px] uppercase font-bold text-white shadow-lg">
+        New Update
+    </div>
+</div>
                 </div>
                 <div class="p-2 pt-4 flex flex-col flex-grow">
                     <div class="text-[10px] text-white/50 font-bold uppercase tracking-widest mb-1">${item.category}</div>
@@ -1109,11 +1114,13 @@ function sendOrder() {
     if(!name || !location) { alert("Please fill in your Name and Location."); return; }
     triggerConfetti();
 
-    db.collection("users").doc(currentUser.uid).collection("orders").add({
+        db.collection("users").doc(currentUser.uid).collection("orders").add({
         product: currentProduct,
         condition: condition,
         spec: spec,
         color: color,
+        customerName: name, 
+        customerPhone: number, 
         date: firebase.firestore.FieldValue.serverTimestamp(),
         status: "Pending WhatsApp Confirmation"
     }).then(() => {
@@ -1250,6 +1257,13 @@ fetchStoreData();
     </script>
 
     <script src="script.js"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js');
+        });
+    }
+</script>
 
 </body>
 </html>
