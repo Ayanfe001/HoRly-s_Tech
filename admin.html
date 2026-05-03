@@ -40,10 +40,12 @@
     <div class="w-64 liquid-glass m-4 flex flex-col p-6 hidden md:flex">
         <h1 class="orbitron text-xl font-bold tracking-tighter mb-10"><span class="text-red-500">Admin</span>_<span class="gradient-text">Panel</span></h1>
         <nav class="space-y-4 flex-1">
-            <button onclick="switchTab('dashboard')" class="w-full text-left px-4 py-3 rounded-xl bg-white/10 text-white font-medium hover:bg-white/20 transition"><i class="fas fa-chart-line w-6"></i> Dashboard</button>
+            <button onclick="switchTab('dashboard')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-chart-line w-6"></i> Dashboard</button>
             <button onclick="switchTab('users')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-users w-6"></i> Customers</button>
             <button onclick="switchTab('inventory')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-box w-6"></i> Live Inventory</button>
             <button onclick="switchTab('flashsale')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-bolt w-6"></i> Flash Sale</button>
+            <button onclick="switchTab('gadgetwars')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-balance-scale w-6"></i> Gadget Wars</button>
+            <button onclick="switchTab('superbundles')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-layer-group w-6"></i> Super Bundles</button>
         </nav>
         <button onclick="adminLogout()" class="mt-auto px-4 py-3 rounded-xl border border-red-500/30 text-red-400 hover:bg-red-500/10 transition"><i class="fas fa-sign-out-alt w-6"></i> Exit Admin</button>
     </div>
@@ -119,6 +121,70 @@
             <button type="submit" class="bg-orange-500 text-white font-bold py-4 px-8 rounded-xl hover:bg-orange-400 transition w-full">Update Flash Sale Live</button>
         </form>
     </div>
+</div>
+
+    <!-- Gadget Wars Tab -->
+<div id="tab-gadgetwars" class="tab-content hidden">
+    <h2 class="orbitron text-3xl font-bold mb-8">Modify <span class="gradient-text">Gadget Wars</span></h2>
+    <form class="liquid-glass p-8 space-y-4" onsubmit="updateGadgetWars(event)">
+        <input type="text" id="admin-gw-desc" placeholder="Subtitle Description" class="w-full bg-black/50 border border-white/10 rounded-xl px-5 py-3 text-white mb-4">
+        
+        <div class="grid grid-cols-3 gap-4 mb-4">
+            <input type="text" id="admin-gw-h1" placeholder="Phone 1 Name" class="bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white">
+            <input type="text" id="admin-gw-h2" placeholder="Phone 2 Name" class="bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white">
+            <input type="text" id="admin-gw-h3" placeholder="Phone 3 Name" class="bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white">
+        </div>
+        
+        <p class="text-xs text-white/50 uppercase tracking-widest mt-4">Row 1 Feature</p>
+        <div class="grid grid-cols-4 gap-4">
+            <input type="text" id="admin-gw-r1-feat" placeholder="Feature Name" class="bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white">
+            <input type="text" id="admin-gw-r1-v1" placeholder="Phone 1 Value" class="bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white">
+            <input type="text" id="admin-gw-r1-v2" placeholder="Phone 2 Value" class="bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white">
+            <input type="text" id="admin-gw-r1-v3" placeholder="Phone 3 Value" class="bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white">
+        </div>
+
+        <p class="text-xs text-white/50 uppercase tracking-widest mt-4">Row 2 Feature</p>
+        <div class="grid grid-cols-4 gap-4">
+            <input type="text" id="admin-gw-r2-feat" placeholder="Feature Name" class="bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white">
+            <input type="text" id="admin-gw-r2-v1" placeholder="Phone 1 Value" class="bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white">
+            <input type="text" id="admin-gw-r2-v2" placeholder="Phone 2 Value" class="bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white">
+            <input type="text" id="admin-gw-r2-v3" placeholder="Phone 3 Value" class="bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white">
+        </div>
+
+        <button type="submit" class="mt-6 bg-sky-500 text-white font-bold py-4 px-8 rounded-xl hover:bg-sky-400 transition w-full">Save Gadget Wars</button>
+    </form>
+</div>
+
+<!-- Super Bundles Tab -->
+<div id="tab-superbundles" class="tab-content hidden">
+    <h2 class="orbitron text-3xl font-bold mb-8">Modify <span class="gradient-text">Super Bundles</span></h2>
+    <form class="grid grid-cols-1 lg:grid-cols-3 gap-6" onsubmit="updateSuperBundles(event)">
+        <!-- Bundle 1 Admin -->
+        <div class="liquid-glass p-6 space-y-3">
+            <input type="text" id="admin-b1-title" placeholder="Bundle 1 Title" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white font-bold text-sky-400">
+            <input type="text" id="admin-b1-l1" placeholder="List Item 1" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-sm text-white">
+            <input type="text" id="admin-b1-l2" placeholder="List Item 2" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-sm text-white">
+            <input type="text" id="admin-b1-l3" placeholder="List Item 3" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-sm text-white">
+            <input type="text" id="admin-b1-price" placeholder="Price (₦)" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white font-bold mt-2">
+        </div>
+        <!-- Bundle 2 Admin -->
+        <div class="liquid-glass p-6 space-y-3">
+            <input type="text" id="admin-b2-title" placeholder="Bundle 2 Title" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white font-bold text-purple-400">
+            <input type="text" id="admin-b2-l1" placeholder="List Item 1" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-sm text-white">
+            <input type="text" id="admin-b2-l2" placeholder="List Item 2" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-sm text-white">
+            <input type="text" id="admin-b2-l3" placeholder="List Item 3" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-sm text-white">
+            <input type="text" id="admin-b2-price" placeholder="Price (₦)" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white font-bold mt-2">
+        </div>
+        <!-- Bundle 3 Admin -->
+        <div class="liquid-glass p-6 space-y-3">
+            <input type="text" id="admin-b3-title" placeholder="Bundle 3 Title" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white font-bold text-orange-400">
+            <input type="text" id="admin-b3-l1" placeholder="List Item 1" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-sm text-white">
+            <input type="text" id="admin-b3-l2" placeholder="List Item 2" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-sm text-white">
+            <input type="text" id="admin-b3-l3" placeholder="List Item 3" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-2 text-sm text-white">
+            <input type="text" id="admin-b3-price" placeholder="Price (₦)" class="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white font-bold mt-2">
+        </div>
+        <button type="submit" class="col-span-1 lg:col-span-3 bg-sky-500 text-white font-bold py-4 rounded-xl hover:bg-sky-400 transition">Save Super Bundles</button>
+    </form>
 </div>
 
    <script>
@@ -204,6 +270,34 @@ function loadAdminData() {
             document.getElementById('fsImage').value = data.image || "";
         }
     });
+
+    // --- UPDATE GADGET WARS ---
+function updateGadgetWars(e) {
+    e.preventDefault();
+    const gwData = {};
+    ['desc', 'h1', 'h2', 'h3', 'r1-feat', 'r1-v1', 'r1-v2', 'r1-v3', 'r2-feat', 'r2-v1', 'r2-v2', 'r2-v3'].forEach(id => {
+        gwData[id] = document.getElementById(`admin-gw-${id}`).value;
+    });
+
+    db.collection("settings").doc("gadgetWars").set(gwData).then(() => {
+        alert("Gadget Wars updated successfully!");
+    }).catch(err => alert(err.message));
+}
+
+// --- UPDATE SUPER BUNDLES ---
+function updateSuperBundles(e) {
+    e.preventDefault();
+    const bundleData = {};
+    ['b1-title', 'b1-price', 'b1-l1', 'b1-l2', 'b1-l3', 
+     'b2-title', 'b2-price', 'b2-l1', 'b2-l2', 'b2-l3', 
+     'b3-title', 'b3-price', 'b3-l1', 'b3-l2', 'b3-l3'].forEach(id => {
+        bundleData[id] = document.getElementById(`admin-${id}`).value;
+    });
+
+    db.collection("settings").doc("superBundles").set(bundleData).then(() => {
+        alert("Super Bundles updated successfully!");
+    }).catch(err => alert(err.message));
+}
 
 }
 
