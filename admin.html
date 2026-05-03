@@ -15,6 +15,8 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <!-- Add this to the <head> of index.html, login.html, and admin.html -->
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
@@ -42,6 +44,7 @@
         <nav class="space-y-4 flex-1">
             <button onclick="switchTab('dashboard')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-chart-line w-6"></i> Dashboard</button>
             <button onclick="switchTab('users')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-users w-6"></i> Customers</button>
+            <button onclick="switchTab('orders')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-shipping-fast w-6"></i> Live Orders</button>
             <button onclick="switchTab('inventory')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-box w-6"></i> Live Inventory</button>
             <button onclick="switchTab('flashsale')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-bolt w-6"></i> Flash Sale</button>
             <button onclick="switchTab('gadgetwars')" class="w-full text-left px-4 py-3 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition"><i class="fas fa-balance-scale w-6"></i> Gadget Wars</button>
@@ -185,6 +188,26 @@
         </div>
         <button type="submit" class="col-span-1 lg:col-span-3 bg-sky-500 text-white font-bold py-4 rounded-xl hover:bg-sky-400 transition">Save Super Bundles</button>
     </form>
+</div>
+
+    <!-- Live Orders Tab -->
+<div id="tab-orders" class="tab-content hidden">
+    <h2 class="orbitron text-3xl font-bold mb-8">Live <span class="gradient-text">Orders</span></h2>
+    <div class="liquid-glass p-6 overflow-x-auto">
+        <table class="w-full text-left text-sm">
+            <thead class="text-white/50 uppercase border-b border-white/10">
+                <tr>
+                    <th class="pb-4">Customer</th>
+                    <th class="pb-4">Product & Specs</th>
+                    <th class="pb-4">Status</th>
+                    <th class="pb-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="adminOrdersTable" class="divide-y divide-white/5">
+                <!-- Orders will inject here -->
+            </tbody>
+        </table>
+    </div>
 </div>
 
    <script>
@@ -339,8 +362,102 @@ async function editItem(docId) {
         }).catch(err => alert(err.message));
     }
 
+       // --- LIVE ORDER TRACKING ---
+function loadOrdersData() {
+    const ordersTable = document.getElementById('adminOrdersTable');
+    ordersTable.innerHTML = '';
+
+    // Fetch all orders using a Collection Group Query
+    db.collectionGroup("orders").orderBy("date", "desc").get().then((snapshot) => {
+        snapshot.forEach(doc => {
+            const order = doc.data();
+            const orderPath = doc.ref.path; // Save the exact database path for updating
+            
+            ordersTable.innerHTML += `
+                <tr class="hover:bg-white/5 transition">
+                    <td class="py-4">
+                        <div class="font-bold text-white">${order.customerName || 'N/A'}</div>
+                        <div class="text-[10px] text-white/50">${order.customerPhone || 'N/A'}</div>
+                    </td>
+                    <td class="py-4">
+                        <div class="font-bold text-sky-400">${order.product}</div>
+                        <div class="text-[10px] text-white/70">${order.condition} | ${order.spec} | ${order.color}</div>
+                    </td>
+                    <td class="py-4">
+                        <select onchange="updateOrderStatus('${orderPath}', this.value)" class="bg-black/50 border border-white/10 rounded px-2 py-1 text-xs text-white outline-none">
+                            <option value="${order.status}" hidden selected>${order.status}</option>
+                            <option value="Pending WhatsApp Confirmation">Pending</option>
+                            <option value="Processing in Lab">Processing in Lab</option>
+                            <option value="Dispatched with Rider">Dispatched with Rider</option>
+                            <option value="Delivered & Completed">Delivered & Completed</option>
+                        </select>
+                    </td>
+                    <td class="py-4">
+                        <button onclick="generateReceipt('${order.customerName}', '${order.product}', '${order.spec}', '${order.condition}')" class="text-xs bg-white/10 hover:bg-white text-white hover:text-black border border-white/20 px-3 py-1.5 rounded transition">
+                            <i class="fas fa-file-pdf"></i> Receipt
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+    }).catch(err => {
+        // If Firebase requires an index for this query, it will log a link here.
+        console.error("Orders Error (You may need to click the index link in your console):", err);
+    });
+}
+
+// Function to update the order status in the database
+function updateOrderStatus(orderPath, newStatus) {
+    db.doc(orderPath).update({ status: newStatus }).then(() => {
+        // Optional: show a small toast or notification here
+    }).catch(err => alert("Error updating status: " + err.message));
+}
+
+// --- PDF RECEIPT GENERATOR ---
+function generateReceipt(customer, product, spec, condition) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Design the PDF
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(22);
+    doc.setTextColor(14, 165, 233); // Sky blue
+    doc.text("HoRly's Tech", 20, 30);
+    
+    doc.setFontSize(12);
+    doc.setTextColor(100, 100, 100);
+    doc.text("Official Purchase Receipt", 20, 40);
+    
+    doc.setDrawColor(200, 200, 200);
+    doc.line(20, 45, 190, 45); // Horizontal line
+
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(0, 0, 0);
+    doc.text(`Customer Name: ${customer}`, 20, 60);
+    doc.text(`Date: ${new Date().toLocaleDateString()}`, 140, 60);
+    
+    doc.setFont("helvetica", "bold");
+    doc.text("Item Details:", 20, 80);
+    
+    doc.setFont("helvetica", "normal");
+    doc.text(`Device: ${product}`, 20, 90);
+    doc.text(`Specification: ${spec}`, 20, 100);
+    doc.text(`Condition: ${condition}`, 20, 110);
+    
+    doc.line(20, 120, 190, 120);
+    
+    doc.setFontSize(10);
+    doc.setTextColor(150, 150, 150);
+    doc.text("Thank you for upgrading your digital life with HoRly's Tech.", 20, 135);
+    doc.text("All UK Used devices are covered by a 7-Day Guarantee.", 20, 142);
+
+    // Trigger Download
+    doc.save(`HoRlys_Receipt_${customer.replace(/\s+/g, '_')}.pdf`);
+}
+
     // Initialize Dashboard Data
     loadAdminData();
+    loadOrdersData();
 </script>
 
 
