@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
-Sitemap: https://horlystech.com/sitemap.xml
+Sitemap: https://horlystech.vercel.app/sitemap.xml
 
 # Block access to system files
 Disallow: /manifest.json
