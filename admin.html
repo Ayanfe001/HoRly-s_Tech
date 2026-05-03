@@ -192,6 +192,19 @@ function loadAdminData() {
             `;
         });
     });
+
+        // Fetch Existing Flash Sale for Editing
+    db.collection("settings").doc("flashSale").get().then((doc) => {
+        if(doc.exists) {
+            const data = doc.data();
+            document.getElementById('fsTitle').value = data.title || "";
+            document.getElementById('fsDesc').value = data.desc || "";
+            document.getElementById('fsOldPrice').value = data.oldPrice || "";
+            document.getElementById('fsNewPrice').value = data.newPrice || "";
+            document.getElementById('fsImage').value = data.image || "";
+        }
+    });
+
 }
 
 // --- DELETE ITEM ---
