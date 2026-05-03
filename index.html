@@ -1034,8 +1034,8 @@ function renderProducts(filter = 'all') {
     filteredData.forEach(item => {
         const card = `
             <div class="liquid-glass overflow-hidden card-hover group relative p-3 flex flex-col h-full">
-                <div class="aspect-square w-full rounded-xl overflow-hidden bg-white/5 border border-white/5 flex-shrink-0 relative flex items-center justify-center p-4">
-    <img src="${item.image}" alt="${item.name}" class="w-full h-full object-contain drop-shadow-2xl group-hover:scale-110 transition-transform duration-700">
+                <div class="aspect-square w-full rounded-xl overflow-hidden bg-white/5 border border-white/5 flex-shrink-0 relative">
+    <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute top-5 right-5 flex flex-col gap-1 items-end">
     <div class="bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] uppercase font-bold text-white border border-white/20 shadow-inner tracking-widest">
         UPDATE FOR ALL
