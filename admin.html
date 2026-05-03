@@ -270,35 +270,6 @@ function loadAdminData() {
             document.getElementById('fsImage').value = data.image || "";
         }
     });
-
-    // --- UPDATE GADGET WARS ---
-function updateGadgetWars(e) {
-    e.preventDefault();
-    const gwData = {};
-    ['desc', 'h1', 'h2', 'h3', 'r1-feat', 'r1-v1', 'r1-v2', 'r1-v3', 'r2-feat', 'r2-v1', 'r2-v2', 'r2-v3'].forEach(id => {
-        gwData[id] = document.getElementById(`admin-gw-${id}`).value;
-    });
-
-    db.collection("settings").doc("gadgetWars").set(gwData).then(() => {
-        alert("Gadget Wars updated successfully!");
-    }).catch(err => alert(err.message));
-}
-
-// --- UPDATE SUPER BUNDLES ---
-function updateSuperBundles(e) {
-    e.preventDefault();
-    const bundleData = {};
-    ['b1-title', 'b1-price', 'b1-l1', 'b1-l2', 'b1-l3', 
-     'b2-title', 'b2-price', 'b2-l1', 'b2-l2', 'b2-l3', 
-     'b3-title', 'b3-price', 'b3-l1', 'b3-l2', 'b3-l3'].forEach(id => {
-        bundleData[id] = document.getElementById(`admin-${id}`).value;
-    });
-
-    db.collection("settings").doc("superBundles").set(bundleData).then(() => {
-        alert("Super Bundles updated successfully!");
-    }).catch(err => alert(err.message));
-}
-
 }
 
 // --- DELETE ITEM ---
@@ -323,48 +294,55 @@ async function editItem(docId) {
         }
     }
 }
+    // --- 5. UPDATE FLASH SALE ---
+    function updateFlashSale(e) {
+        e.preventDefault();
+        const flashData = {
+            title: document.getElementById('fsTitle').value,
+            desc: document.getElementById('fsDesc').value,
+            oldPrice: document.getElementById('fsOldPrice').value,
+            newPrice: document.getElementById('fsNewPrice').value,
+            image: document.getElementById('fsImage').value,
+            updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
 
-// --- SAVE NEW ITEM ---
-function saveNewItem(e) {
-    e.preventDefault();
-    const btn = document.getElementById('addSubmitBtn');
-    btn.innerHTML = "Pushing to Cloud...";
-    
-    const itemData = {
-        name: document.getElementById('newItemName').value,
-        category: document.getElementById('newItemCat').value,
-        image: document.getElementById('newItemImg').value,
-        desc: document.getElementById('newItemDesc').value,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    };
+        db.collection("settings").doc("flashSale").set(flashData).then(() => {
+            alert("Flash Sale updated on live site!");
+        }).catch(err => alert(err.message));
+    }
 
-    db.collection("inventory").add(itemData).then(() => {
-        document.getElementById('addModal').classList.remove('active');
-        e.target.reset(); 
-        btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Push to Live Site';
-        alert("Product successfully added to live inventory!");
-        loadAdminData(); 
-    }).catch(error => alert("Error: " + error.message));
-}
+    // --- UPDATE GADGET WARS ---
+    function updateGadgetWars(e) {
+        e.preventDefault();
+        const gwData = {};
+        ['desc', 'h1', 'h2', 'h3', 'r1-feat', 'r1-v1', 'r1-v2', 'r1-v3', 'r2-feat', 'r2-v1', 'r2-v2', 'r2-v3'].forEach(id => {
+            gwData[id] = document.getElementById(`admin-gw-${id}`).value;
+        });
 
-// --- UPDATE FLASH SALE ---
-function updateFlashSale(e) {
-    e.preventDefault();
-    const flashData = {
-        title: document.getElementById('fsTitle').value,
-        desc: document.getElementById('fsDesc').value,
-        oldPrice: document.getElementById('fsOldPrice').value,
-        newPrice: document.getElementById('fsNewPrice').value,
-        image: document.getElementById('fsImage').value,
-        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-    };
+        db.collection("settings").doc("gadgetWars").set(gwData).then(() => {
+            alert("Gadget Wars updated successfully!");
+        }).catch(err => alert(err.message));
+    }
 
-    db.collection("settings").doc("flashSale").set(flashData).then(() => {
-        alert("Flash Sale updated on live site!");
-    }).catch(err => alert(err.message));
-}
+    // --- UPDATE SUPER BUNDLES ---
+    function updateSuperBundles(e) {
+        e.preventDefault();
+        const bundleData = {};
+        ['b1-title', 'b1-price', 'b1-l1', 'b1-l2', 'b1-l3', 
+         'b2-title', 'b2-price', 'b2-l1', 'b2-l2', 'b2-l3', 
+         'b3-title', 'b3-price', 'b3-l1', 'b3-l2', 'b3-l3'].forEach(id => {
+            bundleData[id] = document.getElementById(`admin-${id}`).value;
+        });
 
+        db.collection("settings").doc("superBundles").set(bundleData).then(() => {
+            alert("Super Bundles updated successfully!");
+        }).catch(err => alert(err.message));
+    }
+
+    // Initialize Dashboard Data
+    loadAdminData();
 </script>
+
 
     <script src="script.js"></script>
 
