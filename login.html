@@ -14,6 +14,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
     
     <style>
         :root {
@@ -204,27 +206,6 @@
     </div>
 
     <script>
-        // Haptic Feedback
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        function playInteractionFeedback() {
-            if (navigator.vibrate) navigator.vibrate(15);
-            if(audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
-            const oscillator = audioCtx.createOscillator();
-            const gainNode = audioCtx.createGain();
-            oscillator.type = 'sine';
-            oscillator.frequency.setValueAtTime(800, audioCtx.currentTime); 
-            oscillator.frequency.exponentialRampToValueAtTime(300, audioCtx.currentTime + 0.1); 
-            gainNode.gain.setValueAtTime(0.02, audioCtx.currentTime); 
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
-            oscillator.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-            oscillator.start(); oscillator.stop(audioCtx.currentTime + 0.1);
-        }
-
-        document.querySelectorAll('.interaction-btn, input').forEach(btn => {
-            btn.addEventListener('click', playInteractionFeedback);
-        });
-
         // FORM TOGGLE LOGIC
         function toggleForms() {
             const login = document.getElementById('loginForm');
@@ -353,5 +334,8 @@
             }
         }
     </script>
+
+    <script src="script.js"></script>
+
 </body>
 </html>
