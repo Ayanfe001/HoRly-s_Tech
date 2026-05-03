@@ -325,14 +325,14 @@
                         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full liquid-glass border border-orange-500/50 text-white text-[10px] font-bold uppercase tracking-widest mb-6">
                             <span class="w-2 h-2 rounded-full bg-orange-500 animate-ping"></span> Limited Time Offer
                         </div>
-                        <h2 class="orbitron text-4xl md:text-5xl font-bold mb-3 drop-shadow-lg">
-                            PlayStation 5 <span class="text-orange-400">Slim</span>
-                        </h2>
-                        <p class="text-white/70 text-sm mb-8">1TB Console + Extra Controller + FIFA 25</p>
-                        <div class="flex items-center justify-center md:justify-start gap-4 mb-8">
-                            <span class="text-white/40 line-through text-lg">₦1,150,000</span>
-                            <span class="text-4xl font-bold text-white drop-shadow-md">₦980,000</span>
-                        </div>
+                        <h2 id="flashSaleTitle" class="orbitron text-4xl md:text-5xl font-bold mb-3 drop-shadow-lg">
+    PlayStation 5 <span class="text-orange-400">Slim</span>
+</h2>
+<p id="flashSaleDesc" class="text-white/70 text-sm mb-8">1TB Console + Extra Controller + FIFA 25</p>
+<div class="flex items-center justify-center md:justify-start gap-4 mb-8">
+    <span id="flashSaleOldPrice" class="text-white/40 line-through text-lg">₦1,150,000</span>
+    <span id="flashSaleNewPrice" class="text-4xl font-bold text-white drop-shadow-md">₦980,000</span>
+</div>
                         <div class="flex justify-center md:justify-start gap-3 mb-10 text-center">
                             <div class="liquid-glass p-4 rounded-2xl min-w-[80px]">
                                 <div id="days" class="text-3xl font-bold text-white orbitron">02</div>
@@ -356,7 +356,7 @@
                         </button>
                     </div>
                     <div class="flex-1 relative z-10 w-full">
-                        <img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=2070&auto=format&fit=crop" 
+                        <img id="flashSaleImg" src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=2070&auto=format&fit=crop" 
                              alt="Flash Deal Product" 
                              class="w-full max-w-md mx-auto rounded-[2rem] shadow-2xl border border-white/10 transform group-hover:scale-105 transition-transform duration-700">
                     </div>
@@ -988,14 +988,26 @@ const btns = document.querySelectorAll('.filter-btn');
 // Fetch Live Inventory from Firebase
 async function fetchStoreData() {
     try {
+        // Fetch Live Inventory
         const snapshot = await db.collection("inventory").get();
         liveProducts = [];
         snapshot.forEach(doc => {
             liveProducts.push({ id: doc.id, ...doc.data() });
         });
         renderProducts('all'); 
+
+        // Fetch Live Flash Sale
+        const flashDoc = await db.collection("settings").doc("flashSale").get();
+        if(flashDoc.exists) {
+            const data = flashDoc.data();
+            document.getElementById('flashSaleTitle').innerHTML = data.title || "Flash Deal";
+            document.getElementById('flashSaleDesc').innerText = data.desc || "";
+            document.getElementById('flashSaleOldPrice').innerText = data.oldPrice || "";
+            document.getElementById('flashSaleNewPrice').innerText = data.newPrice || "";
+            if(data.image) document.getElementById('flashSaleImg').src = data.image;
+        }
     } catch (error) {
-        console.error("Error fetching inventory:", error);
+        console.error("Error fetching data:", error);
     }
 }
 
