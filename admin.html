@@ -317,6 +317,33 @@ async function editItem(docId) {
         }
     }
 }
+
+           // --- SAVE NEW ITEM ---
+    function saveNewItem(e) {
+        e.preventDefault();
+        const btn = document.getElementById('addSubmitBtn');
+        btn.innerHTML = "Pushing to Cloud...";
+        
+        const itemData = {
+            name: document.getElementById('newItemName').value,
+            category: document.getElementById('newItemCat').value,
+            image: document.getElementById('newItemImg').value,
+            desc: document.getElementById('newItemDesc').value,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        };
+
+        db.collection("inventory").add(itemData).then(() => {
+            document.getElementById('addModal').classList.remove('active');
+            e.target.reset(); 
+            btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Push to Live Site';
+            alert("Product successfully added to live inventory!");
+            loadAdminData(); 
+        }).catch(error => {
+            alert("Error: " + error.message);
+            btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Push to Live Site';
+        });
+    }
+
     // --- 5. UPDATE FLASH SALE ---
     function updateFlashSale(e) {
         e.preventDefault();
