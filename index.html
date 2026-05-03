@@ -368,40 +368,34 @@
                 <div class="max-w-5xl mx-auto liquid-glass rounded-[3rem] p-8 md:p-12">
                     <div class="text-center mb-10">
                         <h2 class="orbitron text-3xl font-bold">Gadget <span class="gradient-text">Wars</span></h2>
-                        <p class="text-white/60 mt-2">Can't decide? See the difference.</p>
-                    </div>
-                    <div class="overflow-x-auto custom-scrollbar">
-                        <table class="w-full text-left text-sm text-white/70 min-w-[600px]">
-                            <thead class="text-xs text-white uppercase bg-white/10 font-bold orbitron rounded-t-xl">
-                                <tr>
-                                    <th class="px-6 py-5 rounded-tl-2xl">Feature</th>
-                                    <th class="px-6 py-5 text-sky-400">iPhone 14 Pro Max</th>
-                                    <th class="px-6 py-5 text-indigo-400">iPhone 15 Pro Max</th>
-                                    <th class="px-6 py-5 text-orange-400 rounded-tr-2xl">Samsung S24 Ultra</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-white/5">
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-6 py-5 font-bold text-white">Build Material</td>
-                                    <td class="px-6 py-5">Stainless Steel</td>
-                                    <td class="px-6 py-5 text-white">Titanium (Lighter)</td>
-                                    <td class="px-6 py-5">Titanium</td>
-                                </tr>
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-6 py-5 font-bold text-white">Charging</td>
-                                    <td class="px-6 py-5">Lightning Port</td>
-                                    <td class="px-6 py-5 text-white">USB-C (Universal)</td>
-                                    <td class="px-6 py-5">USB-C (45W Fast)</td>
-                                </tr>
-                                <tr class="hover:bg-white/5 transition-colors">
-                                    <td class="px-6 py-5 font-bold text-white">Camera Zoom</td>
-                                    <td class="px-6 py-5">3x Optical</td>
-                                    <td class="px-6 py-5">5x Optical</td>
-                                    <td class="px-6 py-5 text-white">100x Space Zoom</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                        <p id="gw-desc" class="text-white/60 mt-2">Can't decide? See the difference.</p>
+</div>
+<div class="overflow-x-auto custom-scrollbar">
+    <table class="w-full text-left text-sm text-white/70 min-w-[600px]">
+        <thead class="text-xs text-white uppercase bg-white/10 font-bold orbitron rounded-t-xl">
+            <tr>
+                <th class="px-6 py-5 rounded-tl-2xl">Feature</th>
+                <th id="gw-h1" class="px-6 py-5 text-sky-400">iPhone 14 Pro Max</th>
+                <th id="gw-h2" class="px-6 py-5 text-indigo-400">iPhone 15 Pro Max</th>
+                <th id="gw-h3" class="px-6 py-5 text-orange-400 rounded-tr-2xl">Samsung S24 Ultra</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-white/5">
+            <tr class="hover:bg-white/5 transition-colors">
+                <td id="gw-r1-feat" class="px-6 py-5 font-bold text-white">Build Material</td>
+                <td id="gw-r1-v1" class="px-6 py-5">Stainless Steel</td>
+                <td id="gw-r1-v2" class="px-6 py-5 text-white">Titanium (Lighter)</td>
+                <td id="gw-r1-v3" class="px-6 py-5">Titanium</td>
+            </tr>
+            <tr class="hover:bg-white/5 transition-colors">
+                <td id="gw-r2-feat" class="px-6 py-5 font-bold text-white">Charging</td>
+                <td id="gw-r2-v1" class="px-6 py-5">Lightning Port</td>
+                <td id="gw-r2-v2" class="px-6 py-5 text-white">USB-C (Universal)</td>
+                <td id="gw-r2-v3" class="px-6 py-5">USB-C (45W Fast)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
                 </div>
             </section>
 
@@ -409,47 +403,47 @@
             <section class="py-16 px-6 relative z-10">
                 <div class="max-w-7xl mx-auto">
                     <h2 class="orbitron text-3xl font-bold mb-10 text-center">Super <span class="gradient-text">Bundles</span></h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        <div class="liquid-glass p-8 hover:-translate-y-2 transition-transform duration-500 card-hover">
-                            <h3 class="orbitron text-xl font-bold text-white mb-4">The "Starter" Pack</h3>
-                            <ul class="text-sm text-white/70 space-y-3 mb-8">
-                                <li>✨ UK Used iPhone XR/11</li>
-                                <li>✨ Silicon Case</li>
-                                <li>✨ Privacy Screen Guard</li>
-                                <li>✨ Fast Charger Cable</li>
-                            </ul>
-                            <div class="flex items-center justify-between mt-auto">
-                                <span id="bundle1Price" class="text-sky-400 font-bold text-xl">₦2xx,000</span>
-                                <button onclick="buyBundle('Starter Pack')" class="interaction-btn liquid-button px-5 py-2 text-white text-xs font-bold uppercase">Get Bundle</button>
-                            </div>
-                        </div>
-                        <div class="liquid-glass p-8 hover:-translate-y-2 transition-transform duration-500 border-white/30 card-hover">
-                            <h3 class="orbitron text-xl font-bold text-white mb-4">The "Content Creator"</h3>
-                            <ul class="text-sm text-white/70 space-y-3 mb-8">
-                                <li>✨ iPhone 13 Pro Max (256GB)</li>
-                                <li>✨ Ring Light & Tripod</li>
-                                <li>✨ Wireless Lapel Mic</li>
-                                <li>✨ Transparent Bumper Case</li>
-                            </ul>
-                            <div class="flex items-center justify-between mt-auto">
-                                <span id="bundle2Price" class="text-purple-400 font-bold text-xl">₦9xx,000</span>
-                                <button onclick="buyBundle('Creator Pack')" class="interaction-btn bg-white text-black px-5 py-2 rounded-full text-xs font-bold uppercase shadow-lg">Get Bundle</button>
-                            </div>
-                        </div>
-                        <div class="liquid-glass p-8 hover:-translate-y-2 transition-transform duration-500 card-hover">
-                            <h3 class="orbitron text-xl font-bold text-white mb-4">The "Gamer" Setup</h3>
-                            <ul class="text-sm text-white/70 space-y-3 mb-8">
-                                <li>✨ PS5 Console (Standard)</li>
-                                <li>✨ Extra DualSense Controller</li>
-                                <li>✨ FIFA 24 / COD MW3</li>
-                                <li>✨ Vertical Cooling Stand</li>
-                            </ul>
-                            <div class="flex items-center justify-between mt-auto">
-                                <span id="bundle3Price" class="text-orange-400 font-bold text-xl">₦1,xxx,000</span>
-                                <button onclick="buyBundle('Gamer Setup')" class="interaction-btn liquid-button px-5 py-2 text-white text-xs font-bold uppercase">Get Bundle</button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Bundle 1 -->
+    <div class="liquid-glass p-8 hover:-translate-y-2 transition-transform duration-500 card-hover">
+        <h3 id="b1-title" class="orbitron text-xl font-bold text-white mb-4">The "Starter" Pack</h3>
+        <ul class="text-sm text-white/70 space-y-3 mb-8">
+            <li id="b1-l1">✨ UK Used iPhone XR/11</li>
+            <li id="b1-l2">✨ Silicon Case</li>
+            <li id="b1-l3">✨ Privacy Screen Guard</li>
+        </ul>
+        <div class="flex items-center justify-between mt-auto">
+            <span id="b1-price" class="text-sky-400 font-bold text-xl">₦2xx,000</span>
+            <button onclick="buyBundle('Starter Pack')" class="interaction-btn liquid-button px-5 py-2 text-white text-xs font-bold uppercase">Get Bundle</button>
+        </div>
+    </div>
+    <!-- Bundle 2 -->
+    <div class="liquid-glass p-8 hover:-translate-y-2 transition-transform duration-500 border-white/30 card-hover">
+        <h3 id="b2-title" class="orbitron text-xl font-bold text-white mb-4">The "Content Creator"</h3>
+        <ul class="text-sm text-white/70 space-y-3 mb-8">
+            <li id="b2-l1">✨ iPhone 13 Pro Max (256GB)</li>
+            <li id="b2-l2">✨ Ring Light & Tripod</li>
+            <li id="b2-l3">✨ Wireless Lapel Mic</li>
+        </ul>
+        <div class="flex items-center justify-between mt-auto">
+            <span id="b2-price" class="text-purple-400 font-bold text-xl">₦9xx,000</span>
+            <button onclick="buyBundle('Creator Pack')" class="interaction-btn bg-white text-black px-5 py-2 rounded-full text-xs font-bold uppercase shadow-lg">Get Bundle</button>
+        </div>
+    </div>
+    <!-- Bundle 3 -->
+    <div class="liquid-glass p-8 hover:-translate-y-2 transition-transform duration-500 card-hover">
+        <h3 id="b3-title" class="orbitron text-xl font-bold text-white mb-4">The "Gamer" Setup</h3>
+        <ul class="text-sm text-white/70 space-y-3 mb-8">
+            <li id="b3-l1">✨ PS5 Console (Standard)</li>
+            <li id="b3-l2">✨ Extra DualSense Controller</li>
+            <li id="b3-l3">✨ FIFA 24 / COD MW3</li>
+        </ul>
+        <div class="flex items-center justify-between mt-auto">
+            <span id="b3-price" class="text-orange-400 font-bold text-xl">₦1,xxx,000</span>
+            <button onclick="buyBundle('Gamer Setup')" class="interaction-btn liquid-button px-5 py-2 text-white text-xs font-bold uppercase">Get Bundle</button>
+        </div>
+    </div>
+</div>
                 </div>
             </section>
 
