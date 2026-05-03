@@ -1000,6 +1000,27 @@ async function fetchStoreData() {
             document.getElementById('flashSaleNewPrice').innerText = data.newPrice || "";
             if(data.image) document.getElementById('flashSaleImg').src = data.image;
         }
+
+                // Fetch Gadget Wars
+        const gwDoc = await db.collection("settings").doc("gadgetWars").get();
+        if(gwDoc.exists) {
+            const d = gwDoc.data();
+            ['desc', 'h1', 'h2', 'h3', 'r1-feat', 'r1-v1', 'r1-v2', 'r1-v3', 'r2-feat', 'r2-v1', 'r2-v2', 'r2-v3'].forEach(id => {
+                if(d[id]) document.getElementById(`gw-${id}`).innerText = d[id];
+            });
+        }
+
+        // Fetch Super Bundles
+        const bundleDoc = await db.collection("settings").doc("superBundles").get();
+        if(bundleDoc.exists) {
+            const b = bundleDoc.data();
+            ['b1-title', 'b1-price', 'b1-l1', 'b1-l2', 'b1-l3', 
+             'b2-title', 'b2-price', 'b2-l1', 'b2-l2', 'b2-l3', 
+             'b3-title', 'b3-price', 'b3-l1', 'b3-l2', 'b3-l3'].forEach(id => {
+                if(b[id]) document.getElementById(id).innerText = b[id];
+            });
+        }
+
     } catch (error) {
         console.error("Error fetching data:", error);
     }
